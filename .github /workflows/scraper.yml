@@ -1,0 +1,67 @@
+name: LSA Lead Scraper Automation
+
+on:
+  workflow_dispatch:
+
+# Repoya yazma izni (Commit için şart)
+permissions:
+  contents: write
+
+# KRİTİK KORUMA 1: Concurrency
+# Eğer 10 dakikalık süre dolduğunda önceki işlem hala bitmemişse
+# veya manuel tetiklerseniz, ikisinin aynı anda repoya yazmaya çalışıp
+# sistemi çökertmesini engeller. Sıraya sokar.
+concurrency:
+  group: scraper-group
+  cancel-in-progress: false
+
+jobs:
+  run-scraper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repositori Kodlarını Çek
+        uses: actions/checkout@v4
+        with:
+          # KRİTİK KORUMA 2: Git geçmişini tam çeker, push öncesi rebase için şarttır
+          fetch-depth: 0 
+
+      - name: Node.js Kurulumu
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # 24 henüz deneyseldir, LTS olan 20 çok daha stabildir
+
+      - name: Google Chrome Kurulumu
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: NPM Bağımlılıklarını Yükle
+        run: npm install puppeteer-core puppeteer-extra puppeteer-extra-plugin-stealth
+
+      - name: Scraper'ı Çalıştır
+        env:
+          GOOGLE_COOKIES_SECRET: ${{ secrets.GOOGLE_COOKIES }}
+        run: node scraper.js
+
+      - name: Değişiklikleri Repoya Commit Et
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Sadece bu iki dosyayı izle
+          git add data.json updated_cookies.json
+          
+          # Verilerde değişiklik yoksa hata vermeden çık
+          if git diff --staged --quiet; then
+            echo "✅ Verilerde değişiklik yok, commit atlanıyor."
+            exit 0
+          fi
+          
+          git commit -m "Automated update: data.json and fresh cookies"
+          
+          # ÇÖZÜM: --autostash ile geçici dosyalar saklanır, -X theirs ile lokal botun verisi üstün kılınır
+          git pull --rebase --autostash -X theirs origin main
+          
+          # Güncel veriyi hata almadan ana branch'e gönder
+          git push origin main
