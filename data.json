@@ -1,0 +1,205 @@
+{
+  "updatedAt": "26.8.2026, 17:48:08",
+  "leads": [
+    {
+      "Musteri": "0699 11305630",
+      "Telefon": "0699 11305630",
+      "Hizmet": "-",
+      "Konum": "Felixdorf",
+      "Tarih": "26.08.26 17:40",
+      "Mesaj": "-",
+      "id": "51503af14b3116356ffd8b873202b983",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0660 1876758",
+      "Telefon": "0660 1876758",
+      "Hizmet": "-",
+      "Konum": "Hohenau an der March",
+      "Tarih": "26.08.26 14:49",
+      "Mesaj": "-",
+      "id": "8a760b8cf5000f1ba8c1154a0b54c7e9",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0664 2817705",
+      "Telefon": "0664 2817705",
+      "Hizmet": "-",
+      "Konum": "Baden",
+      "Tarih": "26.08.26 12:57",
+      "Mesaj": "-",
+      "id": "4dbfd34c8fd9b570f480e446aa08c94b",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0676 4542829",
+      "Telefon": "0676 4542829",
+      "Hizmet": "-",
+      "Konum": "Kirchberg an der Pielach",
+      "Tarih": "26.08.26 11:34",
+      "Mesaj": "-",
+      "id": "7cf23070b00d73cd6d7a99abce77272f",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0681 81303135",
+      "Telefon": "0681 81303135",
+      "Hizmet": "Rollrasen verlegen",
+      "Konum": "Langenzersdorf",
+      "Tarih": "25.08.26 13:47",
+      "Mesaj": "-",
+      "id": "57e83aa46b43a69e664dc77044b7ce94",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0664 73576605",
+      "Telefon": "0664 73576605",
+      "Hizmet": "Entsorgung",
+      "Konum": "Bezirk Sankt Pölten-Land",
+      "Tarih": "25.08.26 11:22",
+      "Mesaj": "P\nPotenzieller Kunde\n9:22 AM\nBenötigen die Entsorgung eine Kriechelbaumes.",
+      "id": "419125e53a2c25ff3c12e00e6c2a4f19",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0699 10670612",
+      "Telefon": "0699 10670612",
+      "Hizmet": "Rollrasen verlegen",
+      "Konum": "Schwechat",
+      "Tarih": "24.08.26 20:24",
+      "Mesaj": "P\nPotenzieller Kunde\n6:24 PM\nSehr geehrte Damen und Herren! Ich hätte gerne einen neuen rasen. Verlegen von ca 220 m2 inkl. Abtrag alter Rasen (Steppe) in 2401 Fischamend. Ersuche um Angebot Mit freundlichen Grüßen Petra weiß",
+      "id": "9d003eeb6e4275b985d9bcfd26320bed",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0699 11122021",
+      "Telefon": "0699 11122021",
+      "Hizmet": "-",
+      "Konum": "Gemeinde Bruck an der Leitha",
+      "Tarih": "24.08.26 19:25",
+      "Mesaj": "-",
+      "id": "bcbcec7bc7211c7e3b0744622bb252ba",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0676 4764155",
+      "Telefon": "0676 4764155",
+      "Hizmet": "-",
+      "Konum": "Wien",
+      "Tarih": "24.08.26 17:21",
+      "Mesaj": "-",
+      "id": "295316e138aca45a2803a0de1945dae8",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0664 1309178",
+      "Telefon": "0664 1309178",
+      "Hizmet": "Rollrasen verlegen",
+      "Konum": "Wien",
+      "Tarih": "24.08.26 10:52",
+      "Mesaj": "-",
+      "id": "5274ce2208a8103a14d4010ba650a564",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0664 7965844",
+      "Telefon": "0664 7965844",
+      "Hizmet": "Andere Dienstleistung",
+      "Konum": "Wien",
+      "Tarih": "24.08.26 09:47",
+      "Mesaj": "P\nPotenzieller Kunde\n7:47 AM\nKunstrasen",
+      "id": "3d3f14bdcb89a40e58fcb8e3e1138fc0",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0676 83607202",
+      "Telefon": "0676 83607202",
+      "Hizmet": "-",
+      "Konum": "Kirchstetten",
+      "Tarih": "24.08.26 09:45",
+      "Mesaj": "-",
+      "id": "011aa59e3e8655f77627571ac32b4acb",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0664 3287663",
+      "Telefon": "0664 3287663",
+      "Hizmet": "-",
+      "Konum": "Gmünd",
+      "Tarih": "24.08.26 08:26",
+      "Mesaj": "-",
+      "id": "fe2bb886c06c60761e0e617700e61f96",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0664 3284453",
+      "Telefon": "0664 3284453",
+      "Hizmet": "-",
+      "Konum": "Gmünd",
+      "Tarih": "24.08.26 08:11",
+      "Mesaj": "-",
+      "id": "c87e3714bbe5df8f928ad9379ab8b0b8",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0676 7575499",
+      "Telefon": "0676 7575499",
+      "Hizmet": "-",
+      "Konum": "Guntramsdorf",
+      "Tarih": "22.08.26 19:22",
+      "Mesaj": "P\nPotenzieller Kunde\n5:22 PM\nVermissen Sie zufällig einen großen schönen Oleander?! Mein dementer Mann hat ihn irgendwo in diesem Bereich entwendet und wir suchen den Besitzer...LG Maria Schwarz Tel. 06767575499",
+      "id": "a107649e18efbf4c8611c56fcc006dfc",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "02243 22293",
+      "Telefon": "02243 22293",
+      "Hizmet": "-",
+      "Konum": "Klosterneuburg",
+      "Tarih": "22.08.26 15:35",
+      "Mesaj": "-",
+      "id": "42a569d484f62ee1128956673d81ebe7",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "777 521 649",
+      "Telefon": "777 521 649",
+      "Hizmet": "Zaunbau",
+      "Konum": "Wien",
+      "Tarih": "22.08.26 13:27",
+      "Mesaj": "-",
+      "id": "9ee8e7339cc65579428899d52f210048",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0676 5951883",
+      "Telefon": "0676 5951883",
+      "Hizmet": "-",
+      "Konum": "Klosterneuburg",
+      "Tarih": "22.08.26 13:12",
+      "Mesaj": "-",
+      "id": "f238d691f90d3af65c1be952f0ee82dc",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0660 8645815",
+      "Telefon": "0660 8645815",
+      "Hizmet": "Kunstrasenverlegung",
+      "Konum": "Himberg bei Wien",
+      "Tarih": "22.08.26 10:10",
+      "Mesaj": "-",
+      "id": "04f0ecabc7727d210b460c5708657e64",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0676 3048148",
+      "Telefon": "0676 3048148",
+      "Hizmet": "-",
+      "Konum": "Amstetten",
+      "Tarih": "20.08.26 12:21",
+      "Mesaj": "-",
+      "id": "92f230d77229cac4766477881c27e019",
+      "telegramSent": true
+    }
+  ]
+}

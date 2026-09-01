@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSMAN REKLAMLAR</title>
+
+  <!-- 🚀 PWA / APP DESTEĞİ EKLENTİLERİ -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="OsmanReklam">
+<link rel="apple-touch-icon" href="./icon-512.png">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --bg-body: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --primary-color: #2563eb;
+      --border-color: #e2e8f0;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      padding: 20px 10px;
+    }
+
+    .main-card {
+      background: var(--card-bg) !important;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .header-title {
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #1e293b;
+    }
+
+    .table-container {
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .table {
+      margin-bottom: 0;
+    }
+
+    .table thead th {
+      background-color: #0f172a !important;
+      color: #f8fafc !important;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 14px 16px;
+      border: none;
+    }
+
+    .table tbody td {
+      padding: 14px 16px;
+      vertical-align: middle;
+      font-size: 0.925rem;
+      border-bottom-color: #f1f5f9;
+    }
+
+    .message-box {
+      background-color: #f1f5f9;
+      border-left: 4px solid var(--primary-color);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      white-space: pre-line;
+      word-break: break-word;
+    }
+
+    @media (max-width: 767.98px) {
+      body { padding: 10px 5px; }
+      .main-card { padding: 1rem !important; border-radius: 12px; }
+      .desktop-table-view { display: none !important; }
+      .mobile-cards-view { display: flex; flex-direction: column; gap: 12px; }
+
+      .lead-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 14px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      }
+
+      .lead-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #f1f5f9;
+        padding-bottom: 8px;
+        margin-bottom: 10px;
+      }
+
+      .lead-card-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 6px;
+        font-size: 0.875rem;
+      }
+
+      .lead-card-label { color: var(--text-muted); font-weight: 500; }
+      .lead-card-value { font-weight: 600; color: var(--text-main); text-align: right; }
+    }
+
+    @media (min-width: 768px) {
+      .mobile-cards-view { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container main-card p-4">
+    <!-- Header Alanı -->
+    <div class="row g-3 align-items-center mb-4">
+      <div class="col-12 col-md-6">
+        <h2 class="header-title mb-1 fs-3">OSMAN REKLAMLAR</h2>
+        <div class="text-muted small">
+          <i class="bi bi-clock-history me-1"></i><strong>Son Güncelleme:</strong> 
+          <span id="last-update" class="text-primary fw-bold ms-1">Yükleniyor...</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="position-relative">
+          <input type="text" id="searchInput" onkeyup="filterTable()" class="form-control form-control-lg fs-6 ps-5" placeholder="Ara (Müşteri, Konum, Hizmet, Mesaj...)...">
+          <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🚀 UYGULAMAYI YÜKLE BANNER / BUTONU -->
+    <div id="installAppWrapper" class="mb-4 d-none">
+      <div class="alert alert-primary d-flex align-items-center justify-content-between mb-0 border-0 shadow-sm rounded-3">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-download fs-4 me-3 text-primary"></i>
+          <div>
+            <strong class="d-block text-dark">Uygulamayı Yükle</strong>
+            <small class="text-muted">Ana ekranınıza ekleyip tek tıkla erişin.</small>
+          </div>
+        </div>
+        <button id="btnInstallApp" class="btn btn-primary btn-sm px-3 fw-bold">Yükle</button>
+      </div>
+    </div>
+
+    <!-- MASAÜSTÜ TABLO GÖRÜNÜMÜ -->
+    <div class="table-container desktop-table-view">
+      <table class="table align-middle" id="leadTable">
+        <thead>
+          <tr>
+            <th>Müşteri / Telefon</th>
+            <th>Hizmet</th>
+            <th>Konum</th>
+            <th>Tarih</th>
+            <th class="text-end">Aksiyon</th>
+          </tr>
+        </thead>
+        <tbody id="lead-table-body">
+          <tr><td colspan="5" class="text-center py-4 text-muted"><div class="spinner-border spinner-border-sm me-2"></div>Veriler yükleniyor...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- MOBİL KART GÖRÜNÜMÜ -->
+    <div id="lead-cards-body" class="mobile-cards-view">
+      <div class="text-center text-muted py-4"><div class="spinner-border spinner-border-sm me-2"></div>Veriler yükleniyor...</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function cleanMessageText(text) {
+      if (!text || text === '-' || text.trim() === '') return null;
+      
+      let cleaned = text
+        .split('Wird geladen')[0]
+        .split('Audioinhalte')[0]
+        .split('Hier dem Kunden')[0]
+        .replace(/^P\n+/g, '')
+        .trim();
+
+      return cleaned.length > 0 ? cleaned : null;
+    }
+
+    function escapeHTML(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>'"]/g, 
+        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+      );
+    }
+
+    async function loadData() {
+      const tbody = document.getElementById('lead-table-body');
+      const cardsBody = document.getElementById('lead-cards-body');
+      const updateSpan = document.getElementById('last-update');
+
+      try {
+        const response = await fetch('./data.json?t=' + Date.now(), { cache: 'no-cache' });
+        if (!response.ok) throw new Error(`HTTP Hata: ${response.status}`);
+
+        const data = await response.json();
+        updateSpan.innerText = escapeHTML(data.updatedAt) || 'Bilinmiyor';
+
+        if (!data.leads || data.leads.length === 0) {
+          const emptyHTML = '<div class="text-center py-4 text-muted">Veri bulunamadı.</div>';
+          tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-muted">Veri bulunamadı.</td></tr>`;
+          cardsBody.innerHTML = emptyHTML;
+          return;
+        }
+
+        let desktopRows = '';
+        let mobileCards = '';
+
+        data.leads.forEach((lead, index) => {
+          const customer = escapeHTML(lead["Musteri"] || 'Müşteri');
+          const phone = escapeHTML(lead["Telefon"] || '');
+          const jobType = escapeHTML(lead["Hizmet"] || '-');
+          const location = escapeHTML(lead["Konum"] || '-');
+          const dateStr = escapeHTML(lead["Tarih"] || lead["Ilk gorusme"] || '-');
+          const rawMessage = lead["Mesaj"] || '-';
+
+          const cleanedMsg = cleanMessageText(rawMessage);
+          const escapedCleanedMsg = cleanedMsg ? escapeHTML(cleanedMsg) : null;
+
+          let phoneDisplay = `<span class="fw-bold text-dark">${customer}</span>`;
+          let targetPhone = phone && phone !== '-' ? phone : (customer.match(/\+?\d[\d\s-]{5,}/) ? customer : null);
+          
+          if (targetPhone) {
+            phoneDisplay = `<a href="tel:${targetPhone.replace(/\s+/g, '')}" class="fw-bold text-decoration-none text-primary"><i class="bi bi-telephone me-1"></i>${customer}</a>`;
+          }
+
+          const msgButton = escapedCleanedMsg ? `
+            <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#msg-desktop-${index}">
+              <i class="bi bi-chat-text me-1"></i>Mesaj
+            </button>
+          ` : '<span class="text-muted small">-</span>';
+
+          desktopRows += `
+            <tr class="searchable-row">
+              <td>${phoneDisplay}</td>
+              <td>${jobType}</td>
+              <td><span class="badge bg-light text-dark border">${location}</span></td>
+              <td class="text-muted small"><i class="bi bi-calendar-event me-1"></i>${dateStr}</td>
+              <td class="text-end">${msgButton}</td>
+            </tr>
+            ${escapedCleanedMsg ? `
+              <tr class="collapse msg-row" id="msg-desktop-${index}">
+                <td colspan="5" class="p-3 bg-light">
+                  <div class="message-box">
+                    <strong class="text-primary small d-block mb-1"><i class="bi bi-chat-quote me-1"></i>Müşteri Mesajı:</strong>
+                    <div class="small text-dark msg-content">${escapedCleanedMsg}</div>
+                  </div>
+                </td>
+              </tr>
+            ` : ''}
+          `;
+
+          const mobileMsgHTML = escapedCleanedMsg ? `
+            <div class="message-box mt-2">
+              <strong class="text-primary small d-block mb-1"><i class="bi bi-chat-quote me-1"></i>Mesaj:</strong>
+              <div class="small text-dark">${escapedCleanedMsg}</div>
+            </div>
+          ` : '';
+
+          mobileCards += `
+            <div class="lead-card searchable-card">
+              <div class="lead-card-header">
+                <div>${phoneDisplay}</div>
+                <span class="badge bg-light text-secondary border small">${dateStr}</span>
+              </div>
+              <div class="lead-card-row">
+                <span class="lead-card-label">Hizmet:</span>
+                <span class="lead-card-value">${jobType}</span>
+              </div>
+              <div class="lead-card-row">
+                <span class="lead-card-label">Konum:</span>
+                <span class="lead-card-value">${location}</span>
+              </div>
+              ${mobileMsgHTML}
+            </div>
+          `;
+        });
+
+        tbody.innerHTML = desktopRows;
+        cardsBody.innerHTML = mobileCards;
+
+      } catch (err) {
+        console.error("Yükleme hatası:", err);
+        updateSpan.innerText = 'Yükleme Hatası';
+        const errorMsg = `Veri okunamadı: ${err.message}`;
+        tbody.innerHTML = `<tr><td colspan="5" class="text-center text-danger py-4">${errorMsg}</td></tr>`;
+        cardsBody.innerHTML = `<div class="text-center text-danger py-4">${errorMsg}</div>`;
+      }
+    }
+
+    function filterTable() {
+      const input = document.getElementById('searchInput');
+      const filter = input.value.toLowerCase();
+
+      const rows = document.querySelectorAll('#lead-table-body tr.searchable-row');
+      rows.forEach(row => {
+        const nextCollapse = row.nextElementSibling;
+        let fullContent = row.innerText.toLowerCase();
+        
+        if (nextCollapse && nextCollapse.classList.contains('msg-row')) {
+          fullContent += " " + nextCollapse.innerText.toLowerCase();
+        }
+
+        const isMatch = fullContent.includes(filter);
+        row.style.display = isMatch ? '' : 'none';
+
+        if (nextCollapse && nextCollapse.classList.contains('msg-row')) {
+          if (!isMatch) {
+            nextCollapse.classList.remove('show');
+          }
+        }
+      });
+
+      const cards = document.querySelectorAll('#lead-cards-body .searchable-card');
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(filter) ? '' : 'none';
+      });
+    }
+
+    loadData();
+
+    // 🚀 PWA APP YÜKLEME (INSTALL PROMPT) MANTIĞI
+    let deferredPrompt;
+    const installWrapper = document.getElementById('installAppWrapper');
+    const installBtn = document.getElementById('btnInstallApp');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      if (installWrapper) installWrapper.classList.remove('d-none');
+    });
+
+    if (installBtn) {
+      installBtn.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`Kullanıcı seçimi: ${outcome}`);
+        deferredPrompt = null;
+        installWrapper.classList.add('d-none');
+      });
+    }
+
+    window.addEventListener('appinstalled', () => {
+      console.log('🎉 Uygulama başarıyla yüklendi!');
+      if (installWrapper) installWrapper.classList.add('d-none');
+      deferredPrompt = null;
+    });
+
+    // 🚀 SERVICE WORKER KAYDI (3 satırlık sw.js gerektirir)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW Hata:', err));
+      });
+    }
+  </script>
+</body>
+</html>
