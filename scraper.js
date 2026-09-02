@@ -12,7 +12,7 @@ puppeteer.use(StealthPlugin());
 const SKIP_TELEGRAM = false; 
 const SKIP_GIT_PUSH = false;  
 
-// --- CONFIGURATION (OSMAN REKLAM) ---
+// --- CONFIGURATION (SICHER REKLAM) ---
 const CONFIG = {
   projectName: 'Sicher Reklam',
   userDataPath: '/home/atsicherteam/sicher-reklam/user_data',
@@ -204,7 +204,7 @@ function clearChromeLocks() {
     }
 
     // =========================================================================
-    // 🟢 GOOGLE LOCAL SERVICES SAYFA KONTROLÜ
+    // 🟢 AKILLI SAYFA KONTROLÜ VE MENÜ NAVİGASYONU (SICHER REKLAM İÇİN)
     // =========================================================================
     console.log("🔍 LSA sayfa durumu kontrol ediliyor...");
     await new Promise(r => setTimeout(r, 2500));
@@ -212,28 +212,16 @@ function clearChromeLocks() {
     const initialState = await page.evaluate(() => {
       const bodyText = document.body?.innerText || '';
       const hasVerification = /Unternehmensüberprüfung|Unternehmensverifizierung|Verifizierung erforderlich|Unternehmen verifizieren/i.test(bodyText);
-      const hasAnfragen = /\bAnfragen\b/i.test(bodyText);
-      
-      const rows = Array.from(document.querySelectorAll('[role="row"], tr'));
-      const hasInboxTable = rows.some(row => {
-        const text = (row.innerText || '').trim();
-        return text.length > 20 && !/Gebührenstatus|Kundenname|Kunde/i.test(text);
-      });
-
-      return { hasVerification, hasAnfragen, hasInboxTable, url: window.location.href };
+      return { hasVerification, url: window.location.href };
     });
 
     console.log("📋 Sayfa durumu:", initialState);
 
-    if (initialState.hasAnfragen && initialState.hasInboxTable) {
-      console.log("✅ Direkt Anfragen/Inbox ekranındayız.");
-      console.log("📊 Scraper doğrudan başlıyor.");
-    } 
-    else if (initialState.hasVerification) {
+    if (initialState.hasVerification) {
       console.log("⚠️ Unternehmensüberprüfung / Verifizierung ekranı tespit edildi.");
       console.log("🍔 Üst menü açılacak...");
 
-      // 1. HAMBURGER MENÜ
+      // 1. HAMBURGER MENÜ TIKLAMA
       const menuClicked = await page.evaluate(() => {
         const candidates = Array.from(document.querySelectorAll('header button, button, [role="button"]'));
         
@@ -272,9 +260,9 @@ function clearChromeLocks() {
         throw new Error("❌ Verifizierung ekranı bulundu fakat hamburger menü bulunamadı.");
       }
       console.log("🍔 Hamburger menü açıldı.");
-      await new Promise(r => setTimeout(r, 2500));
+      await new Promise(r => setTimeout(r, 2000));
 
-      // 2. ANFRAGEN
+      // 2. ANFRAGEN TIKLAMA
       const anfragenClicked = await page.evaluate(() => {
         const elements = Array.from(document.querySelectorAll('a, button, [role="button"], [role="menuitem"], [role="link"], [role="tab"], span, div'));
         
@@ -293,47 +281,28 @@ function clearChromeLocks() {
       if (!anfragenClicked) {
         throw new Error("❌ Hamburger menü açıldı fakat 'Anfragen' bulunamadı.");
       }
-      console.log("🖱️ 'Anfragen' tıklandı.");
+      console.log("🖱️ 'Anfragen' tıklandı. Yükleme bekleniyor...");
 
-      // 3. GERÇEKTEN ANFRAGEN SAYFASINA GEÇİLDİ Mİ? 
-      console.log("⏳ Anfragen ekranı bekleniyor...");
-      try {
-        await page.waitForFunction(() => {
-          const body = document.body?.innerText || '';
-          const hasAnfragen = /\bAnfragen\b/i.test(body);
-          const rows = Array.from(document.querySelectorAll('[role="row"], tr'));
-          const hasLeadRows = rows.some(row => {
-            const text = (row.innerText || '').trim();
-            return text.length > 20 && !/Gebührenstatus|Kundenname|Kunde/i.test(text);
-          });
-          return hasAnfragen && hasLeadRows;
-        }, { timeout: 30000 });
-        console.log("✅ Anfragen ekranı ve lead satırları bulundu.");
-      } catch (waitErr) {
-        throw new Error("❌ 'Anfragen' tıklandı fakat 30 saniye içinde lead tablosu yüklenmedi.");
-      }
-      await new Promise(r => setTimeout(r, 4000)); // Tablonun DOM'a tamamen oturması için ek bekleme
-    } 
-    else {
-      console.log("⚠️ Sayfa durumu net olarak tespit edilemedi.");
-      console.log("🔄 Mevcut sayfa kontrol edilerek devam ediliyor.");
-      await new Promise(r => setTimeout(r, 3000));
+      // 3. TABLONUN DOM'A YÜKLENMESİNİ BEKLE (GEÇİŞ İÇİN EK BEKLEME)
+      await new Promise(r => setTimeout(r, 6000));
+    } else {
+      console.log("✅ Direkt Anfragen/Inbox ekranındayız.");
     }
 
     // =========================================================================
-    // SCRAPER ÖNCESİ STABİLİZASYON VE SCROLL (GÜNCELLENDİ)
+    // SCROLL VE DOM STABİLİZASYONU
     // =========================================================================
     console.log("📜 Sayfa kaydırılarak tüm lead satırları tetikleniyor...");
     await page.evaluate(async () => {
-      for (let i = 0; i < 6; i++) {
-        window.scrollBy(0, 400);
-        await new Promise(r => setTimeout(r, 400));
+      for (let i = 0; i < 5; i++) {
+        window.scrollBy(0, 350);
+        await new Promise(r => setTimeout(r, 300));
       }
-      window.scrollTo(0, 0); // Başa sar
+      window.scrollTo(0, 0);
       await new Promise(r => setTimeout(r, 1000));
     });
 
-    // TABLO VERİLERİNİ ÇEKME
+    // TABLO VERİLERİNİ ÇEKME (ORİJİNAL SAĞLAM MANTIK)
     const validRows = await page.evaluate(() => {
       const rows = Array.from(document.querySelectorAll('[role="row"], tr'));
 
