@@ -204,7 +204,7 @@ function clearChromeLocks() {
     }
 
     // =========================================================================
-    // 🟢 AKILLI SAYFA KONTROLÜ VE VERİFİZİERUNG BEKLEME
+    // 🟢 AKILLI SAYFA KONTROLÜ VE ANFRAGEN'E GEÇİŞ (GÜÇLENDİRİLDİ)
     // =========================================================================
     console.log("🔍 LSA sayfa durumu kontrol ediliyor...");
     await new Promise(r => setTimeout(r, 2500));
@@ -222,98 +222,43 @@ function clearChromeLocks() {
       console.log("🍔 Üst menü açılacak...");
 
       // 1. HAMBURGER MENÜ TIKLAMA
-      const menuClicked = await page.evaluate(() => {
+      await page.evaluate(() => {
         const candidates = Array.from(document.querySelectorAll('header button, button, [role="button"]'));
-        
         const menuButton = candidates.find(el => {
           const aria = (el.getAttribute('aria-label') || '').trim().toLowerCase();
           const title = (el.getAttribute('title') || '').trim().toLowerCase();
           const html = el.innerHTML || '';
-          
-          if (aria.includes('menü') || aria.includes('menu') || title.includes('menü') || title.includes('menu')) {
-            return true;
-          }
-          
-          if (html.includes('view_headline') || html.includes('menu') || html.includes('hamburger') || el.querySelector('svg')) {
-            const rect = el.getBoundingClientRect();
-            if (rect.left < 150 && rect.top < 100 && rect.width > 0 && rect.height > 0) {
-              return true;
-            }
-          }
-          return false;
+          return aria.includes('menü') || aria.includes('menu') || title.includes('menü') || title.includes('menu') || html.includes('view_headline');
         });
-
-        if (!menuButton) {
-          const firstHeaderBtn = document.querySelector('header button, div[role="banner"] button');
-          if (firstHeaderBtn) {
-            firstHeaderBtn.click();
-            return true;
-          }
-          return false;
-        }
-
-        menuButton.click();
-        return true;
+        if (menuButton) menuButton.click();
       });
 
-      if (!menuClicked) {
-        throw new Error("❌ Verifizierung ekranı bulundu fakat hamburger menü bulunamadı.");
-      }
-      console.log("🍔 Hamburger menü açıldı.");
       await new Promise(r => setTimeout(r, 2000));
 
-      // 2. ANFRAGEN TIKLAMA
-      const anfragenClicked = await page.evaluate(() => {
-        const elements = Array.from(document.querySelectorAll('a, button, [role="button"], [role="menuitem"], [role="link"], [role="tab"], span, div'));
-        
-        const anfragen = elements.find(el => {
-          const text = (el.innerText || el.textContent || '').trim().replace(/\s+/g, ' ');
-          return text.length < 30 && (/anfragen/i.test(text) || /posteingang/i.test(text) || /leads/i.test(text));
-        });
-
-        if (!anfragen) return false;
-        
-        const clickable = anfragen.closest('a') || anfragen.closest('[role="menuitem"]') || anfragen.closest('[role="link"]') || anfragen;
-        clickable.click();
-        return true;
+      // 2. ANFRAGEN ELEMANINA DERİNLERDEN TIKLAMA DENEMESİ
+      console.log("🖱️ 'Anfragen' seçeneğine tıklanıyor...");
+      const clicked = await page.evaluate(() => {
+        const allElements = Array.from(document.querySelectorAll('*'));
+        const target = allElements.find(el => el.children.length === 0 && /^anfragen$/i.test((el.innerText || el.textContent || '').trim()));
+        if (target) {
+          const clickable = target.closest('a, button, [role="button"], [role="menuitem"], [role="link"], div, span') || target;
+          clickable.click();
+          return true;
+        }
+        return false;
       });
 
-      if (!anfragenClicked) {
-        throw new Error("❌ Hamburger menü açıldı fakat 'Anfragen' bulunamadı.");
+      await new Promise(r => setTimeout(r, 3000));
+
+      // 3. YÖNLENDİRME KONTROLÜ: Eğer yönlenme olmadıysa doğrudan TARGET URL'ye git!
+      const currentUrl = page.url();
+      if (currentUrl.includes('verification')) {
+        console.log("🔄 Tıklama URL'yi değiştirmedi, doğrudan Inbox URL'sine gidiliyor...");
+        await page.goto(CONFIG.targetUrl, { waitUntil: 'networkidle2' });
+        await new Promise(r => setTimeout(r, 3000));
+      } else {
+        console.log("✅ Anfragen sayfasına yönlendirme başarılı!");
       }
-      console.log("🖱️ 'Anfragen' tıklandı. Yükleme ve Yönlendirme bekleniyor...");
-
-      await new Promise(r => setTimeout(r, 6000));
-
-      // =========================================================================
-      // 🔍 DEBUG: ANFRAGEN TIKLANDIKTAN SONRAKİ SAYFA BİLGİSİNİ VE METİNLERİ BAS
-      // =========================================================================
-      const debugInfo = await page.evaluate(() => {
-        const url = window.location.href;
-        const title = document.title;
-        const bodyText = (document.body?.innerText || '').replace(/\s+/g, ' ').substring(0, 1000);
-        
-        const rowsCount = document.querySelectorAll('[role="row"], tr').length;
-        const gridCellsCount = document.querySelectorAll('[role="gridcell"], td').length;
-        const listItemsCount = document.querySelectorAll('[role="listitem"]').length;
-
-        return {
-          url,
-          title,
-          rowsCount,
-          gridCellsCount,
-          listItemsCount,
-          bodySnippet: bodyText
-        };
-      });
-
-      console.log("------------------ 🔍 DEBUG BAŞLANGICI ------------------");
-      console.log("📍 Güncel URL:", debugInfo.url);
-      console.log("📑 Güncel Sayfa Başlığı:", debugInfo.title);
-      console.log(`📊 DOM Sayıları -> Satırlar: ${debugInfo.rowsCount}, Hücreler: ${debugInfo.gridCellsCount}, Liste Öğeleri: ${debugInfo.listItemsCount}`);
-      console.log("📝 Sayfadaki Metin Özeti (İlk 1000 Karakter):\n", debugInfo.bodySnippet);
-      console.log("------------------ 🔍 DEBUG BİTİŞİ ------------------");
-
     } else {
       console.log("✅ Direkt Anfragen/Inbox ekranındayız.");
     }
