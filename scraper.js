@@ -14,7 +14,7 @@ const SKIP_GIT_PUSH = false;
 
 // --- CONFIGURATION (OSMAN REKLAM) ---
 const CONFIG = {
-  projectName: 'Osman Reklam',
+  projectName: 'Sicher Reklam',
   userDataPath: '/home/atsicherteam/sicher-reklam/user_data',
   targetUrl: 'https://ads.google.com/localservices/inbox?cid=9203255169&bid=11049534709&pid=9999999999&euid=8501543550&hl=de&gl=AT',
   telegramToken: process.env.TELEGRAM_BOT_TOKEN,
@@ -204,7 +204,7 @@ function clearChromeLocks() {
     }
 
     // =========================================================================
-    // 🟢 GOOGLE LOCAL SERVICES SAYFA KONTROLÜ (GÜNCELLENMİŞ ESNEK SEÇİCİ İLE)
+    // 🟢 GOOGLE LOCAL SERVICES SAYFA KONTROLÜ
     // =========================================================================
     console.log("🔍 LSA sayfa durumu kontrol ediliyor...");
     await new Promise(r => setTimeout(r, 2500));
@@ -233,7 +233,7 @@ function clearChromeLocks() {
       console.log("⚠️ Unternehmensüberprüfung / Verifizierung ekranı tespit edildi.");
       console.log("🍔 Üst menü açılacak...");
 
-      // 1. HAMBURGER MENÜ (GÜÇLENDİRİLMİŞ SEÇİCİ)
+      // 1. HAMBURGER MENÜ
       const menuClicked = await page.evaluate(() => {
         const candidates = Array.from(document.querySelectorAll('header button, button, [role="button"]'));
         
@@ -272,9 +272,9 @@ function clearChromeLocks() {
         throw new Error("❌ Verifizierung ekranı bulundu fakat hamburger menü bulunamadı.");
       }
       console.log("🍔 Hamburger menü açıldı.");
-      await new Promise(r => setTimeout(r, 2500)); // Menü animasyonu için bekleme artırıldı
+      await new Promise(r => setTimeout(r, 2500));
 
-      // 2. ANFRAGEN (ESNEK METİN VE KAPSAYICI TIKLAMA İLE GÜNCELLENDİ)
+      // 2. ANFRAGEN
       const anfragenClicked = await page.evaluate(() => {
         const elements = Array.from(document.querySelectorAll('a, button, [role="button"], [role="menuitem"], [role="link"], [role="tab"], span, div'));
         
@@ -312,7 +312,7 @@ function clearChromeLocks() {
       } catch (waitErr) {
         throw new Error("❌ 'Anfragen' tıklandı fakat 30 saniye içinde lead tablosu yüklenmedi.");
       }
-      await new Promise(r => setTimeout(r, 3000));
+      await new Promise(r => setTimeout(r, 4000)); // Tablonun DOM'a tamamen oturması için ek bekleme
     } 
     else {
       console.log("⚠️ Sayfa durumu net olarak tespit edilemedi.");
@@ -321,15 +321,17 @@ function clearChromeLocks() {
     }
 
     // =========================================================================
-    // SCRAPER ÖNCESİ SON STABİLİZASYON
+    // SCRAPER ÖNCESİ STABİLİZASYON VE SCROLL (GÜNCELLENDİ)
     // =========================================================================
+    console.log("📜 Sayfa kaydırılarak tüm lead satırları tetikleniyor...");
     await page.evaluate(async () => {
-      for (let i = 0; i < 4; i++) {
-        window.scrollBy(0, 300);
-        await new Promise(r => setTimeout(r, 200));
+      for (let i = 0; i < 6; i++) {
+        window.scrollBy(0, 400);
+        await new Promise(r => setTimeout(r, 400));
       }
+      window.scrollTo(0, 0); // Başa sar
+      await new Promise(r => setTimeout(r, 1000));
     });
-    await new Promise(r => setTimeout(r, 1500));
 
     // TABLO VERİLERİNİ ÇEKME
     const validRows = await page.evaluate(() => {
