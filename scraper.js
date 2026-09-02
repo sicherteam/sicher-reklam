@@ -204,7 +204,7 @@ function clearChromeLocks() {
     }
 
     // =========================================================================
-    // 🟢 AKILLI SAYFA KONTROLÜ VE NAVİGASYON (GÜÇLENDİRİLMİŞ SAYFA GEÇİŞİ)
+    // 🟢 AKILLI SAYFA KONTROLÜ VE VERİFİZİERUNG BEKLEME
     // =========================================================================
     console.log("🔍 LSA sayfa durumu kontrol ediliyor...");
     await new Promise(r => setTimeout(r, 2500));
@@ -262,11 +262,7 @@ function clearChromeLocks() {
       console.log("🍔 Hamburger menü açıldı.");
       await new Promise(r => setTimeout(r, 2000));
 
-      // 2. ANFRAGEN TIKLAMA VE YÖNLENDİRME BEKLEME
-      console.log("🖱️ 'Anfragen' tıklandı. Yönlendirme bekleniyor...");
-      
-      const navigationPromise = page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 30000 }).catch(() => null);
-
+      // 2. ANFRAGEN TIKLAMA
       const anfragenClicked = await page.evaluate(() => {
         const elements = Array.from(document.querySelectorAll('a, button, [role="button"], [role="menuitem"], [role="link"], [role="tab"], span, div'));
         
@@ -285,26 +281,41 @@ function clearChromeLocks() {
       if (!anfragenClicked) {
         throw new Error("❌ Hamburger menü açıldı fakat 'Anfragen' bulunamadı.");
       }
+      console.log("🖱️ 'Anfragen' tıklandı. Yükleme ve Yönlendirme bekleniyor...");
 
-      await navigationPromise;
-      await new Promise(r => setTimeout(r, 3000));
+      await new Promise(r => setTimeout(r, 6000));
+
+      // =========================================================================
+      // 🔍 DEBUG: ANFRAGEN TIKLANDIKTAN SONRAKİ SAYFA BİLGİSİNİ VE METİNLERİ BAS
+      // =========================================================================
+      const debugInfo = await page.evaluate(() => {
+        const url = window.location.href;
+        const title = document.title;
+        const bodyText = (document.body?.innerText || '').replace(/\s+/g, ' ').substring(0, 1000);
+        
+        const rowsCount = document.querySelectorAll('[role="row"], tr').length;
+        const gridCellsCount = document.querySelectorAll('[role="gridcell"], td').length;
+        const listItemsCount = document.querySelectorAll('[role="listitem"]').length;
+
+        return {
+          url,
+          title,
+          rowsCount,
+          gridCellsCount,
+          listItemsCount,
+          bodySnippet: bodyText
+        };
+      });
+
+      console.log("------------------ 🔍 DEBUG BAŞLANGICI ------------------");
+      console.log("📍 Güncel URL:", debugInfo.url);
+      console.log("📑 Güncel Sayfa Başlığı:", debugInfo.title);
+      console.log(`📊 DOM Sayıları -> Satırlar: ${debugInfo.rowsCount}, Hücreler: ${debugInfo.gridCellsCount}, Liste Öğeleri: ${debugInfo.listItemsCount}`);
+      console.log("📝 Sayfadaki Metin Özeti (İlk 1000 Karakter):\n", debugInfo.bodySnippet);
+      console.log("------------------ 🔍 DEBUG BİTİŞİ ------------------");
+
     } else {
       console.log("✅ Direkt Anfragen/Inbox ekranındayız.");
-    }
-
-    // 3. TABLO SATIRLARININ DİNAMİK YÜKLENMESİNİ BEKLE
-    console.log("⏳ Tablonun DOM'da oluşması bekleniyor...");
-    try {
-      await page.waitForFunction(() => {
-        const rows = Array.from(document.querySelectorAll('[role="row"], tr'));
-        return rows.some(row => {
-          const text = (row.innerText || '').trim();
-          return text.length > 15 && !/Gebührenstatus|Kundenname|Kunde/i.test(text);
-        });
-      }, { timeout: 20000 });
-      console.log("✅ Tablo ve satırlar yüklendi.");
-    } catch (e) {
-      console.warn("⚠️ Tablo beklenirken zaman aşımı oluştu, mevcut DOM ile devam ediliyor...");
     }
 
     // =========================================================================
