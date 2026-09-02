@@ -204,7 +204,7 @@ function clearChromeLocks() {
     }
 
     // =========================================================================
-    // 🟢 AKILLI SAYFA KONTROLÜ VE MENÜ NAVİGASYONU (SICHER REKLAM İÇİN)
+    // 🟢 AKILLI SAYFA KONTROLÜ VE NAVİGASYON (GÜÇLENDİRİLMİŞ SAYFA GEÇİŞİ)
     // =========================================================================
     console.log("🔍 LSA sayfa durumu kontrol ediliyor...");
     await new Promise(r => setTimeout(r, 2500));
@@ -262,7 +262,11 @@ function clearChromeLocks() {
       console.log("🍔 Hamburger menü açıldı.");
       await new Promise(r => setTimeout(r, 2000));
 
-      // 2. ANFRAGEN TIKLAMA
+      // 2. ANFRAGEN TIKLAMA VE YÖNLENDİRME BEKLEME
+      console.log("🖱️ 'Anfragen' tıklandı. Yönlendirme bekleniyor...");
+      
+      const navigationPromise = page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 30000 }).catch(() => null);
+
       const anfragenClicked = await page.evaluate(() => {
         const elements = Array.from(document.querySelectorAll('a, button, [role="button"], [role="menuitem"], [role="link"], [role="tab"], span, div'));
         
@@ -281,12 +285,26 @@ function clearChromeLocks() {
       if (!anfragenClicked) {
         throw new Error("❌ Hamburger menü açıldı fakat 'Anfragen' bulunamadı.");
       }
-      console.log("🖱️ 'Anfragen' tıklandı. Yükleme bekleniyor...");
 
-      // 3. TABLONUN DOM'A YÜKLENMESİNİ BEKLE (GEÇİŞ İÇİN EK BEKLEME)
-      await new Promise(r => setTimeout(r, 6000));
+      await navigationPromise;
+      await new Promise(r => setTimeout(r, 3000));
     } else {
       console.log("✅ Direkt Anfragen/Inbox ekranındayız.");
+    }
+
+    // 3. TABLO SATIRLARININ DİNAMİK YÜKLENMESİNİ BEKLE
+    console.log("⏳ Tablonun DOM'da oluşması bekleniyor...");
+    try {
+      await page.waitForFunction(() => {
+        const rows = Array.from(document.querySelectorAll('[role="row"], tr'));
+        return rows.some(row => {
+          const text = (row.innerText || '').trim();
+          return text.length > 15 && !/Gebührenstatus|Kundenname|Kunde/i.test(text);
+        });
+      }, { timeout: 20000 });
+      console.log("✅ Tablo ve satırlar yüklendi.");
+    } catch (e) {
+      console.warn("⚠️ Tablo beklenirken zaman aşımı oluştu, mevcut DOM ile devam ediliyor...");
     }
 
     // =========================================================================
@@ -302,7 +320,7 @@ function clearChromeLocks() {
       await new Promise(r => setTimeout(r, 1000));
     });
 
-    // TABLO VERİLERİNİ ÇEKME (ORİJİNAL SAĞLAM MANTIK)
+    // TABLO VERİLERİNİ ÇEKME
     const validRows = await page.evaluate(() => {
       const rows = Array.from(document.querySelectorAll('[role="row"], tr'));
 
