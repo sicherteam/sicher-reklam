@@ -204,7 +204,7 @@ function clearChromeLocks() {
     }
 
     // =========================================================================
-    // 🟢 GOOGLE LOCAL SERVICES SAYFA KONTROLÜ (GÜNCELLENMİŞ HAMBURGER SEÇİCİ İLE)
+    // 🟢 GOOGLE LOCAL SERVICES SAYFA KONTROLÜ (GÜNCELLENMİŞ ESNEK SEÇİCİ İLE)
     // =========================================================================
     console.log("🔍 LSA sayfa durumu kontrol ediliyor...");
     await new Promise(r => setTimeout(r, 2500));
@@ -233,7 +233,7 @@ function clearChromeLocks() {
       console.log("⚠️ Unternehmensüberprüfung / Verifizierung ekranı tespit edildi.");
       console.log("🍔 Üst menü açılacak...");
 
-      // 1. HAMBURGER MENÜ (KOORDİNAT VE FALLBACK DESTEKLİ GÜÇLENDİRİLMİŞ SEÇİCİ)
+      // 1. HAMBURGER MENÜ (GÜÇLENDİRİLMİŞ SEÇİCİ)
       const menuClicked = await page.evaluate(() => {
         const candidates = Array.from(document.querySelectorAll('header button, button, [role="button"]'));
         
@@ -272,17 +272,21 @@ function clearChromeLocks() {
         throw new Error("❌ Verifizierung ekranı bulundu fakat hamburger menü bulunamadı.");
       }
       console.log("🍔 Hamburger menü açıldı.");
-      await new Promise(r => setTimeout(r, 1500));
+      await new Promise(r => setTimeout(r, 2500)); // Menü animasyonu için bekleme artırıldı
 
-      // 2. ANFRAGEN
+      // 2. ANFRAGEN (ESNEK METİN VE KAPSAYICI TIKLAMA İLE GÜNCELLENDİ)
       const anfragenClicked = await page.evaluate(() => {
-        const elements = Array.from(document.querySelectorAll('a, button, [role="button"], [role="menuitem"], [role="link"], [role="tab"]'));
+        const elements = Array.from(document.querySelectorAll('a, button, [role="button"], [role="menuitem"], [role="link"], [role="tab"], span, div'));
+        
         const anfragen = elements.find(el => {
           const text = (el.innerText || el.textContent || '').trim().replace(/\s+/g, ' ');
-          return /^Anfragen$/i.test(text);
+          return text.length < 30 && (/anfragen/i.test(text) || /posteingang/i.test(text) || /leads/i.test(text));
         });
+
         if (!anfragen) return false;
-        anfragen.click();
+        
+        const clickable = anfragen.closest('a') || anfragen.closest('[role="menuitem"]') || anfragen.closest('[role="link"]') || anfragen;
+        clickable.click();
         return true;
       });
 
