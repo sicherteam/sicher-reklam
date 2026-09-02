@@ -9,8 +9,8 @@ const crypto = require('crypto');
 puppeteer.use(StealthPlugin());
 
 // --- MOD KONTROLLERİ (AÇ / KAPAT) ---
-const SKIP_TELEGRAM = false; // true yapılırsa Telegram bildirimi atmaz
-const SKIP_GIT_PUSH = false;  // true yapılırsa GitHub'a push yapmaz
+const SKIP_TELEGRAM = false; 
+const SKIP_GIT_PUSH = false;  
 
 // --- CONFIGURATION (OSMAN REKLAM) ---
 const CONFIG = {
@@ -25,7 +25,7 @@ const CONFIG = {
 function normalizeDateForMd5(dateStr) {
   if (!dateStr || dateStr === '-') return '';
   const match = dateStr.match(/(\d{2})\.(\d{2})\.(\d{2,4})\s+(\d{2}):(\d{2})/);
-  if (!match) return dateStr.replace(/\D/g, ''); // RegEx fallback
+  if (!match) return dateStr.replace(/\D/g, ''); 
   
   let [, day, month, year, hour, minute] = match;
   if (year.length === 2) year = `20${year}`;
@@ -51,9 +51,7 @@ async function sendTelegramMessage(lead) {
     return false;
   }
 
-  // 🔹 Eğer Müşteri alanından bağımsız olarak ayrıştırılmış telefon numarası varsa ekler
   const phoneText = lead["Telefon"] ? `\n📞 *Telefon:* ${lead["Telefon"]}` : '';
-
   const message = `🔔 *YENİ Müşteri!* (${CONFIG.projectName})\n\n` +
                   `👤 *Müşteri:* ${lead["Musteri"]}${phoneText}\n` +
                   `📍 *Konum:* ${lead["Konum"]}\n` +
@@ -78,7 +76,7 @@ async function sendTelegramMessage(lead) {
   }
 }
 
-// 24-Hour Strict Date Formatter (Viyana / UTC+2 Offset Destekli)
+// 24-Hour Strict Date Formatter 
 function parseTo24HourDate(dateStr) {
   if (!dateStr || dateStr === '-') return '-';
 
@@ -89,7 +87,6 @@ function parseTo24HourDate(dateStr) {
   let [, datePart, hoursStr, minutes, modifier] = match;
   let hours = parseInt(hoursStr, 10);
 
-  // 1. AM/PM Dönüşümü
   if (modifier) {
     const isPM = modifier.toUpperCase() === 'PM';
     const isAM = modifier.toUpperCase() === 'AM';
@@ -97,7 +94,6 @@ function parseTo24HourDate(dateStr) {
     if (isAM && hours === 12) hours = 0;
   }
 
-  // 2. Sunucu saat farkı (+2 Saat Offset)
   hours += 2;
   hours = hours % 24;
 
@@ -128,7 +124,7 @@ function clearChromeLocks() {
 // --- MAIN EXECUTION ---
 (async () => {
   let freshLeads = [];
-  const sessionIds = new Set(); // 🔹 Aynı çalıştırmadaki duplicate'leri engellemek için Set
+  const sessionIds = new Set(); 
 
   // ESKİ KAYITLARI YÜKLE
   let previousLeads = [];
@@ -142,7 +138,7 @@ function clearChromeLocks() {
   }
 
   // ===================================================
-  // 1. BÖLÜM: TARAYICI İŞLEMLERİ (Sadece Veri Toplama)
+  // 1. BÖLÜM: TARAYICI İŞLEMLERİ 
   // ===================================================
   let browser;
   try {
@@ -179,7 +175,6 @@ function clearChromeLocks() {
 
     await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36');
 
-    // 🌐 OPTİMİZASYON 1: GELİŞMİŞ AĞ/KAYNAK ENGELLEME
     await page.setRequestInterception(true);
     page.on('request', (req) => {
       const url = req.url().toLowerCase();
@@ -198,7 +193,7 @@ function clearChromeLocks() {
       }
     });
 
-    console.log("🚀 LSA Inbox sayfasına gidiliyor...");
+    console.log("🚀 LSA sayfasına gidiliyor...");
     await page.goto(CONFIG.targetUrl, { waitUntil: 'networkidle2' });
 
     const pageTitle = await page.title();
@@ -208,6 +203,104 @@ function clearChromeLocks() {
       throw new Error(`❌ Oturum açılamadı veya Google engelledi! Başlık: ${pageTitle}`);
     }
 
+    // =========================================================================
+    // 🟢 GOOGLE LOCAL SERVICES SAYFA KONTROLÜ (GÜNCELLENDİ)
+    // =========================================================================
+    console.log("🔍 LSA sayfa durumu kontrol ediliyor...");
+    await new Promise(r => setTimeout(r, 2500));
+
+    const initialState = await page.evaluate(() => {
+      const bodyText = document.body?.innerText || '';
+      const hasVerification = /Unternehmensüberprüfung|Unternehmensverifizierung|Verifizierung erforderlich|Unternehmen verifizieren/i.test(bodyText);
+      const hasAnfragen = /\bAnfragen\b/i.test(bodyText);
+      
+      const rows = Array.from(document.querySelectorAll('[role="row"], tr'));
+      const hasInboxTable = rows.some(row => {
+        const text = (row.innerText || '').trim();
+        return text.length > 20 && !/Gebührenstatus|Kundenname|Kunde/i.test(text);
+      });
+
+      return { hasVerification, hasAnfragen, hasInboxTable, url: window.location.href };
+    });
+
+    console.log("📋 Sayfa durumu:", initialState);
+
+    if (initialState.hasAnfragen && initialState.hasInboxTable) {
+      console.log("✅ Direkt Anfragen/Inbox ekranındayız.");
+      console.log("📊 Scraper doğrudan başlıyor.");
+    } 
+    else if (initialState.hasVerification) {
+      console.log("⚠️ Unternehmensüberprüfung / Verifizierung ekranı tespit edildi.");
+      console.log("🍔 Üst menü açılacak...");
+
+      // 1. HAMBURGER MENÜ 
+      const menuClicked = await page.evaluate(() => {
+        const buttons = Array.from(document.querySelectorAll('button, [role="button"], [aria-label], header button'));
+        const menuButton = buttons.find(el => {
+          const aria = (el.getAttribute('aria-label') || '').trim().toLowerCase();
+          const title = (el.getAttribute('title') || '').trim().toLowerCase();
+          return (
+            aria === 'menü' || aria === 'menu' || aria.includes('menü öffnen') || 
+            aria.includes('menu öffnen') || aria.includes('open menu') || 
+            title === 'menü' || title === 'menu'
+          );
+        });
+        if (!menuButton) return false;
+        menuButton.click();
+        return true;
+      });
+
+      if (!menuClicked) {
+        throw new Error("❌ Verifizierung ekranı bulundu fakat hamburger menü bulunamadı.");
+      }
+      console.log("🍔 Hamburger menü açıldı.");
+      await new Promise(r => setTimeout(r, 1500));
+
+      // 2. ANFRAGEN
+      const anfragenClicked = await page.evaluate(() => {
+        const elements = Array.from(document.querySelectorAll('a, button, [role="button"], [role="menuitem"], [role="link"], [role="tab"]'));
+        const anfragen = elements.find(el => {
+          const text = (el.innerText || el.textContent || '').trim().replace(/\s+/g, ' ');
+          return /^Anfragen$/i.test(text);
+        });
+        if (!anfragen) return false;
+        anfragen.click();
+        return true;
+      });
+
+      if (!anfragenClicked) {
+        throw new Error("❌ Hamburger menü açıldı fakat 'Anfragen' bulunamadı.");
+      }
+      console.log("🖱️ 'Anfragen' tıklandı.");
+
+      // 3. GERÇEKTEN ANFRAGEN SAYFASINA GEÇİLDİ Mİ? 
+      console.log("⏳ Anfragen ekranı bekleniyor...");
+      try {
+        await page.waitForFunction(() => {
+          const body = document.body?.innerText || '';
+          const hasAnfragen = /\bAnfragen\b/i.test(body);
+          const rows = Array.from(document.querySelectorAll('[role="row"], tr'));
+          const hasLeadRows = rows.some(row => {
+            const text = (row.innerText || '').trim();
+            return text.length > 20 && !/Gebührenstatus|Kundenname|Kunde/i.test(text);
+          });
+          return hasAnfragen && hasLeadRows;
+        }, { timeout: 30000 });
+        console.log("✅ Anfragen ekranı ve lead satırları bulundu.");
+      } catch (waitErr) {
+        throw new Error("❌ 'Anfragen' tıklandı fakat 30 saniye içinde lead tablosu yüklenmedi.");
+      }
+      await new Promise(r => setTimeout(r, 3000));
+    } 
+    else {
+      console.log("⚠️ Sayfa durumu net olarak tespit edilemedi.");
+      console.log("🔄 Mevcut sayfa kontrol edilerek devam ediliyor.");
+      await new Promise(r => setTimeout(r, 3000));
+    }
+
+    // =========================================================================
+    // SCRAPER ÖNCESİ SON STABİLİZASYON
+    // =========================================================================
     await page.evaluate(async () => {
       for (let i = 0; i < 4; i++) {
         window.scrollBy(0, 300);
@@ -275,9 +368,8 @@ function clearChromeLocks() {
     for (const item of validRows) {
       let messageText = "-";
       let finalCustomerName = item.phone;
-      let panelPhone = null; // 🔹 Panel açıldığında tespit edilecek telefon numarası
+      let panelPhone = null; 
 
-      // 1. Saat Dönüşümü ve Ön-MD5 Üretimi
       const formattedDate = parseTo24HourDate(item.anfrageDate);
       let tempCustomerName = (!finalCustomerName || finalCustomerName.trim() === '-' || finalCustomerName === '') ? 'Müşteri' : finalCustomerName;
       
@@ -290,23 +382,20 @@ function clearChromeLocks() {
 
       const currentMd5 = generateLeadMd5(tempLead);
 
-      // 🔹 AYNİ ÇALIŞTIRMADA DUPLICATE KONTROLÜ (Session Check)
       if (sessionIds.has(currentMd5)) {
         console.log(`⚠️ Aynı çalıştırmada duplicate atlandı: ${tempCustomerName} (${currentMd5})`);
         continue;
       }
 
-      // 🚀 OPTİMİZASYON 2: DÖNGÜ BAŞINDA ESKİ KAYIT (TELEFON VEYA MESAJ) KONTROLÜ
       const existingLead = previousLeads.find(old => old.id === currentMd5);
 
       if (existingLead) {
         console.log(`⚡ [SKIP] Eski kayıt (Telefon/Mesaj) atlandı: ${existingLead.Musteri} (${currentMd5})`);
         sessionIds.add(currentMd5);
         freshLeads.push(existingLead);
-        continue; // 🛑 Tıklama yapılmadan doğrudan bir sonraki kayda geçer!
+        continue; 
       }
 
-      // 2. SADECE YENİ MESAJLI KAYITLAR İÇİN TIKLAMA VE DETAY OKUMA
       if (item.isMessage) {
         try {
           console.log(`📩 Yeni mesaj detayı okunuyor (Index: ${item.domIndex})...`);
@@ -323,7 +412,6 @@ function clearChromeLocks() {
             let nameInHeader = null;
             let extractedPhone = null;
 
-            // A) Mesaj Metnini Okuma
             const chatBlock = Array.from(document.querySelectorAll('div, section, article'))
                                    .find(el => (el.innerText || '').includes('Unterhaltung'));
             
@@ -336,19 +424,16 @@ function clearChromeLocks() {
                          .trim() || "NO MESSAGE";
             }
 
-            // B) Üst Panel Header Alanından Telefon ve İsim Taraması
             const headerBar = Array.from(document.querySelectorAll('div, header'))
                                    .find(el => (el.innerText || '').includes('ARCHIVIEREN') || (el.innerText || '').includes('MARKIEREN'));
             if (headerBar) {
               const headerText = headerBar.innerText || '';
 
-              // 🔹 1. Telefon Numarası Taraması (+43, +90, 0660 vb. uluslararası/yerel kalıplar)
               const phoneMatch = headerText.match(/\+?\d[\d\s\/-]{7,}/);
               if (phoneMatch) {
                 extractedPhone = phoneMatch[0].trim();
               }
 
-              // 🔹 2. İsim Taraması
               const lines = headerText.split('\n').map(l => l.trim()).filter(Boolean);
               if (lines.length > 0 && !lines[0].includes('ARCHIVIEREN')) {
                 const candidate = lines[0].split('|')[0].trim();
@@ -373,7 +458,6 @@ function clearChromeLocks() {
         }
       }
 
-      // 🔹 İsim bulunamazsa panelden çıkan telefonu, o da yoksa 'Müşteri' kelimesini atar
       if (!finalCustomerName || finalCustomerName.trim() === '-' || finalCustomerName === '') {
         finalCustomerName = panelPhone || 'Müşteri';
       }
@@ -419,7 +503,6 @@ function clearChromeLocks() {
       };
     });
 
-    // Tarihe Göre Sıralama
     leads.sort((a, b) => parseDateForSorting(b["Tarih"]) - parseDateForSorting(a["Tarih"]));
 
     const unsentLeads = leads.filter(l => !l.telegramSent);
@@ -429,7 +512,6 @@ function clearChromeLocks() {
 
     if (unsentLeads.length > 0 || hasNewEntry) {
       
-      // TELEGRAM GÖNDERİM KONTROLÜ
       if (SKIP_TELEGRAM) {
         console.log("⏭️ SKIP_TELEGRAM = true (Telegram bildirimi atlanıyor).");
       } else {
@@ -451,7 +533,6 @@ function clearChromeLocks() {
       fs.writeFileSync('data.json', JSON.stringify(outputData, null, 2));
       console.log(`💾 data.json tarihe göre sıralandı ve kaydedildi.`);
 
-      // GIT PUSH KONTROLÜ
       if (SKIP_GIT_PUSH) {
         console.log("⏭️ SKIP_GIT_PUSH = true (Git Push atlanıyor).");
       } else {
