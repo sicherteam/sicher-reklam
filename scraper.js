@@ -204,7 +204,7 @@ function clearChromeLocks() {
     }
 
     // =========================================================================
-    // 🟢 GOOGLE LOCAL SERVICES SAYFA KONTROLÜ (GÜNCELLENDİ)
+    // 🟢 GOOGLE LOCAL SERVICES SAYFA KONTROLÜ (GÜNCELLENMİŞ HAMBURGER SEÇİCİ İLE)
     // =========================================================================
     console.log("🔍 LSA sayfa durumu kontrol ediliyor...");
     await new Promise(r => setTimeout(r, 2500));
@@ -233,19 +233,37 @@ function clearChromeLocks() {
       console.log("⚠️ Unternehmensüberprüfung / Verifizierung ekranı tespit edildi.");
       console.log("🍔 Üst menü açılacak...");
 
-      // 1. HAMBURGER MENÜ 
+      // 1. HAMBURGER MENÜ (KOORDİNAT VE FALLBACK DESTEKLİ GÜÇLENDİRİLMİŞ SEÇİCİ)
       const menuClicked = await page.evaluate(() => {
-        const buttons = Array.from(document.querySelectorAll('button, [role="button"], [aria-label], header button'));
-        const menuButton = buttons.find(el => {
+        const candidates = Array.from(document.querySelectorAll('header button, button, [role="button"]'));
+        
+        const menuButton = candidates.find(el => {
           const aria = (el.getAttribute('aria-label') || '').trim().toLowerCase();
           const title = (el.getAttribute('title') || '').trim().toLowerCase();
-          return (
-            aria === 'menü' || aria === 'menu' || aria.includes('menü öffnen') || 
-            aria.includes('menu öffnen') || aria.includes('open menu') || 
-            title === 'menü' || title === 'menu'
-          );
+          const html = el.innerHTML || '';
+          
+          if (aria.includes('menü') || aria.includes('menu') || title.includes('menü') || title.includes('menu')) {
+            return true;
+          }
+          
+          if (html.includes('view_headline') || html.includes('menu') || html.includes('hamburger') || el.querySelector('svg')) {
+            const rect = el.getBoundingClientRect();
+            if (rect.left < 150 && rect.top < 100 && rect.width > 0 && rect.height > 0) {
+              return true;
+            }
+          }
+          return false;
         });
-        if (!menuButton) return false;
+
+        if (!menuButton) {
+          const firstHeaderBtn = document.querySelector('header button, div[role="banner"] button');
+          if (firstHeaderBtn) {
+            firstHeaderBtn.click();
+            return true;
+          }
+          return false;
+        }
+
         menuButton.click();
         return true;
       });
