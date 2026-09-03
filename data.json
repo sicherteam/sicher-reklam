@@ -1,6 +1,16 @@
 {
-  "updatedAt": "3.9.2026, 11:50:37",
+  "updatedAt": "3.9.2026, 11:55:40",
   "leads": [
+    {
+      "Musteri": "0660 4401749",
+      "Telefon": "0660 4401749",
+      "Hizmet": "Beförderung von Umzugsgut",
+      "Konum": "Deutschlandsberg",
+      "Tarih": "03.09.26 11:53",
+      "Mesaj": "-",
+      "id": "850d07bd0db971ba63d8a4818d5439b8",
+      "telegramSent": true
+    },
     {
       "Musteri": "0681 81212858",
       "Telefon": "0681 81212858",
@@ -129,16 +139,6 @@
       "Tarih": "31.08.26 14:41",
       "Mesaj": "-",
       "id": "06e55f35359335e8fa8a7323decb2b4b",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0677 64724804",
-      "Telefon": "0677 64724804",
-      "Hizmet": "Beförderung von Umzugsgut",
-      "Konum": "Graz",
-      "Tarih": "31.08.26 13:55",
-      "Mesaj": "-",
-      "id": "839fb054143edf9bfe67784a92599373",
       "telegramSent": true
     },
     {
