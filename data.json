@@ -1,5 +1,5 @@
 {
-  "updatedAt": "3.9.2026, 13:10:58",
+  "updatedAt": "3.9.2026, 13:15:41",
   "leads": [
     {
       "Musteri": "0660 4401749",
@@ -142,16 +142,6 @@
       "telegramSent": true
     },
     {
-      "Musteri": "0650 2412948",
-      "Telefon": "0650 2412948",
-      "Hizmet": "-",
-      "Konum": "Rottenmann",
-      "Tarih": "31.08.26 13:11",
-      "Mesaj": "-",
-      "id": "52228d7dee101e9b1899abf2885c8414",
-      "telegramSent": true
-    },
-    {
       "Musteri": "0660 1582205",
       "Telefon": "0660 1582205",
       "Hizmet": "-",
@@ -199,6 +189,16 @@
       "Tarih": "28.08.26 09:48",
       "Mesaj": "P\nPotenzieller Kunde\n28.08.26\nEs um den Tansport eines Flügels von Parterre in den ersten Stock. Die Adresse ist in Oberhofen im Inntal. Es ist eine offene Innen Treppe. Könntet ihr uns dabei helfen? LG Andreas 0650 2282930",
       "id": "ba44a5b0759e5444674892e366ecfd94",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0664 4744229",
+      "Telefon": "0664 4744229",
+      "Hizmet": "Umzug im Inland",
+      "Konum": "Steyr",
+      "Tarih": "24.08.26 19:09",
+      "Mesaj": "P\nPotenzieller Kunde\n24.08.26\nUmzug nach Linz",
+      "id": "4a4581d2597784800b4122f57c861631",
       "telegramSent": true
     }
   ]
