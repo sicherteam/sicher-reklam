@@ -1,6 +1,16 @@
 {
-  "updatedAt": "3.9.2026, 10:25:46",
+  "updatedAt": "3.9.2026, 10:30:34",
   "leads": [
+    {
+      "Musteri": "0681 81212858",
+      "Telefon": "0681 81212858",
+      "Hizmet": "-",
+      "Konum": "Wien",
+      "Tarih": "03.09.26 10:25",
+      "Mesaj": "-",
+      "id": "a3654e5a87e5fa2b67d642844b5bc295",
+      "telegramSent": true
+    },
     {
       "Musteri": "0650 6868088",
       "Telefon": "0650 6868088",
@@ -139,16 +149,6 @@
       "Tarih": "31.08.26 13:11",
       "Mesaj": "-",
       "id": "52228d7dee101e9b1899abf2885c8414",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0650 9932027",
-      "Telefon": "0650 9932027",
-      "Hizmet": "-",
-      "Konum": "Innsbruck",
-      "Tarih": "31.08.26 12:14",
-      "Mesaj": "-",
-      "id": "a6e3c4f54a46a98b18ddd9e96e2b741b",
       "telegramSent": true
     },
     {
