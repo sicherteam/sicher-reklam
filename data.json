@@ -1,6 +1,16 @@
 {
-  "updatedAt": "3.9.2026, 21:11:00",
+  "updatedAt": "3.9.2026, 21:15:41",
   "leads": [
+    {
+      "Musteri": "0660 2898929",
+      "Telefon": "0660 2898929",
+      "Hizmet": "Innerörtlicher Umzug",
+      "Konum": "Neukirchen am Walde",
+      "Tarih": "03.09.26 21:12",
+      "Mesaj": "P\nPotenzieller Kunde\n7:12 PM\nHallo, ich suche Hilfe beim Übersiedeln von 4724 Neukirchen nach 4722 Steegen. Übersiedelt und aufgebaut gehören 1 Boxspringbett 140 cm breit, 1 Kratzbaum ca. 70 kg schwer, 1 Regal bereits zerlegt und 1 Komode. Optimaler Termin wäre Aufbau in Steegen, 2. Stock, Lift vorhanden, am 23. September am späten Nachmittag, ab ca. 15.15 (Schlüsselübergabe habe ich um 15.00). Am 24. werden bereits neue Möbel angeliefert. Haben Sie freie Kaoazitäten? Dann freu ich mich auf einen unverbindlichen Kostenvoranschlag. Vielen Dank, FG Eva Entholzer",
+      "id": "47e6adbe02a6cec134ec0ad4d3fbec5f",
+      "telegramSent": true
+    },
     {
       "Musteri": "0664 2375524",
       "Telefon": "0664 2375524",
@@ -149,16 +159,6 @@
       "Tarih": "31.08.26 15:54",
       "Mesaj": "-",
       "id": "314b9d8b8d0024696a4c5af9d80d964f",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0677 63154809",
-      "Telefon": "0677 63154809",
-      "Hizmet": "-",
-      "Konum": "Wels",
-      "Tarih": "31.08.26 15:34",
-      "Mesaj": "-",
-      "id": "b84e91e0c5dcdbe5d6c1ba635ba29aaa",
       "telegramSent": true
     },
     {
