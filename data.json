@@ -1,6 +1,16 @@
 {
-  "updatedAt": "3.9.2026, 21:05:39",
+  "updatedAt": "3.9.2026, 21:11:00",
   "leads": [
+    {
+      "Musteri": "0664 2375524",
+      "Telefon": "0664 2375524",
+      "Hizmet": "Internationaler Umzug",
+      "Konum": "Leopoldsdorf im Marchfeld",
+      "Tarih": "03.09.26 21:05",
+      "Mesaj": "P\nPotenzieller Kunde\n7:05 PM\nHallo wir würden eine Firma suchen. Die preislich akzeptabel ist, da wir bis jz nur Wucherpreise gehört haben. Wir würden von leopoldsdorf im marchfeld nach Deutschland oberasbach ziehen wollen. Es wurde fast alles aus der Wohnung mitkommen. Mobelabbau und Aufbau und Kartons räumen wir ein und aus. Würden nur Transport benötigen.mfg brandl",
+      "id": "5f415a022ec3aa2ed994fb1b73899aea",
+      "telegramSent": true
+    },
     {
       "Musteri": "0664 1240498",
       "Telefon": "0664 1240498",
@@ -149,16 +159,6 @@
       "Tarih": "31.08.26 15:34",
       "Mesaj": "-",
       "id": "b84e91e0c5dcdbe5d6c1ba635ba29aaa",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "085 107 2330",
-      "Telefon": "085 107 2330",
-      "Hizmet": "Beförderung von Umzugsgut",
-      "Konum": "Graz",
-      "Tarih": "31.08.26 14:41",
-      "Mesaj": "-",
-      "id": "06e55f35359335e8fa8a7323decb2b4b",
       "telegramSent": true
     },
     {
