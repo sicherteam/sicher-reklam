@@ -1,6 +1,16 @@
 {
-  "updatedAt": "3.9.2026, 19:11:32",
+  "updatedAt": "3.9.2026, 19:15:37",
   "leads": [
+    {
+      "Musteri": "0664 1240498",
+      "Telefon": "0664 1240498",
+      "Hizmet": "-",
+      "Konum": "Gleisdorf",
+      "Tarih": "03.09.26 19:10",
+      "Mesaj": "-",
+      "id": "c8eac3b38dd622a3a191789a409c9b4c",
+      "telegramSent": true
+    },
     {
       "Musteri": "0664 1318890",
       "Telefon": "0664 1318890",
@@ -179,16 +189,6 @@
       "Tarih": "28.08.26 09:53",
       "Mesaj": "-",
       "id": "361103c505aed4b8e318a7e9dc19a133",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0650 2282930",
-      "Telefon": "0650 2282930",
-      "Hizmet": "Andere Dienstleistung",
-      "Konum": "Mieming",
-      "Tarih": "28.08.26 09:48",
-      "Mesaj": "P\nPotenzieller Kunde\n28.08.26\nEs um den Tansport eines Flügels von Parterre in den ersten Stock. Die Adresse ist in Oberhofen im Inntal. Es ist eine offene Innen Treppe. Könntet ihr uns dabei helfen? LG Andreas 0650 2282930",
-      "id": "ba44a5b0759e5444674892e366ecfd94",
       "telegramSent": true
     },
     {
