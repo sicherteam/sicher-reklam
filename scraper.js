@@ -237,7 +237,7 @@ function clearChromeLocks() {
       await new Promise(r => setTimeout(r, 2000));
 
       // 2. ANFRAGEN ELEMANINA TIKLAMA
-      console.log("com. 'Anfragen' seçeneğine tıklanıyor...");
+      console.log("🖱️ 'Anfragen' seçeneğine tıklanıyor...");
       await page.evaluate(() => {
         const allElements = Array.from(document.querySelectorAll('*'));
         const target = allElements.find(el => el.children.length === 0 && /^anfragen$/i.test((el.innerText || el.textContent || '').trim()));
@@ -479,11 +479,14 @@ function clearChromeLocks() {
     leads.sort((a, b) => parseDateForSorting(b["Tarih"]) - parseDateForSorting(a["Tarih"]));
 
     const unsentLeads = leads.filter(l => !l.telegramSent);
-    console.log(`🔎 İnceleme Tamamlandı. Bildirim Gitmemiş Yeni Lead Sayısı: ${unsentLeads.length}`);
+    
+    // YENİ KONTROL: Gerçekten listeye girmemiş YENİ bir müşteri var mı?
+    const isBrandNewLead = leads.some(l => !previousLeads.some(p => p.id === l.id));
 
-    const hasNewEntry = leads.some(l => !previousLeads.some(p => p.id === l.id));
+    console.log(`🔎 İnceleme Tamamlandı. Bildirim Gönderilecek Sayısı: ${unsentLeads.length}, Yeni Kayıt: ${isBrandNewLead}`);
 
-    if (unsentLeads.length > 0 || hasNewEntry) {
+    // SADECE Gerçekten yeni bir bildirim atılacaksa VEYA tamamen yeni bir müşteri eklendiyse dosyaya yaz/push yap!
+    if (unsentLeads.length > 0 || isBrandNewLead) {
       
       if (SKIP_TELEGRAM) {
         console.log("⏭️ SKIP_TELEGRAM = true (Telegram bildirimi atlanıyor).");
@@ -498,13 +501,14 @@ function clearChromeLocks() {
         }
       }
 
+      // 🔴 SADECE YENİ MÜŞTERİ VEYA GÖNDERİLMEMİŞ BİLDİRİM VARSA updatedAt GÜNCELLENİR
       const outputData = {
         updatedAt: new Date().toLocaleString('de-AT', { timeZone: 'Europe/Vienna' }),
         leads
       };
 
       fs.writeFileSync('data.json', JSON.stringify(outputData, null, 2));
-      console.log(`💾 data.json tarihe göre sıralandı ve kaydedildi.`);
+      console.log(`💾 data.json yeni verilerle güncellendi ve kaydedildi.`);
 
       if (SKIP_GIT_PUSH) {
         console.log("⏭️ SKIP_GIT_PUSH = true (Git Push atlanıyor).");
@@ -512,7 +516,7 @@ function clearChromeLocks() {
         try {
           console.log("⏳ GitHub Sync Yapılıyor...");
           execSync('git add data.json', { timeout: 15000 });
-          execSync('git commit -m "Auto-update & sort data.json [skip ci]" || true', { timeout: 15000 });
+          execSync('git commit -m "Auto-update new leads [skip ci]" || true', { timeout: 15000 });
           execSync('git pull origin main --rebase -X ours', { timeout: 20000 });
           execSync('git push origin main', { timeout: 20000 });
           console.log("✅ Git Push Başarılı!");
@@ -522,7 +526,8 @@ function clearChromeLocks() {
         }
       }
     } else {
-      console.log("ℹ️ Yeni müşteri veya gönderilmemiş bildirim yok.");
+      // 🟢 YENİ MÜŞTERİ VEYA MESAJ YOKSA DOSYAYA VE GIT'E HİÇ DOKUNULMAZ!
+      console.log("ℹ️ Yeni müşteri veya gönderilmemiş bildirim yok. data.json ve GitHub değiştirilmedi.");
     }
   }
 })();
