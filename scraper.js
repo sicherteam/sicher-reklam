@@ -16,7 +16,7 @@ const SKIP_GIT_PUSH = false;  // true yapılırsa GitHub'a push yapmaz
 const CONFIG = {
   projectName: 'Sicher Reklam',
   userDataPath: '/home/atsicherteam/sicher-reklam/user_data',
-  targetUrl: 'https://ads.google.com/localservices/inbox?cid=9203255169&bid=11049534709&pid=9999999999&euid=8501543550&hl=de&gl=AT',
+  targetUrl: 'https://ads.google.com/localservices/inbox?cid=9203255169&bid=11049534709&pid=9999999999&euid=8501543550&hl=de-AT&gl=AT',
   telegramToken: process.env.TELEGRAM_BOT_TOKEN,
   telegramChatId: process.env.TELEGRAM_CHAT_ID,
 };
@@ -128,10 +128,12 @@ function clearChromeLocks() {
 
   // ESKİ KAYITLARI YÜKLE
   let previousLeads = [];
+  let previousUpdatedAt = null;
   if (fs.existsSync('data.json')) {
     try {
       const oldContent = JSON.parse(fs.readFileSync('data.json', 'utf8'));
       previousLeads = oldContent.leads || [];
+      previousUpdatedAt = oldContent.updatedAt || null;
     } catch (e) {
       console.warn("⚠️ Eski data.json okunamadı:", e.message);
     }
@@ -247,6 +249,10 @@ function clearChromeLocks() {
         await page.goto(CONFIG.targetUrl, { waitUntil: 'networkidle2' });
         await new Promise(r => setTimeout(r, 3000));
       }
+
+      // Tablonun oturmasını garantiye al
+      await page.waitForSelector('[role="row"], tr', { timeout: 15000 }).catch(() => {});
+      await new Promise(r => setTimeout(r, 2000));
     }
 
     // =========================================================================
@@ -291,7 +297,7 @@ function clearChromeLocks() {
             t !== customerName && 
             t !== jobType && 
             !/^\+?\d[\d\s-]{6,}$/.test(t) && 
-            !/^(Kategorie|Direkte|Telefon|Nachricht|Belastet|Wird)/i.test(t) &&
+            !/^(Kategorie|Direkte|Telefon|Nachricht|Belastet|Wird)/i.test(t) && 
             !/\d{2}\.\d{2}\.\d{2}/.test(t)
           ) || '-';
         }
@@ -326,7 +332,6 @@ function clearChromeLocks() {
       const formattedDate = parseTo24HourDate(item.anfrageDate);
       let tempCustomerName = (!finalCustomerName || finalCustomerName.trim() === '-' || finalCustomerName === '') ? 'Müşteri' : finalCustomerName;
       
-      // 🔹 2. Kod Yapısı: MD5 yalnızca ilk ham veriden üretilir ve sabittir
       const tempLead = {
         Musteri: tempCustomerName,
         Hizmet: item.jobType,
@@ -334,16 +339,27 @@ function clearChromeLocks() {
         Tarih: formattedDate
       };
 
-      const currentMd5 = generateLeadMd5(tempLead);
+      let currentMd5 = generateLeadMd5(tempLead);
+
+      // 🛡️ ESKİ KAYIT KONTROLÜ (Tarih formatı oynasa bile Müşteri + Konum + Hizmet eşleşmesi korur)
+      const existingLead = previousLeads.find(old => 
+        old.id === currentMd5 || 
+        (
+          old.Musteri.toLowerCase() === tempCustomerName.toLowerCase() &&
+          old.Hizmet.toLowerCase() === item.jobType.toLowerCase() &&
+          old.Konum.toLowerCase() === item.location.toLowerCase()
+        )
+      );
+
+      if (existingLead) {
+        currentMd5 = existingLead.id;
+      }
 
       // Session Duplicate Kontrolü
       if (sessionIds.has(currentMd5)) {
         console.log(`⚠️ Aynı çalıştırmada duplicate atlandı: ${tempCustomerName} (${currentMd5})`);
         continue;
       }
-
-      // 🚀 ESKİ KAYIT KONTROLÜ
-      const existingLead = previousLeads.find(old => old.id === currentMd5);
 
       if (existingLead) {
         console.log(`⚡ [SKIP] Eski kayıt atlandı: ${existingLead.Musteri} (${currentMd5})`);
@@ -419,7 +435,6 @@ function clearChromeLocks() {
         finalCustomerName = panelPhone || 'Müşteri';
       }
 
-      // 🔹 2. Kod Mantığı: MD5 değiştirilmez, döngü başındaki currentMd5 atanır
       const leadObj = {
         "Musteri": finalCustomerName,
         "Telefon": panelPhone || (item.phone !== '-' && /^\+?\d[\d\s-]{6,}$/.test(item.phone) ? item.phone : null),
@@ -427,7 +442,8 @@ function clearChromeLocks() {
         "Konum": item.location,
         "Tarih": formattedDate,
         "Mesaj": messageText,
-        "id": currentMd5
+        "id": currentMd5,
+        "telegramSent": false
       };
 
       sessionIds.add(currentMd5);
@@ -455,7 +471,7 @@ function clearChromeLocks() {
       const existing = previousLeads.find(old => old.id === newLead.id);
       return {
         ...newLead,
-        telegramSent: existing ? (existing.telegramSent || false) : false
+        telegramSent: existing ? (existing.telegramSent ?? false) : false
       };
     });
 
@@ -466,8 +482,10 @@ function clearChromeLocks() {
 
     console.log(`🔎 İnceleme Tamamlandı. Telegram Bekleyen: ${unsentLeads.length}, Yepyeni Kayıt: ${hasNewEntry}`);
 
-    if (unsentLeads.length > 0 || hasNewEntry) {
-      // Telegram Bildirimleri
+    let telegramStatusChanged = false;
+
+    // Telegram Bildirimleri
+    if (unsentLeads.length > 0) {
       if (SKIP_TELEGRAM) {
         console.log("⏭️ SKIP_TELEGRAM = true (Telegram bildirimi atlanıyor).");
       } else {
@@ -475,15 +493,21 @@ function clearChromeLocks() {
           const isSuccess = await sendTelegramMessage(leadToNotify);
           if (isSuccess) {
             leadToNotify.telegramSent = true;
+            telegramStatusChanged = true;
             console.log(`📱 Telegram bildirimi gönderildi: ${leadToNotify["Musteri"]} (MD5: ${leadToNotify.id})`);
           }
           await new Promise(r => setTimeout(r, 1000));
         }
       }
+    }
 
-      // Sadece yeni kayıt veya gitmemiş bildirim durumunda yazılır ve push edilir
+    // 🎯 KRİTİK FİLTRE: Sadece yepyeni kayıt geldiyse VEYA bildirim başarıyla iletildiyse dosyayı yaz ve push et
+    if (hasNewEntry || telegramStatusChanged) {
       const outputData = {
-        updatedAt: new Date().toLocaleString('de-AT', { timeZone: 'Europe/Vienna' }),
+        // Sadece yeni lead geldiğinde güncel saat basılır, aksi halde eski saat korunur
+        updatedAt: hasNewEntry 
+          ? new Date().toLocaleString('de-AT', { timeZone: 'Europe/Vienna' }) 
+          : (previousUpdatedAt || new Date().toLocaleString('de-AT', { timeZone: 'Europe/Vienna' })),
         leads
       };
 
@@ -506,7 +530,7 @@ function clearChromeLocks() {
         }
       }
     } else {
-      console.log("ℹ️ Yeni müşteri veya gönderilmemiş bildirim yok. GitHub push atlandı.");
+      console.log("ℹ️ Yeni müşteri yok ve Telegram durumu değişmedi. GitHub push atlandı.");
     }
   }
 })();
