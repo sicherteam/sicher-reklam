@@ -1,6 +1,26 @@
 {
-  "updatedAt": "4.9.2026, 09:23:07",
+  "updatedAt": "4.9.2026, 09:26:10",
   "leads": [
+    {
+      "Musteri": "0660 2898929",
+      "Telefon": "0660 2898929",
+      "Hizmet": "Innerörtlicher Umzug",
+      "Konum": "Neukirchen am Walde",
+      "Tarih": "03.09.26 21:12",
+      "Mesaj": "-",
+      "id": "47e6adbe02a6cec134ec0ad4d3fbec5f",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0664 2375524",
+      "Telefon": "0664 2375524",
+      "Hizmet": "Internationaler Umzug",
+      "Konum": "Leopoldsdorf im Marchfeld",
+      "Tarih": "03.09.26 21:05",
+      "Mesaj": "P\nPotenzieller Kunde\n7:05 PM\nHallo wir würden eine Firma suchen. Die preislich akzeptabel ist, da wir bis jz nur Wucherpreise gehört haben. Wir würden von leopoldsdorf im marchfeld nach Deutschland oberasbach ziehen wollen. Es wurde fast alles aus der Wohnung mitkommen. Mobelabbau und Aufbau und Kartons räumen wir ein und aus. Würden nur Transport benötigen.mfg brandl",
+      "id": "5f415a022ec3aa2ed994fb1b73899aea",
+      "telegramSent": true
+    },
     {
       "Musteri": "0664 1240498",
       "Telefon": "0664 1240498",
@@ -87,9 +107,9 @@
       "Hizmet": "Beförderung von Umzugsgut",
       "Konum": "Wiener Neudorf",
       "Tarih": "01.09.26 20:58",
-      "Mesaj": "P\nPotenzieller Kunde\n6:58 PM\nHallo, ich möchte Ende September, voraussichtlich am 24. oder 25. September, eine kleine Wohnung übersiedeln lassen und würde gerne nachfragen, ob Sie an einem dieser Termine verfügbar wären und mit welchen Kosten ich ungefähr rechnen müsste. Es handelt sich um eine 33 m² große Wohnung von Wiener Neudorf nach Hirtenberg. Zu übersiedeln wären ungefähr: * 1 Bett * 1 kleine Couch * 2 Kästen, die ab- und am neuen Standort wieder aufgebaut werden müssten * 1 Waschmaschine * einige kleinere Gegenstände/Umzugskartons Könnten Sie mir bitte mitteilen, was die Übersiedlung ungefähr kosten würde.",
+      "Mesaj": "-",
       "id": "6f68fc23252c02da144f2e2d0eb4f211",
-      "telegramSent": false
+      "telegramSent": true
     },
     {
       "Musteri": "0664 5995844",
@@ -157,7 +177,7 @@
       "Hizmet": "Beförderung von Umzugsgut",
       "Konum": "Wien",
       "Tarih": "30.08.26 16:40",
-      "Mesaj": "P\nPotenzieller Kunde\n30.08.26\nGuten Tag Ich habe eine Frage Ich jätte einen Umzug zu machen habe eine Wohnung die 58 Quadratmeter groß ist . Ich habe Sachen zum mitnehmen und auch sehr viele Sachen die auf den Sperrmüll gehören. Wie sind da die Kosten da ich von 2620 Neunkirchen nach 4040 linz umziehe. Ich würde nur Mal vorab informieren sammeln. Mit freundlichen Grüßen",
+      "Mesaj": "-",
       "id": "d3dcfb4565a47837b01c873fd32d8f23",
       "telegramSent": true
     },
@@ -173,11 +193,11 @@
     },
     {
       "Musteri": "0664 4744229",
-      "Telefon": "0664 2375524",
+      "Telefon": "0664 4744229",
       "Hizmet": "Umzug im Inland",
       "Konum": "Steyr",
       "Tarih": "24.08.26 19:09",
-      "Mesaj": "P\nPotenzieller Kunde\n24.08.26\nUmzug nach Linz",
+      "Mesaj": "-",
       "id": "4a4581d2597784800b4122f57c861631",
       "telegramSent": true
     }
