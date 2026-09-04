@@ -1,56 +1,6 @@
 {
-  "updatedAt": "4.9.2026, 11:10:36",
+  "updatedAt": "4.9.2026, 13:01:11",
   "leads": [
-    {
-      "Musteri": "0660 2898929",
-      "Telefon": "0660 2898929",
-      "Hizmet": "Innerörtlicher Umzug",
-      "Konum": "Neukirchen am Walde",
-      "Tarih": "03.09.26 21:12",
-      "Mesaj": "P\nPotenzieller Kunde\n7:12 PM\nHallo, ich suche Hilfe beim Übersiedeln von 4724 Neukirchen nach 4722 Steegen. Übersiedelt und aufgebaut gehören 1 Boxspringbett 140 cm breit, 1 Kratzbaum ca. 70 kg schwer, 1 Regal bereits zerlegt und 1 Komode. Optimaler Termin wäre Aufbau in Steegen, 2. Stock, Lift vorhanden, am 23. September am späten Nachmittag, ab ca. 15.15 (Schlüsselübergabe habe ich um 15.00). Am 24. werden bereits neue Möbel angeliefert. Haben Sie freie Kaoazitäten? Dann freu ich mich auf einen unverbindlichen Kostenvoranschlag. Vielen Dank, FG Eva Entholzer",
-      "id": "47e6adbe02a6cec134ec0ad4d3fbec5f",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0664 2375524",
-      "Telefon": "0664 2375524",
-      "Hizmet": "Internationaler Umzug",
-      "Konum": "Leopoldsdorf im Marchfeld",
-      "Tarih": "03.09.26 21:05",
-      "Mesaj": "P\nPotenzieller Kunde\n7:05 PM\nHallo wir würden eine Firma suchen. Die preislich akzeptabel ist, da wir bis jz nur Wucherpreise gehört haben. Wir würden von leopoldsdorf im marchfeld nach Deutschland oberasbach ziehen wollen. Es wurde fast alles aus der Wohnung mitkommen. Mobelabbau und Aufbau und Kartons räumen wir ein und aus. Würden nur Transport benötigen.mfg brandl",
-      "id": "5f415a022ec3aa2ed994fb1b73899aea",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0664 1240498",
-      "Telefon": "0664 1240498",
-      "Hizmet": "-",
-      "Konum": "Gleisdorf",
-      "Tarih": "03.09.26 19:10",
-      "Mesaj": "-",
-      "id": "c8eac3b38dd622a3a191789a409c9b4c",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0664 1318890",
-      "Telefon": "0664 1318890",
-      "Hizmet": "-",
-      "Konum": "Leibnitz",
-      "Tarih": "03.09.26 16:43",
-      "Mesaj": "-",
-      "id": "e9fb06f61ace2a5baa002b5aebe5242f",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0660 4401749",
-      "Telefon": "0660 4401749",
-      "Hizmet": "Beförderung von Umzugsgut",
-      "Konum": "Deutschlandsberg",
-      "Tarih": "03.09.26 11:53",
-      "Mesaj": "-",
-      "id": "850d07bd0db971ba63d8a4818d5439b8",
-      "telegramSent": true
-    },
     {
       "Musteri": "0681 81212858",
       "Telefon": "0681 81212858",
@@ -59,16 +9,6 @@
       "Tarih": "03.09.26 10:25",
       "Mesaj": "-",
       "id": "a3654e5a87e5fa2b67d642844b5bc295",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0650 6868088",
-      "Telefon": "0650 6868088",
-      "Hizmet": "-",
-      "Konum": "Linz",
-      "Tarih": "02.09.26 21:40",
-      "Mesaj": "-",
-      "id": "98a8d8f0fe21d9b8bfed878ce3452b52",
       "telegramSent": true
     },
     {
@@ -112,26 +52,6 @@
       "telegramSent": false
     },
     {
-      "Musteri": "0664 5995844",
-      "Telefon": "0664 5995844",
-      "Hizmet": "-",
-      "Konum": "Graz",
-      "Tarih": "01.09.26 16:08",
-      "Mesaj": "-",
-      "id": "382d1d5a559579fd4a980caba37ea5a1",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0681 81161844",
-      "Telefon": "0681 81161844",
-      "Hizmet": "-",
-      "Konum": "Graz",
-      "Tarih": "01.09.26 13:01",
-      "Mesaj": "-",
-      "id": "94c72f0c3332f2b88ebb2d6c29df0abf",
-      "telegramSent": true
-    },
-    {
       "Musteri": "0660 1866664",
       "Telefon": "0660 1866664",
       "Hizmet": "-",
@@ -139,16 +59,6 @@
       "Tarih": "31.08.26 19:36",
       "Mesaj": "-",
       "id": "15946da31233a1b74dc0f80da0dd212b",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0664 6326418",
-      "Telefon": "0664 6326418",
-      "Hizmet": "-",
-      "Konum": "Kapfenberg",
-      "Tarih": "31.08.26 19:08",
-      "Mesaj": "-",
-      "id": "4aa9a4a7bbff2ac29043e8dcbf307ae1",
       "telegramSent": true
     },
     {
@@ -162,13 +72,23 @@
       "telegramSent": true
     },
     {
-      "Musteri": "0660 1582205",
-      "Telefon": "0660 1582205",
-      "Hizmet": "-",
-      "Konum": "Voitsberg",
-      "Tarih": "31.08.26 07:22",
+      "Musteri": "085 107 2330",
+      "Telefon": "085 107 2330",
+      "Hizmet": "Beförderung von Umzugsgut",
+      "Konum": "Graz",
+      "Tarih": "31.08.26 14:41",
       "Mesaj": "-",
-      "id": "85dfceecc8fc5eac65a80c7d7b279f6e",
+      "id": "06e55f35359335e8fa8a7323decb2b4b",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0650 9932027",
+      "Telefon": "0650 9932027",
+      "Hizmet": "-",
+      "Konum": "Innsbruck",
+      "Tarih": "31.08.26 12:14",
+      "Mesaj": "-",
+      "id": "a6e3c4f54a46a98b18ddd9e96e2b741b",
       "telegramSent": true
     },
     {
@@ -182,23 +102,93 @@
       "telegramSent": true
     },
     {
-      "Musteri": "0664 2362126",
-      "Telefon": "0664 2362126",
-      "Hizmet": "Beförderung von Umzugsgut",
-      "Konum": "Innsbruck",
-      "Tarih": "28.08.26 09:53",
-      "Mesaj": "-",
-      "id": "361103c505aed4b8e318a7e9dc19a133",
+      "Musteri": "0650 5643799",
+      "Telefon": "0650 5643799",
+      "Hizmet": "Innerörtlicher Umzug",
+      "Konum": "Klagenfurt am Wörthersee",
+      "Tarih": "30.08.26 14:19",
+      "Mesaj": "P\nPotenzieller Kunde\n30.08.26\nWas kostet ein Umzug",
+      "id": "045b482b44f8f30d340652dd3fce645c",
       "telegramSent": true
     },
     {
-      "Musteri": "0664 4744229",
-      "Telefon": "0664 2375524",
+      "Musteri": "0699 18315053",
+      "Telefon": "0699 18315053",
+      "Hizmet": "-",
+      "Konum": "Salzburg",
+      "Tarih": "30.08.26 11:10",
+      "Mesaj": "-",
+      "id": "a31624bbf55626bb0afe2516d80e7eb2",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0664 3087219",
+      "Telefon": "0676 4395268",
       "Hizmet": "Umzug im Inland",
-      "Konum": "Steyr",
-      "Tarih": "24.08.26 19:09",
-      "Mesaj": "P\nPotenzieller Kunde\n24.08.26\nUmzug nach Linz",
-      "id": "4a4581d2597784800b4122f57c861631",
+      "Konum": "Liezen",
+      "Tarih": "28.08.26 19:12",
+      "Mesaj": "P\nPotenzieller Kunde\n02.09.26\n Verpasster Anruf",
+      "id": "94e93ea4158bbc1fe36a2f4bfa49cbc5",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "Renate Gruber",
+      "Telefon": "0664 2362126",
+      "Hizmet": "Umzug im Inland",
+      "Konum": "Innsbruck",
+      "Tarih": "28.08.26 10:01",
+      "Mesaj": "P\nPotenzieller Kunde\n28.08.26\n Eingehender Anruf",
+      "id": "f9234b8a6d094161f8185c548e25b155",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0664 9218226",
+      "Telefon": "0664 9218226",
+      "Hizmet": "-",
+      "Konum": "Melk",
+      "Tarih": "27.08.26 08:13",
+      "Mesaj": "-",
+      "id": "4d1fcd9361d8d8a8cc30cd4c046f4487",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0676 4019695",
+      "Telefon": "0664 6326418",
+      "Hizmet": "Beförderung von Umzugsgut",
+      "Konum": "Kapfenberg",
+      "Tarih": "26.08.26 09:17",
+      "Mesaj": "P\nPotenzieller Kunde\n31.08.26\n Eingehender Anruf",
+      "id": "0419bb87523fe9ce3813f5c8f8d898f0",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "Sassan Tahmasebi",
+      "Telefon": "0660 1582205",
+      "Hizmet": "Beförderung von Umzugsgut",
+      "Konum": "Salzburg",
+      "Tarih": "24.08.26 11:12",
+      "Mesaj": "P\nPotenzieller Kunde\n31.08.26\n Eingehender Anruf",
+      "id": "4f2ec9fe6798106436a20fa48cccd17d",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0664 99489451",
+      "Telefon": "0664 99489451",
+      "Hizmet": "Beförderung von Umzugsgut",
+      "Konum": "Graz",
+      "Tarih": "24.08.26 06:20",
+      "Mesaj": "-",
+      "id": "7b60b950eb26641ec054f3f3901e2424",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0664 4480442",
+      "Telefon": "0660 1582205",
+      "Hizmet": "Innerörtlicher Umzug",
+      "Konum": "Graz",
+      "Tarih": "23.08.26 07:30",
+      "Mesaj": "P\nPotenzieller Kunde\n31.08.26\n Eingehender Anruf",
+      "id": "55517309b7924458f9a394e2ed739fae",
       "telegramSent": true
     }
   ]
