@@ -9,8 +9,8 @@ const crypto = require('crypto');
 puppeteer.use(StealthPlugin());
 
 // --- MOD KONTROLLERİ (AÇ / KAPAT) ---
-const SKIP_TELEGRAM = false; 
-const SKIP_GIT_PUSH = false;  
+const SKIP_TELEGRAM = false; // true yapılırsa Telegram bildirimi atmaz
+const SKIP_GIT_PUSH = false;  // true yapılırsa GitHub'a push yapmaz
 
 // --- CONFIGURATION (SICHER REKLAM) ---
 const CONFIG = {
@@ -76,7 +76,7 @@ async function sendTelegramMessage(lead) {
   }
 }
 
-// 24-Hour Strict Date Formatter 
+// 24-Hour Strict Date Formatter (Viyana / UTC+2 Offset Destekli)
 function parseTo24HourDate(dateStr) {
   if (!dateStr || dateStr === '-') return '-';
 
@@ -124,7 +124,7 @@ function clearChromeLocks() {
 // --- MAIN EXECUTION ---
 (async () => {
   let freshLeads = [];
-  const sessionIds = new Set(); 
+  const sessionIds = new Set(); // Aynı çalıştırmadaki duplicate'leri engellemek için Set
 
   // ESKİ KAYITLARI YÜKLE
   let previousLeads = [];
@@ -175,6 +175,7 @@ function clearChromeLocks() {
 
     await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36');
 
+    // 🌐 OPTİMİZASYON: GELİŞMİŞ AĞ/KAYNAK ENGELLEME
     await page.setRequestInterception(true);
     page.on('request', (req) => {
       const url = req.url().toLowerCase();
@@ -204,7 +205,7 @@ function clearChromeLocks() {
     }
 
     // =========================================================================
-    // 🟢 AKILLI SAYFA KONTROLÜ VE ANFRAGEN'E GEÇİŞ (GÜÇLENDİRİLDİ)
+    // 🟢 AKILLI SAYFA KONTROLÜ VE ANFRAGEN'E GEÇİŞ (DOĞRULAMA EKRANI İÇİN)
     // =========================================================================
     console.log("🔍 LSA sayfa durumu kontrol ediliyor...");
     await new Promise(r => setTimeout(r, 2500));
@@ -235,25 +236,23 @@ function clearChromeLocks() {
 
       await new Promise(r => setTimeout(r, 2000));
 
-      // 2. ANFRAGEN ELEMANINA DERİNLERDEN TIKLAMA DENEMESİ
-      console.log("🖱️ 'Anfragen' seçeneğine tıklanıyor...");
-      const clicked = await page.evaluate(() => {
+      // 2. ANFRAGEN ELEMANINA TIKLAMA
+      console.log("com. 'Anfragen' seçeneğine tıklanıyor...");
+      await page.evaluate(() => {
         const allElements = Array.from(document.querySelectorAll('*'));
         const target = allElements.find(el => el.children.length === 0 && /^anfragen$/i.test((el.innerText || el.textContent || '').trim()));
         if (target) {
           const clickable = target.closest('a, button, [role="button"], [role="menuitem"], [role="link"], div, span') || target;
           clickable.click();
-          return true;
         }
-        return false;
       });
 
       await new Promise(r => setTimeout(r, 3000));
 
-      // 3. YÖNLENDİRME KONTROLÜ: Eğer yönlenme olmadıysa doğrudan TARGET URL'ye git!
+      // 3. YÖNLENDİRME KONTROLÜ
       const currentUrl = page.url();
       if (currentUrl.includes('verification')) {
-        console.log("🔄 Tıklama URL'yi değiştirmedi, doğrudan Inbox URL'sine gidiliyor...");
+        console.log("🔄 Tıklama URL'yi değiştirmedi, doğrudan Target URL'ye gidiliyor...");
         await page.goto(CONFIG.targetUrl, { waitUntil: 'networkidle2' });
         await new Promise(r => setTimeout(r, 3000));
       } else {
@@ -337,6 +336,7 @@ function clearChromeLocks() {
       let finalCustomerName = item.phone;
       let panelPhone = null; 
 
+      // 1. Saat Dönüşümü ve Ön-MD5 Üretimi
       const formattedDate = parseTo24HourDate(item.anfrageDate);
       let tempCustomerName = (!finalCustomerName || finalCustomerName.trim() === '-' || finalCustomerName === '') ? 'Müşteri' : finalCustomerName;
       
@@ -349,20 +349,23 @@ function clearChromeLocks() {
 
       const currentMd5 = generateLeadMd5(tempLead);
 
+      // 🔹 AYNİ ÇALIŞTIRMADA DUPLICATE KONTROLÜ (Session Check)
       if (sessionIds.has(currentMd5)) {
         console.log(`⚠️ Aynı çalıştırmada duplicate atlandı: ${tempCustomerName} (${currentMd5})`);
         continue;
       }
 
+      // 🚀 ESKİ KAYIT KONTROLÜ VE ATLANMASI (Mükerrer Bildirim Engelleme)
       const existingLead = previousLeads.find(old => old.id === currentMd5);
 
       if (existingLead) {
         console.log(`⚡ [SKIP] Eski kayıt (Telefon/Mesaj) atlandı: ${existingLead.Musteri} (${currentMd5})`);
         sessionIds.add(currentMd5);
-        freshLeads.push(existingLead);
-        continue; 
+        freshLeads.push(existingLead); // Eski veriyi (telegramSent=true haliyle) koru
+        continue; // 🛑 Mesaja tıklamadan doğrudan sonraki kayda geç!
       }
 
+      // 2. SADECE YENİ MESAJLI KAYITLAR İÇİN TIKLAMA VE DETAY OKUMA
       if (item.isMessage) {
         try {
           console.log(`📩 Yeni mesaj detayı okunuyor (Index: ${item.domIndex})...`);
@@ -379,6 +382,7 @@ function clearChromeLocks() {
             let nameInHeader = null;
             let extractedPhone = null;
 
+            // A) Mesaj Metnini Okuma
             const chatBlock = Array.from(document.querySelectorAll('div, section, article'))
                                    .find(el => (el.innerText || '').includes('Unterhaltung'));
             
@@ -391,6 +395,7 @@ function clearChromeLocks() {
                          .trim() || "NO MESSAGE";
             }
 
+            // B) Üst Panel Header Alanından Telefon ve İsim Taraması
             const headerBar = Array.from(document.querySelectorAll('div, header'))
                                    .find(el => (el.innerText || '').includes('ARCHIVIEREN') || (el.innerText || '').includes('MARKIEREN'));
             if (headerBar) {
@@ -470,6 +475,7 @@ function clearChromeLocks() {
       };
     });
 
+    // Tarihe Göre Sıralama (En yeni en üstte)
     leads.sort((a, b) => parseDateForSorting(b["Tarih"]) - parseDateForSorting(a["Tarih"]));
 
     const unsentLeads = leads.filter(l => !l.telegramSent);
