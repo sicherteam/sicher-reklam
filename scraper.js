@@ -336,7 +336,7 @@ function clearChromeLocks() {
         Tarih: formattedDate
       });
 
-      // 🚀 ESKİ KAYIT KONTROLÜ (Hem MD5 hem de İsim + Tarih Çift Kontrolü)
+      // 🚀 ESKİ KAYIT KONTROLÜ
       const existingLead = previousLeads.find(old => 
         old.id === currentMd5 || 
         (old.Tarih === formattedDate && old.Hizmet === item.jobType && old.Konum === item.location)
@@ -348,7 +348,7 @@ function clearChromeLocks() {
           sessionIds.add(existingLead.id);
           freshLeads.push(existingLead); 
         }
-        continue; // 🛑 Tıklamadan atla!
+        continue;
       }
 
       // SADECE YENİ MESAJLAR İÇİN PANELİ AÇ
@@ -418,7 +418,6 @@ function clearChromeLocks() {
         finalCustomerName = panelPhone || 'Müşteri';
       }
 
-      // 🔴 DÜZELTME: İsim belli olduktan sonra GERÇEK MD5 üretilir!
       const realMd5 = generateLeadMd5({
         Musteri: finalCustomerName,
         Hizmet: item.jobType,
@@ -471,33 +470,32 @@ function clearChromeLocks() {
 
     const unsentLeads = leads.filter(l => !l.telegramSent);
     
-    // 🟢 DÜZELTME: Gerçekten listeye daha önce HİÇ girmemiş yeni müşteri kontrolü
+    // 🟢 SADECE GERÇEKTEN YENİ MÜŞTERİ EKLENDİ Mİ KONTROLÜ
     const isBrandNewLead = leads.some(l => !previousLeads.some(p => p.id === l.id));
 
     console.log(`🔎 İnceleme Tamamlandı. Telegram Bekleyen: ${unsentLeads.length}, Yepyeni Kayıt: ${isBrandNewLead}`);
 
-    // SADECE Gerçekten gönderilmemiş mesaj varsa VEYA yeni bir müşteri eklendiyse yaz!
-    if (unsentLeads.length > 0 || isBrandNewLead) {
-      
-      if (!SKIP_TELEGRAM) {
-        for (const leadToNotify of unsentLeads) {
-          const isSuccess = await sendTelegramMessage(leadToNotify);
-          if (isSuccess) {
-            leadToNotify.telegramSent = true;
-            console.log(`📱 Telegram bildirimi gönderildi: ${leadToNotify["Musteri"]} (MD5: ${leadToNotify.id})`);
-          }
-          await new Promise(r => setTimeout(r, 1000));
+    // Telegram bildirimlerini gönder
+    if (!SKIP_TELEGRAM && unsentLeads.length > 0) {
+      for (const leadToNotify of unsentLeads) {
+        const isSuccess = await sendTelegramMessage(leadToNotify);
+        if (isSuccess) {
+          leadToNotify.telegramSent = true;
+          console.log(`📱 Telegram bildirimi gönderildi: ${leadToNotify["Musteri"]} (MD5: ${leadToNotify.id})`);
         }
+        await new Promise(r => setTimeout(r, 1000));
       }
+    }
 
-      // SADECE Değişiklik varsa updatedAt YENİLENİR
+    // 🟢 SADECE YEPYENİ BİR MÜŞTERİ EKLENDİYSE data.json GÜNCELLENİR VE PUSH YAPILIR
+    if (isBrandNewLead) {
       const outputData = {
         updatedAt: new Date().toLocaleString('de-AT', { timeZone: 'Europe/Vienna' }),
         leads
       };
 
       fs.writeFileSync('data.json', JSON.stringify(outputData, null, 2));
-      console.log(`💾 data.json YENİ VERİLERLE güncellendi.`);
+      console.log(`💾 data.json YENİ MÜŞTERİ İLE güncellendi.`);
 
       if (!SKIP_GIT_PUSH) {
         try {
@@ -513,8 +511,7 @@ function clearChromeLocks() {
         }
       }
     } else {
-      // 🟢 YENİ MÜŞTERİ YOKSA updatedAt DEĞİŞMEZ, GIT PUSH YAPILMAZ!
-      console.log("ℹ️ Yeni müşteri veya gönderilmemiş bildirim yok. data.json ve GitHub değiştirilmedi.");
+      console.log("ℹ️ Yepyeni bir müşteri eklenmedi. data.json ve GitHub değiştirilmedi.");
     }
   }
 })();
