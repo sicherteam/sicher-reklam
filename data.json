@@ -1,5 +1,5 @@
 {
-  "updatedAt": "4.9.2026, 09:26:10",
+  "updatedAt": "4.9.2026, 09:27:10",
   "leads": [
     {
       "Musteri": "0660 2898929",
@@ -7,7 +7,7 @@
       "Hizmet": "Innerörtlicher Umzug",
       "Konum": "Neukirchen am Walde",
       "Tarih": "03.09.26 21:12",
-      "Mesaj": "-",
+      "Mesaj": "P\nPotenzieller Kunde\n7:12 PM\nHallo, ich suche Hilfe beim Übersiedeln von 4724 Neukirchen nach 4722 Steegen. Übersiedelt und aufgebaut gehören 1 Boxspringbett 140 cm breit, 1 Kratzbaum ca. 70 kg schwer, 1 Regal bereits zerlegt und 1 Komode. Optimaler Termin wäre Aufbau in Steegen, 2. Stock, Lift vorhanden, am 23. September am späten Nachmittag, ab ca. 15.15 (Schlüsselübergabe habe ich um 15.00). Am 24. werden bereits neue Möbel angeliefert. Haben Sie freie Kaoazitäten? Dann freu ich mich auf einen unverbindlichen Kostenvoranschlag. Vielen Dank, FG Eva Entholzer",
       "id": "47e6adbe02a6cec134ec0ad4d3fbec5f",
       "telegramSent": true
     },
@@ -107,9 +107,9 @@
       "Hizmet": "Beförderung von Umzugsgut",
       "Konum": "Wiener Neudorf",
       "Tarih": "01.09.26 20:58",
-      "Mesaj": "-",
+      "Mesaj": "P\nPotenzieller Kunde\n01.09.26\nHallo, ich möchte Ende September, voraussichtlich am 24. oder 25. September, eine kleine Wohnung übersiedeln lassen und würde gerne nachfragen, ob Sie an einem dieser Termine verfügbar wären und mit welchen Kosten ich ungefähr rechnen müsste. Es handelt sich um eine 33 m² große Wohnung von Wiener Neudorf nach Hirtenberg. Zu übersiedeln wären ungefähr: * 1 Bett * 1 kleine Couch * 2 Kästen, die ab- und am neuen Standort wieder aufgebaut werden müssten * 1 Waschmaschine * einige kleinere Gegenstände/Umzugskartons Könnten Sie mir bitte mitteilen, was die Übersiedlung ungefähr kosten würde.",
       "id": "6f68fc23252c02da144f2e2d0eb4f211",
-      "telegramSent": true
+      "telegramSent": false
     },
     {
       "Musteri": "0664 5995844",
@@ -177,7 +177,7 @@
       "Hizmet": "Beförderung von Umzugsgut",
       "Konum": "Wien",
       "Tarih": "30.08.26 16:40",
-      "Mesaj": "-",
+      "Mesaj": "P\nPotenzieller Kunde\n30.08.26\nGuten Tag Ich habe eine Frage Ich jätte einen Umzug zu machen habe eine Wohnung die 58 Quadratmeter groß ist . Ich habe Sachen zum mitnehmen und auch sehr viele Sachen die auf den Sperrmüll gehören. Wie sind da die Kosten da ich von 2620 Neunkirchen nach 4040 linz umziehe. Ich würde nur Mal vorab informieren sammeln. Mit freundlichen Grüßen",
       "id": "d3dcfb4565a47837b01c873fd32d8f23",
       "telegramSent": true
     },
@@ -193,11 +193,11 @@
     },
     {
       "Musteri": "0664 4744229",
-      "Telefon": "0664 4744229",
+      "Telefon": "0664 2375524",
       "Hizmet": "Umzug im Inland",
       "Konum": "Steyr",
       "Tarih": "24.08.26 19:09",
-      "Mesaj": "-",
+      "Mesaj": "P\nPotenzieller Kunde\n24.08.26\nUmzug nach Linz",
       "id": "4a4581d2597784800b4122f57c861631",
       "telegramSent": true
     }
