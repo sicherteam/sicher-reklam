@@ -1,6 +1,16 @@
 {
-  "updatedAt": "4.9.2026, 18:35:51",
+  "updatedAt": "4.9.2026, 20:30:45",
   "leads": [
+    {
+      "Musteri": "0699 81905719",
+      "Telefon": "0699 81905719",
+      "Hizmet": "Umzug im Inland",
+      "Konum": "Burgenland",
+      "Tarih": "04.09.26 20:27",
+      "Mesaj": "P\nPotenzieller Kunde\n6:27 PM\nGuten Abend! Ich bräuchte eine Fuhr von Wiesfleck (7425) bach Wien (1030). Es geht um einen Bauernkasten, 2 Stühle und mehrere Kisten. Wie viel würde das ungefähr kosten? Mit freundlichen Grüßen Hemma Dorner-Reitlinger",
+      "id": "59b35830d5da0dfba5c2eb65082b73bc",
+      "telegramSent": true
+    },
     {
       "Musteri": "0660 2898929",
       "Telefon": "0660 2898929",
@@ -149,16 +159,6 @@
       "Tarih": "31.08.26 19:08",
       "Mesaj": "-",
       "id": "4aa9a4a7bbff2ac29043e8dcbf307ae1",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0664 9607575",
-      "Telefon": "0664 9607575",
-      "Hizmet": "Beförderung von Umzugsgut",
-      "Konum": "Graz",
-      "Tarih": "31.08.26 15:54",
-      "Mesaj": "-",
-      "id": "314b9d8b8d0024696a4c5af9d80d964f",
       "telegramSent": true
     },
     {
