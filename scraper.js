@@ -128,13 +128,10 @@ function clearChromeLocks() {
 
   // ESKİ KAYITLARI YÜKLE
   let previousLeads = [];
-  let previousUpdatedAt = null;
-
   if (fs.existsSync('data.json')) {
     try {
       const oldContent = JSON.parse(fs.readFileSync('data.json', 'utf8'));
       previousLeads = oldContent.leads || [];
-      previousUpdatedAt = oldContent.updatedAt || null;
     } catch (e) {
       console.warn("⚠️ Eski data.json okunamadı:", e.message);
     }
@@ -329,25 +326,29 @@ function clearChromeLocks() {
       const formattedDate = parseTo24HourDate(item.anfrageDate);
       let tempCustomerName = (!finalCustomerName || finalCustomerName.trim() === '-' || finalCustomerName === '') ? 'Müşteri' : finalCustomerName;
       
-      let currentMd5 = generateLeadMd5({
+      // 🔹 2. Kod Yapısı: MD5 yalnızca ilk ham veriden üretilir ve sabittir
+      const tempLead = {
         Musteri: tempCustomerName,
         Hizmet: item.jobType,
         Konum: item.location,
         Tarih: formattedDate
-      });
+      };
+
+      const currentMd5 = generateLeadMd5(tempLead);
+
+      // Session Duplicate Kontrolü
+      if (sessionIds.has(currentMd5)) {
+        console.log(`⚠️ Aynı çalıştırmada duplicate atlandı: ${tempCustomerName} (${currentMd5})`);
+        continue;
+      }
 
       // 🚀 ESKİ KAYIT KONTROLÜ
-      const existingLead = previousLeads.find(old => 
-        old.id === currentMd5 || 
-        (old.Tarih === formattedDate && old.Hizmet === item.jobType && old.Konum === item.location)
-      );
+      const existingLead = previousLeads.find(old => old.id === currentMd5);
 
       if (existingLead) {
-        console.log(`⚡ [SKIP] Eski kayıt atlandı: ${existingLead.Musteri} (${existingLead.id})`);
-        if (!sessionIds.has(existingLead.id)) {
-          sessionIds.add(existingLead.id);
-          freshLeads.push(existingLead); 
-        }
+        console.log(`⚡ [SKIP] Eski kayıt atlandı: ${existingLead.Musteri} (${currentMd5})`);
+        sessionIds.add(currentMd5);
+        freshLeads.push(existingLead); 
         continue;
       }
 
@@ -418,13 +419,7 @@ function clearChromeLocks() {
         finalCustomerName = panelPhone || 'Müşteri';
       }
 
-      const realMd5 = generateLeadMd5({
-        Musteri: finalCustomerName,
-        Hizmet: item.jobType,
-        Konum: item.location,
-        Tarih: formattedDate
-      });
-
+      // 🔹 2. Kod Mantığı: MD5 değiştirilmez, döngü başındaki currentMd5 atanır
       const leadObj = {
         "Musteri": finalCustomerName,
         "Telefon": panelPhone || (item.phone !== '-' && /^\+?\d[\d\s-]{6,}$/.test(item.phone) ? item.phone : null),
@@ -432,13 +427,11 @@ function clearChromeLocks() {
         "Konum": item.location,
         "Tarih": formattedDate,
         "Mesaj": messageText,
-        "id": realMd5
+        "id": currentMd5
       };
 
-      if (!sessionIds.has(realMd5)) {
-        sessionIds.add(realMd5);
-        freshLeads.push(leadObj);
-      }
+      sessionIds.add(currentMd5);
+      freshLeads.push(leadObj);
     }
 
   } catch (error) {
@@ -469,39 +462,41 @@ function clearChromeLocks() {
     leads.sort((a, b) => parseDateForSorting(b["Tarih"]) - parseDateForSorting(a["Tarih"]));
 
     const unsentLeads = leads.filter(l => !l.telegramSent);
-    
-    // 🟢 SADECE GERÇEKTEN YENİ MÜŞTERİ EKLENDİ Mİ KONTROLÜ
-    const isBrandNewLead = leads.some(l => !previousLeads.some(p => p.id === l.id));
+    const hasNewEntry = leads.some(l => !previousLeads.some(p => p.id === l.id));
 
-    console.log(`🔎 İnceleme Tamamlandı. Telegram Bekleyen: ${unsentLeads.length}, Yepyeni Kayıt: ${isBrandNewLead}`);
+    console.log(`🔎 İnceleme Tamamlandı. Telegram Bekleyen: ${unsentLeads.length}, Yepyeni Kayıt: ${hasNewEntry}`);
 
-    // Telegram bildirimlerini gönder
-    if (!SKIP_TELEGRAM && unsentLeads.length > 0) {
-      for (const leadToNotify of unsentLeads) {
-        const isSuccess = await sendTelegramMessage(leadToNotify);
-        if (isSuccess) {
-          leadToNotify.telegramSent = true;
-          console.log(`📱 Telegram bildirimi gönderildi: ${leadToNotify["Musteri"]} (MD5: ${leadToNotify.id})`);
+    if (unsentLeads.length > 0 || hasNewEntry) {
+      // Telegram Bildirimleri
+      if (SKIP_TELEGRAM) {
+        console.log("⏭️ SKIP_TELEGRAM = true (Telegram bildirimi atlanıyor).");
+      } else {
+        for (const leadToNotify of unsentLeads) {
+          const isSuccess = await sendTelegramMessage(leadToNotify);
+          if (isSuccess) {
+            leadToNotify.telegramSent = true;
+            console.log(`📱 Telegram bildirimi gönderildi: ${leadToNotify["Musteri"]} (MD5: ${leadToNotify.id})`);
+          }
+          await new Promise(r => setTimeout(r, 1000));
         }
-        await new Promise(r => setTimeout(r, 1000));
       }
-    }
 
-    // 🟢 SADECE YEPYENİ BİR MÜŞTERİ EKLENDİYSE data.json GÜNCELLENİR VE PUSH YAPILIR
-    if (isBrandNewLead) {
+      // Sadece yeni kayıt veya gitmemiş bildirim durumunda yazılır ve push edilir
       const outputData = {
         updatedAt: new Date().toLocaleString('de-AT', { timeZone: 'Europe/Vienna' }),
         leads
       };
 
       fs.writeFileSync('data.json', JSON.stringify(outputData, null, 2));
-      console.log(`💾 data.json YENİ MÜŞTERİ İLE güncellendi.`);
+      console.log(`💾 data.json güncellendi ve kaydedildi.`);
 
-      if (!SKIP_GIT_PUSH) {
+      if (SKIP_GIT_PUSH) {
+        console.log("⏭️ SKIP_GIT_PUSH = true (Git Push atlanıyor).");
+      } else {
         try {
           console.log("⏳ GitHub Sync Yapılıyor...");
           execSync('git add data.json', { timeout: 15000 });
-          execSync('git commit -m "Auto-update new leads [skip ci]" || true', { timeout: 15000 });
+          execSync('git commit -m "Auto-update & sort data.json [skip ci]" || true', { timeout: 15000 });
           execSync('git pull origin main --rebase -X ours', { timeout: 20000 });
           execSync('git push origin main', { timeout: 20000 });
           console.log("✅ Git Push Başarılı!");
@@ -511,7 +506,7 @@ function clearChromeLocks() {
         }
       }
     } else {
-      console.log("ℹ️ Yepyeni bir müşteri eklenmedi. data.json ve GitHub değiştirilmedi.");
+      console.log("ℹ️ Yeni müşteri veya gönderilmemiş bildirim yok. GitHub push atlandı.");
     }
   }
 })();
