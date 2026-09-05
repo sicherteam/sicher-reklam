@@ -1,6 +1,16 @@
 {
-  "updatedAt": "5.9.2026, 10:40:45",
+  "updatedAt": "5.9.2026, 15:20:36",
   "leads": [
+    {
+      "Musteri": "0660 3044901",
+      "Telefon": "0660 3044901",
+      "Hizmet": "-",
+      "Konum": "Villach",
+      "Tarih": "05.09.26 15:16",
+      "Mesaj": "-",
+      "id": "668fa5b79859621e0de64e323e361bbf",
+      "telegramSent": true
+    },
     {
       "Musteri": "0664 4027443",
       "Telefon": "0664 4027443",
@@ -149,16 +159,6 @@
       "Tarih": "01.09.26 13:01",
       "Mesaj": "-",
       "id": "94c72f0c3332f2b88ebb2d6c29df0abf",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0660 1866664",
-      "Telefon": "0660 1866664",
-      "Hizmet": "-",
-      "Konum": "Braunau am Inn",
-      "Tarih": "31.08.26 19:36",
-      "Mesaj": "-",
-      "id": "15946da31233a1b74dc0f80da0dd212b",
       "telegramSent": true
     },
     {
