@@ -1,6 +1,16 @@
 {
-  "updatedAt": "5.9.2026, 15:20:36",
+  "updatedAt": "6.9.2026, 15:50:44",
   "leads": [
+    {
+      "Musteri": "0681 10470531",
+      "Telefon": "0681 10470531",
+      "Hizmet": "Beförderung von Umzugsgut",
+      "Konum": "Tirol",
+      "Tarih": "06.09.26 15:39",
+      "Mesaj": "-",
+      "id": "a31a7c393de16030c9da7727b1afd65a",
+      "telegramSent": true
+    },
     {
       "Musteri": "0660 3044901",
       "Telefon": "0660 3044901",
@@ -169,16 +179,6 @@
       "Tarih": "31.08.26 19:08",
       "Mesaj": "-",
       "id": "4aa9a4a7bbff2ac29043e8dcbf307ae1",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0660 1582205",
-      "Telefon": "0660 1582205",
-      "Hizmet": "-",
-      "Konum": "Voitsberg",
-      "Tarih": "31.08.26 07:22",
-      "Mesaj": "-",
-      "id": "85dfceecc8fc5eac65a80c7d7b279f6e",
       "telegramSent": true
     },
     {
