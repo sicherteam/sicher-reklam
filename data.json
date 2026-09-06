@@ -1,6 +1,16 @@
 {
-  "updatedAt": "6.9.2026, 15:50:44",
+  "updatedAt": "6.9.2026, 16:45:57",
   "leads": [
+    {
+      "Musteri": "338047608",
+      "Telefon": "338047608",
+      "Hizmet": "Sperrmüllentsorgung",
+      "Konum": "Klagenfurt am Wörthersee",
+      "Tarih": "06.09.26 16:43",
+      "Mesaj": "P\nPotenzieller Kunde\n2:43 PM\nGuten Tag, ich wollte anfragen wieviel das Entsorgen eines Sofas, der Abbau und das Entsorgen eines Kastens kosten würden? Eventuell kommen noch ein paar andere Möbelstücke dazu. Wohnung ist ebenerdig in Klagenfurt. Man kann direkt vorm Garten parken. Danke und Liebe Grüße, Lisa Svaldo",
+      "id": "823cff29eeff87078f9be37add22b2ef",
+      "telegramSent": true
+    },
     {
       "Musteri": "0681 10470531",
       "Telefon": "0681 10470531",
@@ -149,16 +159,6 @@
       "Tarih": "01.09.26 20:58",
       "Mesaj": "P\nPotenzieller Kunde\n01.09.26\nHallo, ich möchte Ende September, voraussichtlich am 24. oder 25. September, eine kleine Wohnung übersiedeln lassen und würde gerne nachfragen, ob Sie an einem dieser Termine verfügbar wären und mit welchen Kosten ich ungefähr rechnen müsste. Es handelt sich um eine 33 m² große Wohnung von Wiener Neudorf nach Hirtenberg. Zu übersiedeln wären ungefähr: * 1 Bett * 1 kleine Couch * 2 Kästen, die ab- und am neuen Standort wieder aufgebaut werden müssten * 1 Waschmaschine * einige kleinere Gegenstände/Umzugskartons Könnten Sie mir bitte mitteilen, was die Übersiedlung ungefähr kosten würde.",
       "id": "6f68fc23252c02da144f2e2d0eb4f211",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0664 5995844",
-      "Telefon": "0664 5995844",
-      "Hizmet": "-",
-      "Konum": "Graz",
-      "Tarih": "01.09.26 16:08",
-      "Mesaj": "-",
-      "id": "382d1d5a559579fd4a980caba37ea5a1",
       "telegramSent": true
     },
     {
