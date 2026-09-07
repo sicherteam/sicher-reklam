@@ -1,6 +1,16 @@
 {
-  "updatedAt": "7.9.2026, 17:40:39",
+  "updatedAt": "7.9.2026, 18:25:48",
   "leads": [
+    {
+      "Musteri": "0660 3179473",
+      "Telefon": "0660 3179473",
+      "Hizmet": "-",
+      "Konum": "Südoststeiermark",
+      "Tarih": "07.09.26 18:21",
+      "Mesaj": "-",
+      "id": "4dbc4e5a45df9755ef5b72e7f5913729",
+      "telegramSent": true
+    },
     {
       "Musteri": "0664 3154694",
       "Telefon": "0664 3154694",
@@ -179,16 +189,6 @@
       "Tarih": "01.09.26 20:58",
       "Mesaj": "P\nPotenzieller Kunde\n01.09.26\nHallo, ich möchte Ende September, voraussichtlich am 24. oder 25. September, eine kleine Wohnung übersiedeln lassen und würde gerne nachfragen, ob Sie an einem dieser Termine verfügbar wären und mit welchen Kosten ich ungefähr rechnen müsste. Es handelt sich um eine 33 m² große Wohnung von Wiener Neudorf nach Hirtenberg. Zu übersiedeln wären ungefähr: * 1 Bett * 1 kleine Couch * 2 Kästen, die ab- und am neuen Standort wieder aufgebaut werden müssten * 1 Waschmaschine * einige kleinere Gegenstände/Umzugskartons Könnten Sie mir bitte mitteilen, was die Übersiedlung ungefähr kosten würde.",
       "id": "6f68fc23252c02da144f2e2d0eb4f211",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0681 81161844",
-      "Telefon": "0681 81161844",
-      "Hizmet": "-",
-      "Konum": "Graz",
-      "Tarih": "01.09.26 13:01",
-      "Mesaj": "-",
-      "id": "94c72f0c3332f2b88ebb2d6c29df0abf",
       "telegramSent": true
     },
     {
