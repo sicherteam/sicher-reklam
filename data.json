@@ -1,6 +1,16 @@
 {
-  "updatedAt": "7.9.2026, 12:20:36",
+  "updatedAt": "7.9.2026, 13:15:38",
   "leads": [
+    {
+      "Musteri": "0664 5220222",
+      "Telefon": "0664 5220222",
+      "Hizmet": "-",
+      "Konum": "Neusiedl am See",
+      "Tarih": "07.09.26 13:09",
+      "Mesaj": "-",
+      "id": "dc356a5425b6e079857cddbba445b5d1",
+      "telegramSent": true
+    },
     {
       "Musteri": "0677 61626365",
       "Telefon": "0677 61626365",
@@ -159,16 +169,6 @@
       "Tarih": "02.09.26 12:52",
       "Mesaj": "-",
       "id": "7b0ee690038fe114dad499524fcfbe21",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0660 1575562",
-      "Telefon": "0660 1575562",
-      "Hizmet": "Beförderung von Umzugsgut",
-      "Konum": "Innsbruck",
-      "Tarih": "02.09.26 12:29",
-      "Mesaj": "-",
-      "id": "66209bcc5fac7001214ec1780c5b56bb",
       "telegramSent": true
     },
     {
