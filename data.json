@@ -1,6 +1,16 @@
 {
-  "updatedAt": "7.9.2026, 11:55:51",
+  "updatedAt": "7.9.2026, 12:20:36",
   "leads": [
+    {
+      "Musteri": "0677 61626365",
+      "Telefon": "0677 61626365",
+      "Hizmet": "-",
+      "Konum": "Klagenfurt am Wörthersee",
+      "Tarih": "07.09.26 12:16",
+      "Mesaj": "-",
+      "id": "ad6f9c632b6f6ddd06d75e8259777139",
+      "telegramSent": true
+    },
     {
       "Musteri": "0676 9564575",
       "Telefon": "0676 9564575",
@@ -159,16 +169,6 @@
       "Tarih": "02.09.26 12:29",
       "Mesaj": "-",
       "id": "66209bcc5fac7001214ec1780c5b56bb",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0676 4395268",
-      "Telefon": "0676 4395268",
-      "Hizmet": "-",
-      "Konum": "Graz",
-      "Tarih": "02.09.26 11:12",
-      "Mesaj": "-",
-      "id": "a6a69047f4eddbd618a81cfb03c835a5",
       "telegramSent": true
     },
     {
