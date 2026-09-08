@@ -95,7 +95,6 @@ async function sendTelegramMessage(lead) {
     }
   }
 
-  // Yalnızca her iki hedefe de sorunsuz gittiyse true döner
   return allSuccess;
 }
 
@@ -273,7 +272,6 @@ function clearChromeLocks() {
         await new Promise(r => setTimeout(r, 3000));
       }
 
-      // Tablonun oturmasını garantiye al
       await page.waitForSelector('[role="row"], tr', { timeout: 15000 }).catch(() => {});
       await new Promise(r => setTimeout(r, 4000));
     }
@@ -485,23 +483,35 @@ function clearChromeLocks() {
   }
 
   // ===================================================
-  // 2. BÖLÜM: BİLDİRİM, SIRALAMA VE GİTHUB İŞLEMLERİ
+  // 2. BÖLÜM: MERGE (BİRLEŞTİRME), BİLDİRİM VE GİTHUB
   // ===================================================
   if (freshLeads.length > 0) {
     console.log("⚙️ Veriler işleniyor...");
 
-    const leads = freshLeads.map(newLead => {
-      const existing = previousLeads.find(old => old.id === newLead.id);
-      return {
-        ...newLead,
-        telegramSent: existing ? (existing.telegramSent ?? false) : false
-      };
+    // 🔹 1. ESKİ KAYITLARI SAKLA (Sayfadan düşen eskiler silinmez)
+    const leadsMap = new Map();
+    previousLeads.forEach(item => leadsMap.set(item.id, item));
+
+    // 🔹 2. YENİ GELENLERİ ESKİNİN ÜZERİNE MERGE ET
+    freshLeads.forEach(item => {
+      const existing = leadsMap.get(item.id);
+      leadsMap.set(item.id, {
+        ...item,
+        telegramSent: existing ? (existing.telegramSent ?? false) : (item.telegramSent ?? false)
+      });
     });
 
-    leads.sort((a, b) => parseDateForSorting(b["Tarih"]) - parseDateForSorting(a["Tarih"]));
+    let leads = Array.from(leadsMap.values());
+
+    // 🔹 3. KARARLI VE SABİT SIRALAMA (Tarih eşitse ID'ye göre sabitle)
+    leads.sort((a, b) => {
+      const timeDiff = parseDateForSorting(b["Tarih"]) - parseDateForSorting(a["Tarih"]);
+      if (timeDiff !== 0) return timeDiff;
+      return a.id.localeCompare(b.id);
+    });
 
     const unsentLeads = leads.filter(l => !l.telegramSent);
-    const hasNewEntry = leads.some(l => !previousLeads.some(p => p.id === l.id));
+    const hasNewEntry = freshLeads.some(l => !previousLeads.some(p => p.id === l.id));
 
     console.log(`🔎 İnceleme Tamamlandı. Telegram Bekleyen: ${unsentLeads.length}, Yepyeni Kayıt: ${hasNewEntry}`);
 
@@ -524,7 +534,7 @@ function clearChromeLocks() {
       }
     }
 
-    // 🎯 Sadece yepyeni kayıt geldiyse VEYA bildirim başarıyla iletildiyse dosyayı yaz ve push et
+    // 🎯 Sadece gerçekten yeni kayıt geldiyse VEYA bildirim durumu güncellendiyse dosyayı yaz ve push et
     if (hasNewEntry || telegramStatusChanged) {
       const outputData = {
         updatedAt: hasNewEntry 
@@ -534,7 +544,7 @@ function clearChromeLocks() {
       };
 
       fs.writeFileSync('data.json', JSON.stringify(outputData, null, 2));
-      console.log(`💾 data.json güncellendi ve kaydedildi.`);
+      console.log(`💾 data.json birleştirilerek güncellendi ve kaydedildi.`);
 
       if (SKIP_GIT_PUSH) {
         console.log("⏭️ SKIP_GIT_PUSH = true (Git Push atlanıyor).");
