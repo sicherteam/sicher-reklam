@@ -17,8 +17,12 @@ const CONFIG = {
   projectName: 'Sicher Reklam',
   userDataPath: '/home/atsicherteam/sicher-reklam/user_data',
   targetUrl: 'https://ads.google.com/localservices/inbox?cid=9203255169&bid=11049534709&pid=9999999999&euid=8501543550&hl=de-AT&gl=AT',
+  // 1. Telegram Bot Bilgileri
   telegramToken: process.env.TELEGRAM_BOT_TOKEN,
   telegramChatId: process.env.TELEGRAM_CHAT_ID,
+  // 2. Telegram Bot Bilgileri (YENİ EKLENDİ)
+  telegramToken2: process.env.TELEGRAM_BOT_TOKEN_2,
+  telegramChatId2: process.env.TELEGRAM_CHAT_ID_2,
 };
 
 // 🔹 Tarih Normalizasyonu (YY ve YYYY farkını yok eder: "2026-07-29 14:30" yapar)
@@ -44,12 +48,12 @@ function generateLeadMd5(lead) {
   return crypto.createHash('md5').update(rawString).digest('hex');
 }
 
-// Native Fetch API ile Telegram Bildirimi
+// Native Fetch API ile 2 Farklı Telegram Hesabına Bildirim Gönderme
 async function sendTelegramMessage(lead) {
-  if (!CONFIG.telegramToken || !CONFIG.telegramChatId) {
-    console.warn("⚠️ Telegram API bilgileri eksik (.env)");
-    return false;
-  }
+  const targets = [
+    { name: 'Telegram 1', token: CONFIG.telegramToken, chatId: CONFIG.telegramChatId },
+    { name: 'Telegram 2', token: CONFIG.telegramToken2, chatId: CONFIG.telegramChatId2 }
+  ];
 
   const phoneText = lead["Telefon"] ? `\n📞 *Telefon:* ${lead["Telefon"]}` : '';
   const message = `🔔 *YENİ Müşteri!* (${CONFIG.projectName})\n\n` +
@@ -59,21 +63,37 @@ async function sendTelegramMessage(lead) {
                   `📅 *Tarih:* ${lead["Tarih"]}\n` +
                   `💬 *Mesaj:* ${lead["Mesaj"]}`;
 
-  try {
-    const res = await fetch(`https://api.telegram.org/bot${CONFIG.telegramToken}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: CONFIG.telegramChatId,
-        text: message,
-        parse_mode: 'Markdown'
-      })
-    });
-    return res.ok;
-  } catch (err) {
-    console.error('⚠️ Telegram mesaj hatası:', err.message);
-    return false;
+  let atLeastOneSuccess = false;
+
+  for (const target of targets) {
+    if (!target.token || !target.chatId) {
+      console.warn(`⚠️ ${target.name} API bilgileri eksik (.env) - atlanıyor.`);
+      continue;
+    }
+
+    try {
+      const res = await fetch(`https://api.telegram.org/bot${target.token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: target.chatId,
+          text: message,
+          parse_mode: 'Markdown'
+        })
+      });
+
+      if (res.ok) {
+        atLeastOneSuccess = true;
+        console.log(`✅ ${target.name} bildirim başarıyla atıldı.`);
+      } else {
+        console.error(`⚠️ ${target.name} gönderim başarısız. Status: ${res.status}`);
+      }
+    } catch (err) {
+      console.error(`⚠️ ${target.name} mesaj hatası:`, err.message);
+    }
   }
+
+  return atLeastOneSuccess;
 }
 
 // 24-Hour Strict Date Formatter (Viyana / UTC+2 Offset Destekli)
