@@ -1,6 +1,16 @@
 {
-  "updatedAt": "8.9.2026, 09:41:12",
+  "updatedAt": "8.9.2026, 10:26:05",
   "leads": [
+    {
+      "Musteri": "0676 9472220",
+      "Telefon": "0676 9472220",
+      "Hizmet": "Beförderung von Umzugsgut",
+      "Konum": "Feldkirchen in Kärnten",
+      "Tarih": "08.09.26 10:18",
+      "Mesaj": "-",
+      "id": "0085b9da7092a4adb241e605bb5f4362",
+      "telegramSent": true
+    },
     {
       "Musteri": "0676 5905733",
       "Telefon": "0676 5905733",
@@ -179,16 +189,6 @@
       "Tarih": "03.09.26 10:25",
       "Mesaj": "-",
       "id": "a3654e5a87e5fa2b67d642844b5bc295",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0650 6868088",
-      "Telefon": "0650 6868088",
-      "Hizmet": "-",
-      "Konum": "Linz",
-      "Tarih": "02.09.26 21:40",
-      "Mesaj": "-",
-      "id": "98a8d8f0fe21d9b8bfed878ce3452b52",
       "telegramSent": true
     },
     {
