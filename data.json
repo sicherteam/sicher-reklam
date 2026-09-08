@@ -1,6 +1,16 @@
 {
-  "updatedAt": "8.9.2026, 00:31:07",
+  "updatedAt": "8.9.2026, 09:10:42",
   "leads": [
+    {
+      "Musteri": "0676 5905733",
+      "Telefon": "0676 5905733",
+      "Hizmet": "-",
+      "Konum": "Innsbruck",
+      "Tarih": "08.09.26 09:07",
+      "Mesaj": "-",
+      "id": "7ceaf3de9689daaae8d01e0ae9f28ef3",
+      "telegramSent": true
+    },
     {
       "Musteri": "0660 3179473",
       "Telefon": "0660 3179473",
@@ -179,16 +189,6 @@
       "Tarih": "02.09.26 21:40",
       "Mesaj": "-",
       "id": "98a8d8f0fe21d9b8bfed878ce3452b52",
-      "telegramSent": true
-    },
-    {
-      "Musteri": "0677 63457831",
-      "Telefon": "0677 63457831",
-      "Hizmet": "Beförderung von Umzugsgut",
-      "Konum": "Wiener Neudorf",
-      "Tarih": "01.09.26 20:58",
-      "Mesaj": "P\nPotenzieller Kunde\n01.09.26\nHallo, ich möchte Ende September, voraussichtlich am 24. oder 25. September, eine kleine Wohnung übersiedeln lassen und würde gerne nachfragen, ob Sie an einem dieser Termine verfügbar wären und mit welchen Kosten ich ungefähr rechnen müsste. Es handelt sich um eine 33 m² große Wohnung von Wiener Neudorf nach Hirtenberg. Zu übersiedeln wären ungefähr: * 1 Bett * 1 kleine Couch * 2 Kästen, die ab- und am neuen Standort wieder aufgebaut werden müssten * 1 Waschmaschine * einige kleinere Gegenstände/Umzugskartons Könnten Sie mir bitte mitteilen, was die Übersiedlung ungefähr kosten würde.",
-      "id": "6f68fc23252c02da144f2e2d0eb4f211",
       "telegramSent": true
     },
     {
