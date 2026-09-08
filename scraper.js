@@ -210,7 +210,7 @@ function clearChromeLocks() {
     // 🟢 AKILLI SAYFA KONTROLÜ VE ANFRAGEN'E GEÇİŞ (DOĞRULAMA EKRANI İÇİN)
     // =========================================================================
     console.log("🔍 LSA sayfa durumu kontrol ediliyor...");
-    await new Promise(r => setTimeout(r, 2500));
+    await new Promise(r => setTimeout(r, 3000));
 
     const initialState = await page.evaluate(() => {
       const bodyText = document.body?.innerText || '';
@@ -232,7 +232,7 @@ function clearChromeLocks() {
         if (menuButton) menuButton.click();
       });
 
-      await new Promise(r => setTimeout(r, 2000));
+      await new Promise(r => setTimeout(r, 3000));
 
       await page.evaluate(() => {
         const allElements = Array.from(document.querySelectorAll('*'));
@@ -252,7 +252,7 @@ function clearChromeLocks() {
 
       // Tablonun oturmasını garantiye al
       await page.waitForSelector('[role="row"], tr', { timeout: 15000 }).catch(() => {});
-      await new Promise(r => setTimeout(r, 2000));
+      await new Promise(r => setTimeout(r, 4000));
     }
 
     // =========================================================================
