@@ -20,7 +20,7 @@ const CONFIG = {
   // 1. Telegram Bot Bilgileri
   telegramToken: process.env.TELEGRAM_BOT_TOKEN,
   telegramChatId: process.env.TELEGRAM_CHAT_ID,
-  // 2. Telegram Bot Bilgileri (YENİ EKLENDİ)
+  // 2. Telegram Bot Bilgileri
   telegramToken2: process.env.TELEGRAM_BOT_TOKEN_2,
   telegramChatId2: process.env.TELEGRAM_CHAT_ID_2,
 };
@@ -48,7 +48,7 @@ function generateLeadMd5(lead) {
   return crypto.createHash('md5').update(rawString).digest('hex');
 }
 
-// Native Fetch API ile 2 Farklı Telegram Hesabına Bildirim Gönderme
+// Native Fetch API ile 2 Farklı Telegram Grubuna/Hesabına Bildirim Gönderme
 async function sendTelegramMessage(lead) {
   const targets = [
     { name: 'Telegram 1', token: CONFIG.telegramToken, chatId: CONFIG.telegramChatId },
@@ -63,11 +63,12 @@ async function sendTelegramMessage(lead) {
                   `📅 *Tarih:* ${lead["Tarih"]}\n` +
                   `💬 *Mesaj:* ${lead["Mesaj"]}`;
 
-  let atLeastOneSuccess = false;
+  let allSuccess = true;
 
   for (const target of targets) {
     if (!target.token || !target.chatId) {
       console.warn(`⚠️ ${target.name} API bilgileri eksik (.env) - atlanıyor.`);
+      allSuccess = false;
       continue;
     }
 
@@ -83,17 +84,19 @@ async function sendTelegramMessage(lead) {
       });
 
       if (res.ok) {
-        atLeastOneSuccess = true;
         console.log(`✅ ${target.name} bildirim başarıyla atıldı.`);
       } else {
+        allSuccess = false;
         console.error(`⚠️ ${target.name} gönderim başarısız. Status: ${res.status}`);
       }
     } catch (err) {
+      allSuccess = false;
       console.error(`⚠️ ${target.name} mesaj hatası:`, err.message);
     }
   }
 
-  return atLeastOneSuccess;
+  // Yalnızca her iki hedefe de sorunsuz gittiyse true döner
+  return allSuccess;
 }
 
 // 24-Hour Strict Date Formatter (Viyana / UTC+2 Offset Destekli)
@@ -361,7 +364,7 @@ function clearChromeLocks() {
 
       let currentMd5 = generateLeadMd5(tempLead);
 
-      // 🛡️ ESKİ KAYIT KONTROLÜ (Tarih formatı oynasa bile Müşteri + Konum + Hizmet eşleşmesi korur)
+      // 🛡️ ESKİ KAYIT KONTROLÜ
       const existingLead = previousLeads.find(old => 
         old.id === currentMd5 || 
         (
@@ -514,17 +517,16 @@ function clearChromeLocks() {
           if (isSuccess) {
             leadToNotify.telegramSent = true;
             telegramStatusChanged = true;
-            console.log(`📱 Telegram bildirimi gönderildi: ${leadToNotify["Musteri"]} (MD5: ${leadToNotify.id})`);
+            console.log(`📱 Her iki Telegram kanalına bildirim tamamlandı: ${leadToNotify["Musteri"]} (MD5: ${leadToNotify.id})`);
           }
           await new Promise(r => setTimeout(r, 1000));
         }
       }
     }
 
-    // 🎯 KRİTİK FİLTRE: Sadece yepyeni kayıt geldiyse VEYA bildirim başarıyla iletildiyse dosyayı yaz ve push et
+    // 🎯 Sadece yepyeni kayıt geldiyse VEYA bildirim başarıyla iletildiyse dosyayı yaz ve push et
     if (hasNewEntry || telegramStatusChanged) {
       const outputData = {
-        // Sadece yeni lead geldiğinde güncel saat basılır, aksi halde eski saat korunur
         updatedAt: hasNewEntry 
           ? new Date().toLocaleString('de-AT', { timeZone: 'Europe/Vienna' }) 
           : (previousUpdatedAt || new Date().toLocaleString('de-AT', { timeZone: 'Europe/Vienna' })),
