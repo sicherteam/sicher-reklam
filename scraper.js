@@ -56,12 +56,12 @@ async function sendTelegramMessage(lead) {
   ];
 
   const phoneText = lead["Telefon"] ? `\n📞 *Telefon:* ${lead["Telefon"]}` : '';
-  const message = `🔔 *YENİ Müşteri!* (${CONFIG.projectName})\n\n` +
-                  `👤 *Müşteri:* ${lead["Musteri"]}${phoneText}\n` +
-                  `📍 *Konum:* ${lead["Konum"]}\n` +
-                  `💼 *Hizmet:* ${lead["Hizmet"]}\n` +
-                  `📅 *Tarih:* ${lead["Tarih"]}\n` +
-                  `💬 *Mesaj:* ${lead["Mesaj"]}`;
+  const message = `🔔 *NEUER Kunde!* (${CONFIG.projectName})\n\n` +
+                  `👤 *Kunde:* ${lead["Musteri"]}${phoneText}\n` +
+                  `📍 *Ort:* ${lead["Konum"]}\n` +
+                  `💼 *Dienstleistung:* ${lead["Hizmet"]}\n` +
+                  `📅 *Datum:* ${lead["Tarih"]}\n` +
+                  `💬 *Nachricht:* ${lead["Mesaj"]}`;
 
   let allSuccess = true;
 
