@@ -1,6 +1,26 @@
 {
-  "updatedAt": "8.9.2026, 17:51:30",
+  "updatedAt": "9.9.2026, 11:30:50",
   "leads": [
+    {
+      "Musteri": "0664 744559",
+      "Telefon": "0664 744559",
+      "Hizmet": "Beförderung von Umzugsgut",
+      "Konum": "Wels",
+      "Tarih": "09.09.26 11:27",
+      "Mesaj": "P\nPotenzieller Kunde\n9:27 AM\nUmzug Wels nach Linz",
+      "id": "84882e1f90d56b654412c2e241dfc48e",
+      "telegramSent": true
+    },
+    {
+      "Musteri": "0463 287047650",
+      "Telefon": "0463 287047650",
+      "Hizmet": "Beförderung von Umzugsgut",
+      "Konum": "Salzburg",
+      "Tarih": "09.09.26 11:25",
+      "Mesaj": "-",
+      "id": "317d0e3f6a57ed5ad1a108cb075a772b",
+      "telegramSent": true
+    },
     {
       "Musteri": "0676 9472220",
       "Telefon": "0676 9472220",
