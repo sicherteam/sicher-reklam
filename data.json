@@ -1,6 +1,16 @@
 {
-  "updatedAt": "9.9.2026, 16:10:44",
+  "updatedAt": "9.9.2026, 17:15:49",
   "leads": [
+    {
+      "Musteri": "0677 64429011",
+      "Telefon": "0677 64429011",
+      "Hizmet": "Beförderung von Umzugsgut",
+      "Konum": "Landeck",
+      "Tarih": "09.09.26 17:10",
+      "Mesaj": "-",
+      "id": "14f6486f086348d39a47d27d1ca7ff05",
+      "telegramSent": true
+    },
     {
       "Musteri": "0660 7801030",
       "Telefon": "0660 7801030",
