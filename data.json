@@ -1,6 +1,16 @@
 {
-  "updatedAt": "9.9.2026, 11:37:02",
+  "updatedAt": "9.9.2026, 13:10:47",
   "leads": [
+    {
+      "Musteri": "0664 1145425",
+      "Telefon": "0664 1145425",
+      "Hizmet": "Beförderung von Umzugsgut",
+      "Konum": "Linz",
+      "Tarih": "09.09.26 13:08",
+      "Mesaj": "-",
+      "id": "505f43d150ec1a99169bba9df9a60c28",
+      "telegramSent": true
+    },
     {
       "Musteri": "0670 3064562",
       "Telefon": "0670 3064562",
