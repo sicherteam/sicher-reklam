@@ -1,6 +1,16 @@
 {
-  "updatedAt": "9.9.2026, 13:10:47",
+  "updatedAt": "9.9.2026, 14:01:22",
   "leads": [
+    {
+      "Musteri": "0676 5416013",
+      "Telefon": "0676 5416013",
+      "Hizmet": "-",
+      "Konum": "Engelhartszell",
+      "Tarih": "09.09.26 13:55",
+      "Mesaj": "-",
+      "id": "6a09859915cfd8e8278b70fe9333638e",
+      "telegramSent": true
+    },
     {
       "Musteri": "0664 1145425",
       "Telefon": "0664 1145425",
