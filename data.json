@@ -1,6 +1,16 @@
 {
-  "updatedAt": "10.9.2026, 11:36:42",
+  "updatedAt": "10.9.2026, 13:45:45",
   "leads": [
+    {
+      "Musteri": "0664 2826521",
+      "Telefon": "0664 2826521",
+      "Hizmet": "Umzug im Inland",
+      "Konum": "Molln",
+      "Tarih": "10.09.26 13:42",
+      "Mesaj": "P\nPotenzieller Kunde\n11:42 AM\nMein Umzug ist im Dezember geplant. Wo ist der Standort Eurer Firma? Umzug von 4591 Molln Kirchenplatz 7 nach 4574 Vorderstoder Untertamberg 61. Werden die Möbel in die jeweiligen Räume der neuen Unterkunft im ersten Stock eines Einfamilienhauses getragen? Kostenlose Terminvereinbarung wegen Treffen und Besichtigung vor Ort? Welche Kosten sind für mich zu erwarten - bitte um unverbindliches Angebot? Gruß, Herbert Rohregger",
+      "id": "a23ec3a9c9127d15ccf488d8401b2721",
+      "telegramSent": true
+    },
     {
       "Musteri": "0650 5218284",
       "Telefon": "0650 5218284",
