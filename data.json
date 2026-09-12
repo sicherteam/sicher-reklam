@@ -1,6 +1,16 @@
 {
-  "updatedAt": "12.9.2026, 18:45:45",
+  "updatedAt": "12.9.2026, 20:20:50",
   "leads": [
+    {
+      "Musteri": "0650 3616314",
+      "Telefon": "0650 3616314",
+      "Hizmet": "Beförderung von Umzugsgut",
+      "Konum": "Linz",
+      "Tarih": "12.09.26 20:19",
+      "Mesaj": "P\nPotenzieller Kunde\n6:19 PM\nHallo! Wir benötigen einen Klaviertransport bon Steyr nach Traun. Ab in ca. 2 Wochen. Bitte um Preisauskunft. Mfg David Wipplinger",
+      "id": "de785157228a0a41ab7abcd22c6dddd9",
+      "telegramSent": true
+    },
     {
       "Musteri": "0660 6119031",
       "Telefon": "0660 6119031",
