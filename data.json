@@ -1,6 +1,16 @@
 {
-  "updatedAt": "14.9.2026, 18:30:43",
+  "updatedAt": "14.9.2026, 20:15:47",
   "leads": [
+    {
+      "Musteri": "0676 4022840",
+      "Telefon": "0676 4022840",
+      "Hizmet": "Innerörtlicher Umzug",
+      "Konum": "Steyr",
+      "Tarih": "14.09.26 20:12",
+      "Mesaj": "P\nPotenzieller Kunde\n6:12 PM\nMöbeltransport ,abbauen , verpacken, ca 15 km transportieren, einlagern Kästen, Truhe Termin letzte Sept Woche",
+      "id": "8080b3934a83d743e42b34ef8d5a4006",
+      "telegramSent": true
+    },
     {
       "Musteri": "0699 10883172",
       "Telefon": "0699 10883172",
