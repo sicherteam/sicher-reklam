@@ -1,6 +1,16 @@
 {
-  "updatedAt": "14.9.2026, 10:55:41",
+  "updatedAt": "14.9.2026, 12:55:49",
   "leads": [
+    {
+      "Musteri": "0664 3808408",
+      "Telefon": "0664 3808408",
+      "Hizmet": "Umzug im Inland",
+      "Konum": "Melk",
+      "Tarih": "14.09.26 12:51",
+      "Mesaj": "P\nPotenzieller Kunde\n10:51 AM\nSehr geehrte Damen und Herren, ich ersuche um ein unverbindliches Angebot für einen Möbeltransport von Pöchlarn nach Mauer bei Melk. Es sollen ausschließlich Möbel transportiert werden. Der Umzug ist voraussichtlich für den 26.09.2026 oder alternativ am 03.10.2026 geplant. Bitte teilen Sie mir mit: Ob an einem dieser Termine Kapazitäten verfügbar sind Die voraussichtlichen Gesamtkosten Ob das Angebot als Pauschalpreis erstellt werden kann Die Anzahl der eingesetzten Mitarbeiter Ob eine Besichtigung vorab erforderlich ist. Mit freundlichen Grüßen Janine Haibl",
+      "id": "67492c64c7bb29afff7edd09c68f6b9e",
+      "telegramSent": true
+    },
     {
       "Musteri": "0650 5111331",
       "Telefon": "0650 5111331",
