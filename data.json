@@ -1,6 +1,16 @@
 {
-  "updatedAt": "15.9.2026, 12:25:47",
+  "updatedAt": "15.9.2026, 14:45:53",
   "leads": [
+    {
+      "Musteri": "339683039",
+      "Telefon": "339683039",
+      "Hizmet": "Innerörtlicher Umzug",
+      "Konum": "Steinach am Brenner",
+      "Tarih": "15.09.26 14:43",
+      "Mesaj": "P\nPotenzieller Kunde\n12:43 PM\nGuten Tag, ich stehe bald vor meinem Umzug hier in Steinach und wollte mich erkundigen, ob du Zeit und Kapazität dafür hättest. Es ist wirklich ein Katzensprung innerhalb des Ortes: ​Von: Brennerstraße 74 (mit Lift) ​Nach: Kranebitten 183A (mit Lift) ​Die Strecke beträgt nur gut einen Kilometer, und da beide Wohnungen einen Lift haben, geht das hoffentlich ganz fix. ​Kannst du mir kurz sagen, was das preislich in etwa ausmachen würde und wann es bei dir zeitlich passen könnte? ​Liebe Grüße Snjezana Vuleta",
+      "id": "afbd787b9fc24bab61e30102b6b41669",
+      "telegramSent": true
+    },
     {
       "Musteri": "0660 4797565",
       "Telefon": "0660 4797565",
