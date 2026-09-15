@@ -1,6 +1,16 @@
 {
-  "updatedAt": "15.9.2026, 14:45:53",
+  "updatedAt": "15.9.2026, 15:00:46",
   "leads": [
+    {
+      "Musteri": "0676 9696921",
+      "Telefon": "0676 9696921",
+      "Hizmet": "-",
+      "Konum": "Telfs",
+      "Tarih": "15.09.26 14:53",
+      "Mesaj": "-",
+      "id": "b382fdfb24428fca843f883c7d319515",
+      "telegramSent": true
+    },
     {
       "Musteri": "339683039",
       "Telefon": "339683039",
