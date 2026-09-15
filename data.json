@@ -1,6 +1,16 @@
 {
-  "updatedAt": "14.9.2026, 20:45:49",
+  "updatedAt": "15.9.2026, 12:25:47",
   "leads": [
+    {
+      "Musteri": "0660 4797565",
+      "Telefon": "0660 4797565",
+      "Hizmet": "-",
+      "Konum": "Innsbruck",
+      "Tarih": "15.09.26 12:20",
+      "Mesaj": "-",
+      "id": "e7e28353c05288c161c6e4ab00d4001b",
+      "telegramSent": true
+    },
     {
       "Musteri": "0676 9391347",
       "Telefon": "0676 9391347",
