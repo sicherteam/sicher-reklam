@@ -1,6 +1,16 @@
 {
-  "updatedAt": "17.9.2026, 11:26:00",
+  "updatedAt": "17.9.2026, 12:25:46",
   "leads": [
+    {
+      "Musteri": "0676 7035291",
+      "Telefon": "0676 7035291",
+      "Hizmet": "-",
+      "Konum": "Klagenfurt am Wörthersee",
+      "Tarih": "17.09.26 12:20",
+      "Mesaj": "-",
+      "id": "c96e69d3ab6c2c0e584bfb6b7ff600ac",
+      "telegramSent": true
+    },
     {
       "Musteri": "0664 5329899",
       "Telefon": "0664 5329899",
