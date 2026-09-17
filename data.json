@@ -1,6 +1,16 @@
 {
-  "updatedAt": "17.9.2026, 12:25:46",
+  "updatedAt": "17.9.2026, 14:15:39",
   "leads": [
+    {
+      "Musteri": "0664 5490272",
+      "Telefon": "0664 5490272",
+      "Hizmet": "-",
+      "Konum": "Kitzbühel",
+      "Tarih": "17.09.26 14:09",
+      "Mesaj": "-",
+      "id": "b4dc212b41b1a827547bb30082856387",
+      "telegramSent": true
+    },
     {
       "Musteri": "0676 7035291",
       "Telefon": "0676 7035291",
