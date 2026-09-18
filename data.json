@@ -1,6 +1,16 @@
 {
-  "updatedAt": "18.9.2026, 16:55:44",
+  "updatedAt": "18.9.2026, 20:05:51",
   "leads": [
+    {
+      "Musteri": "340932409",
+      "Telefon": "340932409",
+      "Hizmet": "Beförderung von Umzugsgut",
+      "Konum": "Hollabrunn",
+      "Tarih": "18.09.26 20:04",
+      "Mesaj": "P\nPotenzieller Kunde\n6:04 PM\nAm besten wäre so schnell wie möglich,muss Ende des Monats aus dem Haus sein.es müssten2 Ortschaften weiter Transportiert werden. Da ich aktuell Schwanger bin kann ich nicht alles meinen Mann allein machen lassen,da er arbeiten auch noch muss. Es handelt sich um normale haushaltssachen und paar möbel",
+      "id": "6d6c643e9e3f7e1ec74679007555713b",
+      "telegramSent": true
+    },
     {
       "Musteri": "0650 8808941",
       "Telefon": "0650 8808941",
