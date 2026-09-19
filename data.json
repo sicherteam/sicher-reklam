@@ -1,6 +1,16 @@
 {
-  "updatedAt": "19.9.2026, 10:55:42",
+  "updatedAt": "19.9.2026, 13:20:46",
   "leads": [
+    {
+      "Musteri": "0660 4241020",
+      "Telefon": "0660 4241020",
+      "Hizmet": "Beförderung von Umzugsgut",
+      "Konum": "Villach",
+      "Tarih": "19.09.26 13:06",
+      "Mesaj": "-",
+      "id": "d08c6146ed55373adbdd282c4209c3a3",
+      "telegramSent": true
+    },
     {
       "Musteri": "0664 3461341",
       "Telefon": "0664 3461341",
