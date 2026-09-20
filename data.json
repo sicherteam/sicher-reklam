@@ -1,6 +1,16 @@
 {
-  "updatedAt": "20.9.2026, 15:20:53",
+  "updatedAt": "20.9.2026, 20:25:43",
   "leads": [
+    {
+      "Musteri": "0699 18363946",
+      "Telefon": "0699 18363946",
+      "Hizmet": "-",
+      "Konum": "Linz",
+      "Tarih": "20.09.26 20:20",
+      "Mesaj": "-",
+      "id": "631006dc44c00641dc883c59009fa5d7",
+      "telegramSent": true
+    },
     {
       "Musteri": "0660 5857552",
       "Telefon": "0660 5857552",
