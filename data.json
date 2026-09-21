@@ -1,6 +1,16 @@
 {
-  "updatedAt": "21.9.2026, 09:55:42",
+  "updatedAt": "21.9.2026, 10:25:56",
   "leads": [
+    {
+      "Musteri": "0660 2373908",
+      "Telefon": "0660 2373908",
+      "Hizmet": "-",
+      "Konum": "Klagenfurt am Wörthersee",
+      "Tarih": "21.09.26 10:20",
+      "Mesaj": "-",
+      "id": "b1482b361d427906ab666f7b85e02c6c",
+      "telegramSent": true
+    },
     {
       "Musteri": "0680 1562009",
       "Telefon": "0680 1562009",
