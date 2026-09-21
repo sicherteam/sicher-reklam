@@ -1,6 +1,16 @@
 {
-  "updatedAt": "21.9.2026, 16:10:47",
+  "updatedAt": "21.9.2026, 17:55:51",
   "leads": [
+    {
+      "Musteri": "0676 5716623",
+      "Telefon": "0676 5716623",
+      "Hizmet": "Beförderung von Umzugsgut",
+      "Konum": "Klagenfurt am Wörthersee",
+      "Tarih": "21.09.26 17:53",
+      "Mesaj": "-",
+      "id": "2b2986ad265a9e37514423c79a441884",
+      "telegramSent": true
+    },
     {
       "Musteri": "0660 2312144",
       "Telefon": "0660 2312144",
