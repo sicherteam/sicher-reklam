@@ -1,6 +1,16 @@
 {
-  "updatedAt": "22.9.2026, 14:30:51",
+  "updatedAt": "22.9.2026, 14:35:46",
   "leads": [
+    {
+      "Musteri": "0664 5693342",
+      "Telefon": "0664 5693342",
+      "Hizmet": "-",
+      "Konum": "Villach",
+      "Tarih": "22.09.26 14:30",
+      "Mesaj": "-",
+      "id": "1581fefa16c7cdb02ba4e7aa41d37a71",
+      "telegramSent": true
+    },
     {
       "Musteri": "0676 7737401",
       "Telefon": "0676 7737401",
