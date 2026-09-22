@@ -1,6 +1,16 @@
 {
-  "updatedAt": "22.9.2026, 10:40:43",
+  "updatedAt": "22.9.2026, 13:05:44",
   "leads": [
+    {
+      "Musteri": "0676 833221609",
+      "Telefon": "0676 833221609",
+      "Hizmet": "-",
+      "Konum": "Salzburg",
+      "Tarih": "22.09.26 13:00",
+      "Mesaj": "-",
+      "id": "01fc7e5aaad6b9f1ccad86d3d2327dc2",
+      "telegramSent": true
+    },
     {
       "Musteri": "0676 9669245",
       "Telefon": "0676 9669245",
