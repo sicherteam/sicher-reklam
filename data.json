@@ -1,6 +1,16 @@
 {
-  "updatedAt": "23.9.2026, 09:40:47",
+  "updatedAt": "23.9.2026, 10:41:05",
   "leads": [
+    {
+      "Musteri": "0676 3712889",
+      "Telefon": "0676 3712889",
+      "Hizmet": "-",
+      "Konum": "Hagenberg im Mühlkreis",
+      "Tarih": "23.09.26 10:39",
+      "Mesaj": "-",
+      "id": "6af14ea51166cae8b0093dc4caaa2831",
+      "telegramSent": true
+    },
     {
       "Musteri": "0650 9219299",
       "Telefon": "0650 9219299",
