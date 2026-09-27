@@ -1,6 +1,16 @@
 {
-  "updatedAt": "27.9.2026, 11:05:49",
+  "updatedAt": "27.9.2026, 14:06:09",
   "leads": [
+    {
+      "Musteri": "342148688",
+      "Telefon": "342148688",
+      "Hizmet": "Beförderung von Umzugsgut",
+      "Konum": "Wien",
+      "Tarih": "27.09.26 14:01",
+      "Mesaj": "P\nPotenzieller Kunde\n12:01 PM\nWieviel kostet der Transport von einem Piano vom 4.Stock ohne Lift bis in ein direkt vor der Haustür abgestelltes privates Fahrzeug?",
+      "id": "ebb7e871f392686b81d81d8dbcd832e7",
+      "telegramSent": true
+    },
     {
       "Musteri": "0676 4210070",
       "Telefon": "0676 4210070",
