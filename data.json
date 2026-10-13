@@ -1,6 +1,16 @@
 {
-  "updatedAt": "12.10.2026, 18:56:31",
+  "updatedAt": "13.10.2026, 10:45:50",
   "leads": [
+    {
+      "Musteri": "0680 1737975",
+      "Telefon": "0680 1737975",
+      "Hizmet": "Innerörtlicher Umzug",
+      "Konum": "Amstetten",
+      "Tarih": "13.10.26 10:42",
+      "Mesaj": "P\nPotenzieller Kunde\n8:42 AM\nSehr geehrte Damen und Herren Wollte mal nachfragen wieviel es bei euch kosten mit Umzug in amstetten und würden sie Demontage und Montage auch machen LG Alexander Leeb",
+      "id": "27813cedb6d412577ae659bef300fbbf",
+      "telegramSent": true
+    },
     {
       "Musteri": "0664 2584137",
       "Telefon": "0664 2584137",
