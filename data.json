@@ -1,6 +1,16 @@
 {
-  "updatedAt": "14.10.2026, 11:31:17",
+  "updatedAt": "15.10.2026, 19:25:54",
   "leads": [
+    {
+      "Musteri": "0650 6544455",
+      "Telefon": "0650 6544455",
+      "Hizmet": "Umzug im Inland",
+      "Konum": "Baden",
+      "Tarih": "15.10.26 19:20",
+      "Mesaj": "P\nPotenzieller Kunde\n5:20 PM\nGuten Tag,ich brächte Hilfe von Ihnen bei meinem Umzug,ich wohne im Baden und müsste alle Sachen nach Enzesfeld-Lindabrunn bringen,was wäre der Preis ca.? Und wie schnell könnte man einne Termin kriegen ? Mit freundlichen Grüßen, Victoria Kovalenko",
+      "id": "9013fd774349f75e644524952cad3f22",
+      "telegramSent": true
+    },
     {
       "Musteri": "0660 8561032",
       "Telefon": "0660 8561032",
