@@ -1,6 +1,16 @@
 {
-  "updatedAt": "15.10.2026, 19:25:54",
+  "updatedAt": "21.10.2026, 11:45:48",
   "leads": [
+    {
+      "Musteri": "0660 4447255",
+      "Telefon": "0660 4447255",
+      "Hizmet": "-",
+      "Konum": "Wiener Neustadt",
+      "Tarih": "21.10.26 11:42",
+      "Mesaj": "-",
+      "id": "10525350a4d1bf2134c5a7c1c68ed032",
+      "telegramSent": true
+    },
     {
       "Musteri": "0650 6544455",
       "Telefon": "0650 6544455",
