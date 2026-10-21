@@ -1,6 +1,16 @@
 {
-  "updatedAt": "21.10.2026, 11:45:48",
+  "updatedAt": "21.10.2026, 13:40:52",
   "leads": [
+    {
+      "Musteri": "0676 838447697",
+      "Telefon": "0676 838447697",
+      "Hizmet": "-",
+      "Konum": "Sankt Pölten",
+      "Tarih": "21.10.26 13:36",
+      "Mesaj": "-",
+      "id": "d4f7c56957dabc67bd2161e156e6ff55",
+      "telegramSent": false
+    },
     {
       "Musteri": "0660 4447255",
       "Telefon": "0660 4447255",
