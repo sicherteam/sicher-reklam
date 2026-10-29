@@ -1,17 +1,12 @@
 {
-  "name": "lsa-scraper",
-  "version": "1.0.0",
-  "main": "scraper.js",
+  "name": "sicher-reklam",
+  "version": "2.0.0",
+  "description": "Google Ads LSA Lead Sync API for Sicher Reklam",
+  "main": "scraper-api.js",
   "scripts": {
-    "start": "node scraper.js"
-  },
-  "dependencies": {
-    "csv-parser": "^3.2.1",
-    "dotenv": "^16.4.5",
-    "google-auth-library": "^9.0.0",
-    "google-spreadsheet": "^4.1.2",
-    "puppeteer-core": "^22.15.0",
-    "puppeteer-extra": "^3.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2"
+    "start": "node scraper-api.js",
+    "check": "node scraper-api.js --check",
+    "bootstrap": "node scraper-api.js --bootstrap",
+    "dry-run": "node scraper-api.js --dry-run"
   }
 }

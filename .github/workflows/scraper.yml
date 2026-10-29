@@ -1,0 +1,61 @@
+name: LSA Lead API Sync Automation
+
+on:
+  schedule:
+    # Her 15 dakikada bir otomatik senkronizasyon (yedek emniyet kemeri)
+    - cron: '*/15 * * * *'
+  workflow_dispatch: # Anlık tetikleme (Gmail Apps Script veya manuel)
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scraper-group
+  cancel-in-progress: false
+
+jobs:
+  sync-leads:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repoyu Çek
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Node.js Kurulumu
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Google Ads API Senkronizasyonunu Çalıştır
+        env:
+          GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID || '3226096935' }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_CHAT_ID_2: ${{ secrets.TELEGRAM_CHAT_ID_2 }}
+          PROJECT_NAME: 'Sicher Reklam'
+          SKIP_TELEGRAM: ${{ secrets.SKIP_TELEGRAM || 'false' }}
+          LOOKBACK_DAYS: '120'
+          DATA_PATH: 'data.json'
+        run: node scraper-api.js
+
+      - name: Değişiklikleri Repoya Commit Et
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add data.json
+          
+          if git diff --staged --quiet; then
+            echo "✅ Veriler güncel, commit atlanıyor."
+            exit 0
+          fi
+          
+          git commit -m "Automated LSA lead sync [skip ci]"
+          git pull --rebase --autostash -X theirs origin main
+          git push origin main
