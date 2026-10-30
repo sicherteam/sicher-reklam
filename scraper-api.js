@@ -98,9 +98,12 @@ function cleanMessageText(text) {
     /\n\s*>\s*Local Services By Google/i,
     /\bLocal Services By Google\b/i,
     /\n\s*>\s*Vielen Dank/i,
-    /\bSchnellpack bearbeitet Ihre Anfrage\b/i,
+    /\bbearbeitet Ihre Anfrage\b/i,
     /\bSicherteam\s*<[^>]+>/i,
     /\bWiener-R[aä]umungsprofi\s*<[^>]+>/i,
+    /\bDetails zu Ihrer Anfrage\b/i,
+    /\bIhre Kundennummer:\b/i,
+    /https?:\/\/c\.gle\/[^\s]+/i,
   ];
 
   let cleaned = text;
@@ -111,8 +114,13 @@ function cleanMessageText(text) {
     }
   }
 
-  cleaned = cleaned.replace(/\r\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+  cleaned = cleaned.replace(/\r\n/g, '\n').replace(/[ \t]+$/gm, '').replace(/\n{3,}/g, '\n\n').trim();
   return cleaned || '-';
+}
+
+function formatTime(dateStr) {
+  const m = String(dateStr || '').match(/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})/);
+  return m ? `${m[4]}:${m[5]}` : '';
 }
 
 function extractSecondPhone(text, primaryPhone = '') {
@@ -120,7 +128,6 @@ function extractSecondPhone(text, primaryPhone = '') {
 
   const normPrimary = (primaryPhone || '').replace(/\D/g, '');
 
-  // 1. Mobile pattern e.g. 069910330387
   const plainMatch = text.match(/\b(06[56789]\d{7,10})\b/);
   if (plainMatch) {
     const digits = plainMatch[1];
@@ -129,7 +136,6 @@ function extractSecondPhone(text, primaryPhone = '') {
     }
   }
 
-  // 2. Formatted phone numbers
   const candidates = text.match(/(?:(?:\+|00)43[\s\/\-]*)?(?:0[1-9]\d{1,3}[\s\/\-]*)\d{3,4}[\s\/\-]*\d{2,5}/g) || [];
   for (const cand of candidates) {
     const digits = cand.replace(/\D/g, '');
@@ -291,6 +297,11 @@ async function sendTelegram(lead) {
 
   if (targets.length === 0) throw new Error('Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID');
 
+  const isUpdate = Boolean(lead.isMessageUpdate);
+  const header = isUpdate 
+    ? `🔔 <b>NEUE Nachricht!</b> (${htmlEscape(PROJECT)})` 
+    : `🔔 <b>NEUER Kunde!</b> (${htmlEscape(PROJECT)})`;
+
   let customerText = '';
   if (lead.Telefon) {
     if (lead.Musteri && lead.Musteri !== lead.Telefon && lead.Musteri !== 'Müşteri' && lead.Musteri !== 'Kunde' && lead.Musteri !== '-') {
@@ -303,7 +314,7 @@ async function sendTelegram(lead) {
   }
 
   const lines = [
-    `🔔 <b>NEUER Kunde!</b> (${htmlEscape(PROJECT)})`,
+    header,
     `<b>Kunde:</b> ${customerText}`,
   ];
 
@@ -314,8 +325,19 @@ async function sendTelegram(lead) {
   lines.push(`<b>Ort:</b> ${htmlEscape(lead.Konum || DEFAULT_LOCATION)}`);
   lines.push(`<b>Datum:</b> ${htmlEscape(lead.Tarih || '-')}`);
 
-  if (lead.Mesaj && lead.Mesaj !== '-') {
-    lines.push(`<b>Nachricht:</b> ${htmlEscape(lead.Mesaj)}`);
+  const convs = lead.conversations || [];
+  if (convs.length === 1) {
+    const c = convs[0];
+    const timeStr = c.time ? ` ${c.time}` : '';
+    lines.push(`\n<b>Nachricht:${timeStr}</b>\n${htmlEscape(c.text)}`);
+  } else if (convs.length > 1) {
+    for (let i = 0; i < convs.length; i++) {
+      const c = convs[i];
+      const timeStr = c.time ? ` ${c.time}` : '';
+      lines.push(`\n<b>Nachricht ${i + 1}:${timeStr}</b>\n${htmlEscape(c.text)}`);
+    }
+  } else if (lead.Mesaj && lead.Mesaj !== '-') {
+    lines.push(`\n<b>Nachricht:</b>\n${htmlEscape(lead.Mesaj)}`);
   }
 
   const message = lines.join('\n');
@@ -382,11 +404,24 @@ async function fetchLeads(token) {
     const contact = lead.contactDetails || {};
     const extension = contact.phoneNumberExtension;
     const phone = contact.phoneNumber ? `${contact.phoneNumber}${extension ? ` ext. ${extension}` : ''}` : null;
-    const conversations = (messages.get(lead.resourceName) || []).sort((a, b) => a.date.localeCompare(b.date));
-    let rawMessage = conversations.length ? conversations.map(x => x.text).join('\n\n') : '-';
-    const messageText = cleanMessageText(rawMessage);
-    const phone2 = extractSecondPhone(messageText, phone);
-    const detectedLoc = detectLocation({ Mesaj: messageText, Telefon: phone, Konum: '-' }, DEFAULT_LOCATION);
+    const rawConvs = (messages.get(lead.resourceName) || []).sort((a, b) => a.date.localeCompare(b.date));
+
+    const cleanedConvs = rawConvs.map(c => ({
+      id: c.id,
+      date: c.date,
+      time: formatTime(c.date),
+      text: cleanMessageText(c.text)
+    })).filter(c => c.text && c.text !== '-');
+
+    const fullMessageText = cleanedConvs.map(c => c.text).join('\n\n') || '-';
+
+    let phone2 = null;
+    for (const c of cleanedConvs) {
+      const found = extractSecondPhone(c.text, phone);
+      if (found) { phone2 = found; break; }
+    }
+
+    const detectedLoc = detectLocation({ Mesaj: fullMessageText, Telefon: phone, Konum: '-' }, DEFAULT_LOCATION);
 
     return {
       id: `lsa:${CUSTOMER_ID}:${lead.id}`,
@@ -396,7 +431,10 @@ async function fetchLeads(token) {
       Hizmet: lead.serviceId || lead.categoryId || lead.leadType || '-',
       Konum: detectedLoc,
       Tarih: toLegacyDate(lead.creationDateTime),
-      Mesaj: messageText,
+      Mesaj: fullMessageText,
+      conversations: cleanedConvs,
+      conversationCount: cleanedConvs.length,
+      lastConversationId: cleanedConvs.length ? cleanedConvs[cleanedConvs.length - 1].id : null,
       telegramSent: false,
       googleLeadId: String(lead.id),
       googleLeadResource: lead.resourceName,
@@ -444,16 +482,33 @@ async function main() {
                     sentIds.has(String(lead.googleLeadId)) || 
                     sentIds.has(String(lead.id));
 
+    const isLegacyRecord = old && old.conversationCount === undefined;
+    const oldCount = old?.conversationCount || 0;
+    const hasNewMessage = Boolean(
+      old &&
+      !isLegacyRecord &&
+      lead.conversationCount > oldCount &&
+      lead.lastConversationId &&
+      lead.lastConversationId !== old.lastConversationId
+    );
+
     if (!old) {
       added++;
       byId.set(lead.id, { ...lead, telegramSent: BOOTSTRAP ? true : wasSent });
     } else {
-      const merged = { ...old, ...lead, telegramSent: wasSent };
+      // Re-trigger notification ONLY if a customer sent a brand-new follow-up message
+      const shouldNotify = hasNewMessage && !BOOTSTRAP;
+      const merged = { 
+        ...old, 
+        ...lead, 
+        telegramSent: shouldNotify ? false : wasSent,
+        isMessageUpdate: shouldNotify
+      };
+
       if (lead.Telefon2) merged.Telefon2 = lead.Telefon2;
       if (old.Konum && old.Konum !== '-' && old.Konum !== DEFAULT_LOCATION) {
         merged.Konum = old.Konum;
       }
-      if (lead.Mesaj === '-' && old.Mesaj && old.Mesaj !== '-') merged.Mesaj = old.Mesaj;
       if (JSON.stringify(old) !== JSON.stringify(merged)) changed++;
       byId.set(lead.id, merged);
     }
