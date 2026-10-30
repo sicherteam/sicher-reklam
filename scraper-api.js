@@ -86,6 +86,64 @@ const AUSTRIAN_PREFIXES = [
   { prefix: /^(?:\+43|0043|0)?463/,  location: 'Klagenfurt' },
 ];
 
+function cleanMessageText(text) {
+  if (!text || text === '-') return '-';
+
+  const cutPatterns = [
+    /\n\s*Schnellpack\b/i,
+    /\bSchnellpack\s*<[^>]+>/i,
+    /<[^>]*@awexpress\.google\.com>/i,
+    /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,}\s+schrieb am\b/i,
+    /schrieb am\s+(?:Mo|Di|Mi|Do|Fr|Sa|So)\.?,?\s+\d+/i,
+    /\n\s*>\s*Local Services By Google/i,
+    /\bLocal Services By Google\b/i,
+    /\n\s*>\s*Vielen Dank/i,
+    /\bSchnellpack bearbeitet Ihre Anfrage\b/i,
+    /\bSicherteam\s*<[^>]+>/i,
+    /\bWiener-R[aä]umungsprofi\s*<[^>]+>/i,
+  ];
+
+  let cleaned = text;
+  for (const pat of cutPatterns) {
+    const idx = cleaned.search(pat);
+    if (idx !== -1) {
+      cleaned = cleaned.slice(0, idx);
+    }
+  }
+
+  cleaned = cleaned.replace(/\r\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+  return cleaned || '-';
+}
+
+function extractSecondPhone(text, primaryPhone = '') {
+  if (!text || text === '-') return null;
+
+  const normPrimary = (primaryPhone || '').replace(/\D/g, '');
+
+  // 1. Mobile pattern e.g. 069910330387
+  const plainMatch = text.match(/\b(06[56789]\d{7,10})\b/);
+  if (plainMatch) {
+    const digits = plainMatch[1];
+    if (!normPrimary || (!normPrimary.endsWith(digits) && !digits.endsWith(normPrimary))) {
+      return plainMatch[1];
+    }
+  }
+
+  // 2. Formatted phone numbers
+  const candidates = text.match(/(?:(?:\+|00)43[\s\/\-]*)?(?:0[1-9]\d{1,3}[\s\/\-]*)\d{3,4}[\s\/\-]*\d{2,5}/g) || [];
+  for (const cand of candidates) {
+    const digits = cand.replace(/\D/g, '');
+    if (digits.length >= 8 && digits.length <= 15) {
+      if (normPrimary && (normPrimary.endsWith(digits) || digits.endsWith(normPrimary))) {
+        continue;
+      }
+      return cand.trim();
+    }
+  }
+
+  return null;
+}
+
 function detectLocation(lead, fallbackLocation = DEFAULT_LOCATION) {
   if (lead.Konum && lead.Konum !== '-' && lead.Konum.trim().length > 1) {
     return lead.Konum.trim();
@@ -235,7 +293,7 @@ async function sendTelegram(lead) {
 
   let customerText = '';
   if (lead.Telefon) {
-    if (lead.Musteri && lead.Musteri !== lead.Telefon && lead.Musteri !== 'Müşteri' && lead.Musteri !== '-') {
+    if (lead.Musteri && lead.Musteri !== lead.Telefon && lead.Musteri !== 'Müşteri' && lead.Musteri !== 'Kunde' && lead.Musteri !== '-') {
       customerText = `${htmlEscape(lead.Musteri)} (${htmlEscape(lead.Telefon)})`;
     } else {
       customerText = htmlEscape(lead.Telefon);
@@ -245,15 +303,19 @@ async function sendTelegram(lead) {
   }
 
   const lines = [
-    `🔔 <b>YENİ Müşteri!</b> (${htmlEscape(PROJECT)})`,
-    `<b>Müşteri:</b> ${customerText}`,
-    `<b>Konum:</b> ${htmlEscape(lead.Konum || DEFAULT_LOCATION)}`,
-    `<b>Tarih:</b> ${htmlEscape(lead.Tarih || '-')}`,
-    `<b>Anfrage-ID:</b> <code>${htmlEscape(lead.googleLeadId || lead.id)}</code>`,
+    `🔔 <b>NEUER Kunde!</b> (${htmlEscape(PROJECT)})`,
+    `<b>Kunde:</b> ${customerText}`,
   ];
 
+  if (lead.Telefon2) {
+    lines.push(`<b>Telefon 2:</b> ${htmlEscape(lead.Telefon2)}`);
+  }
+
+  lines.push(`<b>Ort:</b> ${htmlEscape(lead.Konum || DEFAULT_LOCATION)}`);
+  lines.push(`<b>Datum:</b> ${htmlEscape(lead.Tarih || '-')}`);
+
   if (lead.Mesaj && lead.Mesaj !== '-') {
-    lines.push(`<b>Mesaj:</b> ${htmlEscape(lead.Mesaj)}`);
+    lines.push(`<b>Nachricht:</b> ${htmlEscape(lead.Mesaj)}`);
   }
 
   const message = lines.join('\n');
@@ -321,13 +383,16 @@ async function fetchLeads(token) {
     const extension = contact.phoneNumberExtension;
     const phone = contact.phoneNumber ? `${contact.phoneNumber}${extension ? ` ext. ${extension}` : ''}` : null;
     const conversations = (messages.get(lead.resourceName) || []).sort((a, b) => a.date.localeCompare(b.date));
-    const messageText = conversations.length ? conversations.map(x => x.text).join('\n\n') : '-';
+    let rawMessage = conversations.length ? conversations.map(x => x.text).join('\n\n') : '-';
+    const messageText = cleanMessageText(rawMessage);
+    const phone2 = extractSecondPhone(messageText, phone);
     const detectedLoc = detectLocation({ Mesaj: messageText, Telefon: phone, Konum: '-' }, DEFAULT_LOCATION);
 
     return {
       id: `lsa:${CUSTOMER_ID}:${lead.id}`,
-      Musteri: contact.consumerName || phone || 'Müşteri',
+      Musteri: contact.consumerName || phone || 'Kunde',
       Telefon: phone,
+      Telefon2: phone2,
       Hizmet: lead.serviceId || lead.categoryId || lead.leadType || '-',
       Konum: detectedLoc,
       Tarih: toLegacyDate(lead.creationDateTime),
@@ -384,7 +449,7 @@ async function main() {
       byId.set(lead.id, { ...lead, telegramSent: BOOTSTRAP ? true : wasSent });
     } else {
       const merged = { ...old, ...lead, telegramSent: wasSent };
-      // Retain historically scraped location if available and valid
+      if (lead.Telefon2) merged.Telefon2 = lead.Telefon2;
       if (old.Konum && old.Konum !== '-' && old.Konum !== DEFAULT_LOCATION) {
         merged.Konum = old.Konum;
       }
@@ -394,7 +459,7 @@ async function main() {
     }
   }
 
-  // Sort descending for data.json display (newest first on top of data.json)
+  // Sort descending for data.json display
   const all = [...byId.values()].sort((a, b) => 
     dateSortKey(b.Tarih).localeCompare(dateSortKey(a.Tarih)) || 
     String(b.googleLeadId || '').localeCompare(String(a.googleLeadId || ''))
@@ -407,7 +472,7 @@ async function main() {
   atomicWrite(output);
 
   if (!SKIP_TELEGRAM) {
-    // CHRONOLOGICAL ORDER: Oldest first -> Newest last, so in Telegram the newest message sits at the bottom!
+    // CHRONOLOGICAL ORDER: Oldest first -> Newest last
     const unsentLeads = all
       .filter(l => l.googleLeadId && !l.telegramSent)
       .sort((a, b) => 
