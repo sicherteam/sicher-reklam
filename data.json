@@ -1,5 +1,5 @@
 {
-  "updatedAt": "30.10.2026, 21:03:01",
+  "updatedAt": "31.10.2026, 00:51:21",
   "leads": [
     {
       "id": "lsa:3226096935:348742913",
@@ -13,7 +13,12 @@
       "googleLeadId": "348742913",
       "googleLeadResource": "customers/3226096935/localServicesLeads/348742913",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:348676401",
@@ -27,7 +32,12 @@
       "googleLeadId": "348676401",
       "googleLeadResource": "customers/3226096935/localServicesLeads/348676401",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:348660888",
@@ -41,7 +51,12 @@
       "googleLeadId": "348660888",
       "googleLeadResource": "customers/3226096935/localServicesLeads/348660888",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:348659259",
@@ -55,7 +70,12 @@
       "googleLeadId": "348659259",
       "googleLeadResource": "customers/3226096935/localServicesLeads/348659259",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:347575420",
@@ -69,7 +89,12 @@
       "googleLeadId": "347575420",
       "googleLeadResource": "customers/3226096935/localServicesLeads/347575420",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 6954036",
@@ -93,7 +118,12 @@
       "googleLeadId": "347428662",
       "googleLeadResource": "customers/3226096935/localServicesLeads/347428662",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0677 18031613",
@@ -117,7 +147,12 @@
       "googleLeadId": "347391090",
       "googleLeadResource": "customers/3226096935/localServicesLeads/347391090",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 838447697",
@@ -141,7 +176,12 @@
       "googleLeadId": "347388510",
       "googleLeadResource": "customers/3226096935/localServicesLeads/347388510",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 4447255",
@@ -165,7 +205,19 @@
       "googleLeadId": "346352874",
       "googleLeadResource": "customers/3226096935/localServicesLeads/346352874",
       "leadType": "MESSAGE",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3405434255",
+          "date": "2026-10-15 20:20:31.877396",
+          "time": "20:20",
+          "text": "Guten Tag,ich brächte Hilfe von Ihnen bei meinem Umzug,ich wohne im Baden und müsste alle Sachen nach Enzesfeld-Lindabrunn bringen,was wäre der Preis ca.? Und wie schnell könnte man einne Termin kriegen ? Mit freundlichen Grüßen, Victoria Kovalenko"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3405434255",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0650 6544455",
@@ -189,7 +241,12 @@
       "googleLeadId": "346013439",
       "googleLeadResource": "customers/3226096935/localServicesLeads/346013439",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:346013289",
@@ -203,7 +260,12 @@
       "googleLeadId": "346013289",
       "googleLeadResource": "customers/3226096935/localServicesLeads/346013289",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 8561032",
@@ -237,7 +299,19 @@
       "googleLeadId": "345766626",
       "googleLeadResource": "customers/3226096935/localServicesLeads/345766626",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3404005138",
+          "date": "2026-10-13 11:42:16.750731",
+          "time": "11:42",
+          "text": "Sehr geehrte Damen und Herren Wollte mal nachfragen wieviel es bei euch kosten mit Umzug in amstetten und würden sie Demontage und Montage auch machen LG Alexander Leeb"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3404005138",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0680 1737975",
@@ -261,7 +335,12 @@
       "googleLeadId": "345618996",
       "googleLeadResource": "customers/3226096935/localServicesLeads/345618996",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 2584137",
@@ -285,7 +364,12 @@
       "googleLeadId": "345474703",
       "googleLeadResource": "customers/3226096935/localServicesLeads/345474703",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 5805183",
@@ -309,7 +393,12 @@
       "googleLeadId": "344500672",
       "googleLeadResource": "customers/3226096935/localServicesLeads/344500672",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 3628595",
@@ -333,7 +422,12 @@
       "googleLeadId": "343888631",
       "googleLeadResource": "customers/3226096935/localServicesLeads/343888631",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0650 6466064",
@@ -357,7 +451,19 @@
       "googleLeadId": "343741723",
       "googleLeadResource": "customers/3226096935/localServicesLeads/343741723",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3400632448",
+          "date": "2026-10-03 08:54:53.409007",
+          "time": "08:54",
+          "text": "Umzug im Dezember einer 2 Zimmer Wohnung"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3400632448",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0681 10830035",
@@ -381,7 +487,19 @@
       "googleLeadId": "342774971",
       "googleLeadResource": "customers/3226096935/localServicesLeads/342774971",
       "leadType": "MESSAGE",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3399291216",
+          "date": "2026-09-30 20:07:58.457332",
+          "time": "20:07",
+          "text": "Haben Sie freie platze?lg"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3399291216",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 2275022",
@@ -405,7 +523,12 @@
       "googleLeadId": "342209522",
       "googleLeadResource": "customers/3226096935/localServicesLeads/342209522",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 8884262",
@@ -429,11 +552,16 @@
       "googleLeadId": "342149525",
       "googleLeadResource": "customers/3226096935/localServicesLeads/342149525",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:342148688",
-      "Musteri": "Müşteri",
+      "Musteri": "Kunde",
       "Telefon": null,
       "Hizmet": "moving_transportation",
       "Konum": "Wien",
@@ -443,7 +571,19 @@
       "googleLeadId": "342148688",
       "googleLeadResource": "customers/3226096935/localServicesLeads/342148688",
       "leadType": "MESSAGE",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3398526511",
+          "date": "2026-09-27 15:01:31.170839",
+          "time": "15:01",
+          "text": "Wieviel kostet der Transport von einem Piano vom 4.Stock ohne Lift bis in ein direkt vor der Haustür abgestelltes privates Fahrzeug?"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3398526511",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 5970071",
@@ -477,7 +617,12 @@
       "googleLeadId": "342517807",
       "googleLeadResource": "customers/3226096935/localServicesLeads/342517807",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 4210070",
@@ -511,7 +656,19 @@
       "googleLeadId": "342135363",
       "googleLeadResource": "customers/3226096935/localServicesLeads/342135363",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3397612260",
+          "date": "2026-09-25 13:41:47.189553",
+          "time": "13:41",
+          "text": "Lass uns auf WhatsApp chatten und telefonieren. Schnell, einfach, sicher und kostenlos. Einladung läuft bald ab. https://whatsapp.com/dl/"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3397612260",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 3712048",
@@ -535,7 +692,12 @@
       "googleLeadId": "342212992",
       "googleLeadResource": "customers/3226096935/localServicesLeads/342212992",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:341808572",
@@ -549,7 +711,12 @@
       "googleLeadId": "341808572",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341808572",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 4450305",
@@ -583,7 +750,19 @@
       "googleLeadId": "341897118",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341897118",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3397953722",
+          "date": "2026-09-24 06:20:28.265074",
+          "time": "06:20",
+          "text": "Hallo. Ich brauche für Montag (28.9) oder Dienstag (29.9) eure Hilfe. Es handelt sich um einen 45 Quadrat Meter wohnung in wiener neustadt. Zum transportieren wäre: Ein Couch Couch Tisch Fehrsetisch Bett( bereit abmontiert ) Kleiderschrank ( muß abmontiert werden, alt Holz) 2 Holz Schränke, leicht 2 Keller Regale, leicht Die Sachen müssen nach Baden bei wien komme. Bitte um Bestätigung ob es möglich wäre und um kostet vorschlag. Mit freundlichen Grüßen, Iwona Tchorzewska"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3397953722",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 6493375",
@@ -607,7 +786,12 @@
       "googleLeadId": "341679249",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341679249",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:341673681",
@@ -621,7 +805,12 @@
       "googleLeadId": "341673681",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341673681",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 3712889",
@@ -655,7 +844,12 @@
       "googleLeadId": "341525082",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341525082",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 9260261",
@@ -679,7 +873,12 @@
       "googleLeadId": "341452902",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341452902",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:341444997",
@@ -693,7 +892,12 @@
       "googleLeadId": "341444997",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341444997",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:341555692",
@@ -707,7 +911,12 @@
       "googleLeadId": "341555692",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341555692",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:341444058",
@@ -721,7 +930,12 @@
       "googleLeadId": "341444058",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341444058",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 1076959",
@@ -775,7 +989,12 @@
       "googleLeadId": "341435178",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341435178",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 833221609",
@@ -799,7 +1018,12 @@
       "googleLeadId": "341428797",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341428797",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:341429286",
@@ -813,7 +1037,12 @@
       "googleLeadId": "341429286",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341429286",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 9669245",
@@ -847,7 +1076,19 @@
       "googleLeadId": "340973840",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340973840",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3396845714",
+          "date": "2026-09-21 20:09:32.065529",
+          "time": "20:09",
+          "text": "Hallo zusammen, Ich habe eine 2 Zimmer Wohnung. Bei letzten Mal sind wir mit 2 Mann einem großen Sprinter ausgekommen. Aufstellung kann ich senden, 20 Kartons. Emailadresse? Entfernung 55 km, A-Kirchdorf in Tirol, 1 Stockwerk über Treppe - Laden vor meiner Haustür, D- Schneizlreuth/Weißbach a.d. Alpenstraße. Erdgeschoss ebenerdig vor dem Haus über Terrasse. Keine Montage notwendig. Termin: 28., 29. oder 30.09.2026 Vielen Dank für Ihr Angebot. 😊 Roland Skommodau"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3396845714",
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:341372086",
@@ -861,7 +1102,12 @@
       "googleLeadId": "341372086",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341372086",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "Roland Skommodau",
@@ -885,7 +1131,12 @@
       "googleLeadId": "341364847",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341364847",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0699 10915702",
@@ -919,7 +1170,12 @@
       "googleLeadId": "341317705",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341317705",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 2312144",
@@ -943,7 +1199,12 @@
       "googleLeadId": "340857383",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340857383",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:341280766",
@@ -957,7 +1218,12 @@
       "googleLeadId": "341280766",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341280766",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:341276215",
@@ -971,7 +1237,12 @@
       "googleLeadId": "341276215",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341276215",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 5178016",
@@ -1015,7 +1286,12 @@
       "googleLeadId": "340842050",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340842050",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0650 6832220",
@@ -1039,7 +1315,12 @@
       "googleLeadId": "340833185",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340833185",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:340831544",
@@ -1053,7 +1334,12 @@
       "googleLeadId": "340831544",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340831544",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 2373908",
@@ -1087,7 +1373,12 @@
       "googleLeadId": "340789766",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340789766",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0699 18363946",
@@ -1111,7 +1402,12 @@
       "googleLeadId": "340762667",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340762667",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 5857552",
@@ -1135,7 +1431,12 @@
       "googleLeadId": "341174716",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341174716",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0699 11281018",
@@ -1159,7 +1460,19 @@
       "googleLeadId": "340940025",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340940025",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3396226181",
+          "date": "2026-09-19 14:29:19.858461",
+          "time": "14:29",
+          "text": "Umzug von Wattens nach Innsbruck Mitte/Ende Oktober. Waschmaschine, Trockner, Bett, Couch, Schuhschrank und etwaige Kartons sind zu übersiedeln, also nicht viel großes. Bitte um Angebot."
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3396226181",
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:340640192",
@@ -1173,7 +1486,12 @@
       "googleLeadId": "340640192",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340640192",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0680 2347368",
@@ -1207,7 +1525,12 @@
       "googleLeadId": "341051263",
       "googleLeadResource": "customers/3226096935/localServicesLeads/341051263",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 3461341",
@@ -1221,7 +1544,7 @@
     },
     {
       "id": "lsa:3226096935:340932409",
-      "Musteri": "Müşteri",
+      "Musteri": "Kunde",
       "Telefon": null,
       "Hizmet": "moving_transportation",
       "Konum": "Wien",
@@ -1231,7 +1554,19 @@
       "googleLeadId": "340932409",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340932409",
       "leadType": "MESSAGE",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3395305536",
+          "date": "2026-09-18 21:04:49.342508",
+          "time": "21:04",
+          "text": "Am besten wäre so schnell wie möglich,muss Ende des Monats aus dem Haus sein.es müssten2 Ortschaften weiter Transportiert werden. Da ich aktuell Schwanger bin kann ich nicht alles meinen Mann allein machen lassen,da er arbeiten auch noch muss. Es handelt sich um normale haushaltssachen und paar möbel"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3395305536",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "340932409",
@@ -1255,7 +1590,12 @@
       "googleLeadId": "340454021",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340454021",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0650 8808941",
@@ -1279,7 +1619,12 @@
       "googleLeadId": "340709856",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340709856",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 7370374",
@@ -1303,7 +1648,12 @@
       "googleLeadId": "340820869",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340820869",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0667 3311855",
@@ -1327,7 +1677,12 @@
       "googleLeadId": "340540707",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340540707",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0699 19006123",
@@ -1351,7 +1706,12 @@
       "googleLeadId": "340606537",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340606537",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 5490272",
@@ -1375,7 +1735,12 @@
       "googleLeadId": "340595950",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340595950",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:340469913",
@@ -1389,7 +1754,25 @@
       "googleLeadId": "340469913",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340469913",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3394655589",
+          "date": "2026-09-17 12:20:53.984365",
+          "time": "12:20",
+          "text": "Umzug und Montage"
+        },
+        {
+          "id": "3395239903",
+          "date": "2026-09-17 21:13:01.099724",
+          "time": "21:13",
+          "text": "Umzug von Presseggen nach Hermagor und Montage eines Schlafzimmers und Bademöbel."
+        }
+      ],
+      "conversationCount": 2,
+      "lastConversationId": "3395239903",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 7035291",
@@ -1413,7 +1796,12 @@
       "googleLeadId": "340160492",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340160492",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 5329899",
@@ -1447,7 +1835,12 @@
       "googleLeadId": "340465509",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340465509",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0677 63532142",
@@ -1471,7 +1864,12 @@
       "googleLeadId": "340357498",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340357498",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0680 2378084",
@@ -1495,7 +1893,12 @@
       "googleLeadId": "339918818",
       "googleLeadResource": "customers/3226096935/localServicesLeads/339918818",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 848567208",
@@ -1519,7 +1922,12 @@
       "googleLeadId": "340216170",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340216170",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:340215150",
@@ -1533,7 +1941,12 @@
       "googleLeadId": "340215150",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340215150",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 5336991",
@@ -1567,7 +1980,19 @@
       "googleLeadId": "340207027",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340207027",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3394329046",
+          "date": "2026-09-15 20:14:51.030506",
+          "time": "20:14",
+          "text": "Übersiedlung Ende Oktober"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3394329046",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "Maria Schöffmann",
@@ -1591,7 +2016,12 @@
       "googleLeadId": "340163560",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340163560",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0699 19023432",
@@ -1615,7 +2045,12 @@
       "googleLeadId": "340127443",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340127443",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0699 19459840",
@@ -1639,21 +2074,44 @@
       "googleLeadId": "339684014",
       "googleLeadResource": "customers/3226096935/localServicesLeads/339684014",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:339683039",
-      "Musteri": "Müşteri",
+      "Musteri": "Kunde",
       "Telefon": null,
       "Hizmet": "local_move",
       "Konum": "Wien",
       "Tarih": "15.09.2026 15:43",
-      "Mesaj": "Guten Tag, ich stehe bald vor meinem Umzug hier in Steinach und wollte mich erkundigen, ob du Zeit und Kapazität dafür hättest. Es ist wirklich ein Katzensprung innerhalb des Ortes: ​Von: Brennerstraße 74 (mit Lift) ​Nach: Kranebitten 183A (mit Lift) ​Die Strecke beträgt nur gut einen Kilometer, und da beide Wohnungen einen Lift haben, geht das hoffentlich ganz fix. ​Kannst du mir kurz sagen, was das preislich in etwa ausmachen würde und wann es bei dir zeitlich passen könnte? ​Liebe Grüße Snjezana Vuleta\n\nDie Fotos habe ich per whatsapp geschickt.\n\nLg\n\nSicherteam Umzug & Räumung <job-6635795111@awexpress.google.com> schrieb am \nDi., 15. Sep. 2026, 15:07:\n\n> Local Services by Google Sicherteam Umzug & Räumung hat Ihnen eine Antwort \n> gesendet Sicherteam Umzug & Räumung hat geschrieben: Hallo Snjezana, ich \n> benötige bitte Fotos von deinen Möbeln, dann kann ich dir gerne ein \n> Pauschalangebot erstellen. Du kannst die Fotos gerne per WhatsApp an +43 \n> 676 9415366 senden oder uns per E-Mail an office@sicher-umzug.at \n> schicken. Liebe Grüße Sicherteam Viele Grüße Sicherteam Umzug & Räumung Sie \n> können auf diese E-Mail einfach mit der \"Antworten\"-Funktion reagieren.\n>\n> <https://c.gle/ACT4xYx4FPvH3sW_mLr0exu5fOQWWk5QVHVnN0KF-KAj91axj5BHhJ5nP9JBu7XqLw1KDi8r-Jeh4V0bdNui93DIEbTOYC-Vbwcy3peZ0B0hEMtH868eObkx64E-SA3t_gaorMJIoprC5fPjTd77jCEad1spEGKNATBZaPCRLxTn1m0> \n>\n> <https://c.gle/ACT4xYx4FPvH3sW_mLr0exu5fOQWWk5QVHVnN0KF-KAj91axj5BHhJ5nP9JBu7XqLw1KDi8r-Jeh4V0bdNui93DIEbTOYC-Vbwcy3peZ0B0hEMtH868eObkx64E-SA3t_gaorMJIoprC5fPjTd77jCEad1spEGKNATBZaPCRLxTn1m0> \n> <https://c.gle/ACT4xYx4FPvH3sW_mLr0exu5fOQWWk5QVHVnN0KF-KAj91axj5BHhJ5nP9JBu7XqLw1KDi8r-Jeh4V0bdNui93DIEbTOYC-Vbwcy3peZ0B0hEMtH868eObkx64E-SA3t_gaorMJIoprC5fPjTd77jCEad1spEGKNATBZaPCRLxTn1m0> \n> Sicherteam Umzug & Räumung hat Ihnen eine Antwort gesendet \n> Sicherteam Umzug & Räumung hat geschrieben: \n> Hallo Snjezana, ich benötige bitte Fotos von deinen Möbeln, dann kann ich \n> dir gerne ein Pauschalangebot erstellen. Du kannst die Fotos gerne per \n> WhatsApp an +43 676 9415366 senden oder uns per E-Mail an \n> office@sicher-umzug.at schicken. Liebe Grüße Sicherteam \n> Viele Grüße \n> Sicherteam Umzug & Räumung \n> Sie können auf diese E-Mail einfach mit der \"Antworten\"-Funktion \n> reagieren. \n> Haben Sie Fragen? Wir unterstützen Sie gern. \n>\n> <https://c.gle/ACT4xYzg2JqDsU7efZr1QEkSgQdwY3DxeackAiLmI18ewhYbAyvMa0WNC-raCvdsqZntdbVRD5r3NhR894iIopKr8JKcDu4y7XjFyui0hvRUk2oxv2jTBJgY7QMx4R702ByxVP1XCpJMBLxwRTKQm23zyd3YvV0nLW-KkrtcGltj> \n> Kontakt \n> <https://c.gle/ACT4xYzg2JqDsU7efZr1QEkSgQdwY3DxeackAiLmI18ewhYbAyvMa0WNC-raCvdsqZntdbVRD5r3NhR894iIopKr8JKcDu4y7XjFyui0hvRUk2oxv2jTBJgY7QMx4R702ByxVP1XCpJMBLxwRTKQm23zyd3YvV0nLW-KkrtcGltj> \n> <https://c.gle/ACT4xYx8uga9-ZRlKxT-kR0R9BgEIp5C_KHwKU5DWjmGC7kM6kSbvAwBxCk82zBNVya5FEjvPn27_9M8WwzZeoLSJW9AKiMcYXLkwcx1-Bp49MUwaPoeYGSvzjW-NVPOBB6DIKaQeC4sG4VB80qLItBogm8n81U> \n> Hilfe \n> <https://c.gle/ACT4xYx8uga9-ZRlKxT-kR0R9BgEIp5C_KHwKU5DWjmGC7kM6kSbvAwBxCk82zBNVya5FEjvPn27_9M8WwzZeoLSJW9AKiMcYXLkwcx1-Bp49MUwaPoeYGSvzjW-NVPOBB6DIKaQeC4sG4VB80qLItBogm8n81U> \n> Sicherteam Umzug & Räumung hat Ihnen eine Antwort gesendet \n> Sicherteam Umzug & Räumung hat geschrieben: \n> Hallo Snjezana, ich benötige bitte Fotos von deinen Möbeln, dann kann ich \n> dir gerne ein Pauschalangebot erstellen. Du kannst die Fotos gerne per \n> WhatsApp an +43 676 9415366 senden oder uns per E-Mail an \n> office@sicher-umzug.at schicken. Liebe Grüße Sicherteam \n> Viele Grüße \n> Sicherteam Umzug & Räumung \n> Sie können auf diese E-Mail einfach mit der \"Antworten\"-Funktion \n> reagieren. \n> Haben Sie Fragen? Wir unterstützen Sie gern. \n>\n> <https://c.gle/ACT4xYzg2JqDsU7efZr1QEkSgQdwY3DxeackAiLmI18ewhYbAyvMa0WNC-raCvdsqZntdbVRD5r3NhR894iIopKr8JKcDu4y7XjFyui0hvRUk2oxv2jTBJgY7QMx4R702ByxVP1XCpJMBLxwRTKQm23zyd3YvV0nLW-KkrtcGltj> \n> Kontakt \n> <https://c.gle/ACT4xYzg2JqDsU7efZr1QEkSgQdwY3DxeackAiLmI18ewhYbAyvMa0WNC-raCvdsqZntdbVRD5r3NhR894iIopKr8JKcDu4y7XjFyui0hvRUk2oxv2jTBJgY7QMx4R702ByxVP1XCpJMBLxwRTKQm23zyd3YvV0nLW-KkrtcGltj> \n>   \n> <https://c.gle/ACT4xYx8uga9-ZRlKxT-kR0R9BgEIp5C_KHwKU5DWjmGC7kM6kSbvAwBxCk82zBNVya5FEjvPn27_9M8WwzZeoLSJW9AKiMcYXLkwcx1-Bp49MUwaPoeYGSvzjW-NVPOBB6DIKaQeC4sG4VB80qLItBogm8n81U> \n> Hilfe \n> <https://c.gle/ACT4xYx8uga9-ZRlKxT-kR0R9BgEIp5C_KHwKU5DWjmGC7kM6kSbvAwBxCk82zBNVya5FEjvPn27_9M8WwzZeoLSJW9AKiMcYXLkwcx1-Bp49MUwaPoeYGSvzjW-NVPOBB6DIKaQeC4sG4VB80qLItBogm8n81U> \n> Google LLC\n> 1600 Amphitheatre Parkway,\n> Mountain View, CA 94043 \n> www.google.com \n>\n> Mit dieser Servicemitteilung informieren wir Sie über wichtige Neuigkeiten \n> zu Ihrer Anfrage zu Google Lokale Dienstleistungen. \n>\n> Mit dieser Servicemitteilung informieren wir Sie über wichtige Neuigkeiten \n> zu Ihrer Anfrage zu Google Lokale Dienstleistungen. \n>",
+      "Mesaj": "Guten Tag, ich stehe bald vor meinem Umzug hier in Steinach und wollte mich erkundigen, ob du Zeit und Kapazität dafür hättest. Es ist wirklich ein Katzensprung innerhalb des Ortes: ​Von: Brennerstraße 74 (mit Lift) ​Nach: Kranebitten 183A (mit Lift) ​Die Strecke beträgt nur gut einen Kilometer, und da beide Wohnungen einen Lift haben, geht das hoffentlich ganz fix. ​Kannst du mir kurz sagen, was das preislich in etwa ausmachen würde und wann es bei dir zeitlich passen könnte? ​Liebe Grüße Snjezana Vuleta\n\nDie Fotos habe ich per whatsapp geschickt.\n\nLg\n\nSicherteam Umzug & Räumung",
       "telegramSent": true,
       "googleLeadId": "339683039",
       "googleLeadResource": "customers/3226096935/localServicesLeads/339683039",
       "leadType": "MESSAGE",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3393817353",
+          "date": "2026-09-15 15:43:20.266419",
+          "time": "15:43",
+          "text": "Guten Tag, ich stehe bald vor meinem Umzug hier in Steinach und wollte mich erkundigen, ob du Zeit und Kapazität dafür hättest. Es ist wirklich ein Katzensprung innerhalb des Ortes: ​Von: Brennerstraße 74 (mit Lift) ​Nach: Kranebitten 183A (mit Lift) ​Die Strecke beträgt nur gut einen Kilometer, und da beide Wohnungen einen Lift haben, geht das hoffentlich ganz fix. ​Kannst du mir kurz sagen, was das preislich in etwa ausmachen würde und wann es bei dir zeitlich passen könnte? ​Liebe Grüße Snjezana Vuleta"
+        },
+        {
+          "id": "3394573244",
+          "date": "2026-09-15 16:11:00.87",
+          "time": "16:11",
+          "text": "Die Fotos habe ich per whatsapp geschickt.\n\nLg\n\nSicherteam Umzug & Räumung"
+        }
+      ],
+      "conversationCount": 2,
+      "lastConversationId": "3394573244",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 9696921",
@@ -1687,7 +2145,12 @@
       "googleLeadId": "340087780",
       "googleLeadResource": "customers/3226096935/localServicesLeads/340087780",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 4797565",
@@ -1711,7 +2174,19 @@
       "googleLeadId": "339966256",
       "googleLeadResource": "customers/3226096935/localServicesLeads/339966256",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3393584073",
+          "date": "2026-09-14 21:42:03.033427",
+          "time": "21:42",
+          "text": "Ich würde Ende Oktober/Anfang November eine Transportfirma brauchen, die meine Übersiedlung von Hackenbuch (Gemeinde Moosdorf) nach Wien durchführen."
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3393584073",
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:339825636",
@@ -1725,7 +2200,19 @@
       "googleLeadId": "339825636",
       "googleLeadResource": "customers/3226096935/localServicesLeads/339825636",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3393557448",
+          "date": "2026-09-14 21:12:21.75623",
+          "time": "21:12",
+          "text": "Möbeltransport ,abbauen , verpacken, ca 15 km transportieren, einlagern Kästen, Truhe Termin letzte Sept Woche"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3393557448",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 9391347",
@@ -1759,7 +2246,12 @@
       "googleLeadId": "339486323",
       "googleLeadResource": "customers/3226096935/localServicesLeads/339486323",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0699 10883172",
@@ -1783,7 +2275,19 @@
       "googleLeadId": "339669120",
       "googleLeadResource": "customers/3226096935/localServicesLeads/339669120",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3393629293",
+          "date": "2026-09-14 13:51:36.399923",
+          "time": "13:51",
+          "text": "Sehr geehrte Damen und Herren, ich ersuche um ein unverbindliches Angebot für einen Möbeltransport von Pöchlarn nach Mauer bei Melk. Es sollen ausschließlich Möbel transportiert werden. Der Umzug ist voraussichtlich für den 26.09.2026 oder alternativ am 03.10.2026 geplant. Bitte teilen Sie mir mit: Ob an einem dieser Termine Kapazitäten verfügbar sind Die voraussichtlichen Gesamtkosten Ob das Angebot als Pauschalpreis erstellt werden kann Die Anzahl der eingesetzten Mitarbeiter Ob eine Besichtigung vorab erforderlich ist. Mit freundlichen Grüßen Janine Haibl"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3393629293",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 3808408",
@@ -1807,7 +2311,12 @@
       "googleLeadId": "339356255",
       "googleLeadResource": "customers/3226096935/localServicesLeads/339356255",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:339657966",
@@ -1821,7 +2330,12 @@
       "googleLeadId": "339657966",
       "googleLeadResource": "customers/3226096935/localServicesLeads/339657966",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0650 5111331",
@@ -1855,7 +2369,12 @@
       "googleLeadId": "339714301",
       "googleLeadResource": "customers/3226096935/localServicesLeads/339714301",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 8343819",
@@ -1879,7 +2398,19 @@
       "googleLeadId": "339575493",
       "googleLeadResource": "customers/3226096935/localServicesLeads/339575493",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3393094128",
+          "date": "2026-09-13 14:16:53.171986",
+          "time": "14:16",
+          "text": "Sehr geehrte Damen und Herren, Ich ziehe um und brauche dringend ein Umzugsunternehmen. Ich sammle derzeit Angebote. Ich habe nicht viele Möbel, aber sie müssen nächste Woche nach Frankreich geliefert werden (1200km) - (Wien - Flayosc, Provance). Wenn Sie Zeit und Interesse haben, melden Sie sich bitte. Ich wünsche Ihnen einen schönen Sonntag. Herzliche Grüße, Anissa"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3393094128",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 4226315",
@@ -1903,7 +2434,19 @@
       "googleLeadId": "339517815",
       "googleLeadResource": "customers/3226096935/localServicesLeads/339517815",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3392982849",
+          "date": "2026-09-12 21:19:49.249065",
+          "time": "21:19",
+          "text": "Hallo! Wir benötigen einen Klaviertransport bon Steyr nach Traun. Ab in ca. 2 Wochen. Bitte um Preisauskunft. Mfg David Wipplinger"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3392982849",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0650 3616314",
@@ -1927,7 +2470,12 @@
       "googleLeadId": "339611326",
       "googleLeadResource": "customers/3226096935/localServicesLeads/339611326",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 6119031",
@@ -1951,7 +2499,12 @@
       "googleLeadId": "339565690",
       "googleLeadResource": "customers/3226096935/localServicesLeads/339565690",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 2501781",
@@ -1975,7 +2528,12 @@
       "googleLeadId": "339319267",
       "googleLeadResource": "customers/3226096935/localServicesLeads/339319267",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 3706390",
@@ -1999,7 +2557,12 @@
       "googleLeadId": "339184947",
       "googleLeadResource": "customers/3226096935/localServicesLeads/339184947",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 1378895",
@@ -2023,7 +2586,12 @@
       "googleLeadId": "338752937",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338752937",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0650 5744437",
@@ -2047,7 +2615,19 @@
       "googleLeadId": "338925240",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338925240",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3392292124",
+          "date": "2026-09-10 14:42:07.562694",
+          "time": "14:42",
+          "text": "Mein Umzug ist im Dezember geplant. Wo ist der Standort Eurer Firma? Umzug von 4591 Molln Kirchenplatz 7 nach 4574 Vorderstoder Untertamberg 61. Werden die Möbel in die jeweiligen Räume der neuen Unterkunft im ersten Stock eines Einfamilienhauses getragen? Kostenlose Terminvereinbarung wegen Treffen und Besichtigung vor Ort? Welche Kosten sind für mich zu erwarten - bitte um unverbindliches Angebot? Gruß, Herbert Rohregger"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3392292124",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 2826521",
@@ -2071,7 +2651,12 @@
       "googleLeadId": "338601251",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338601251",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:338917527",
@@ -2085,7 +2670,19 @@
       "googleLeadId": "338917527",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338917527",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3392276626",
+          "date": "2026-09-10 12:26:06.112285",
+          "time": "12:26",
+          "text": "Guten Tag Bauen Sie auch möbel ab und auf. Habe einen großen Schlafzimmerschrank ums Eck und noch einige Möbel nur zum liefern."
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3392276626",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0650 5218284",
@@ -2119,7 +2716,12 @@
       "googleLeadId": "338409554",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338409554",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:338824399",
@@ -2133,7 +2735,12 @@
       "googleLeadId": "338824399",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338824399",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 3721570",
@@ -2167,7 +2774,12 @@
       "googleLeadId": "338359421",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338359421",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 7801030",
@@ -2191,7 +2803,12 @@
       "googleLeadId": "338320436",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338320436",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:338753305",
@@ -2205,7 +2822,12 @@
       "googleLeadId": "338753305",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338753305",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 5416013",
@@ -2239,7 +2861,19 @@
       "googleLeadId": "338748028",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338748028",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3391476261",
+          "date": "2026-09-09 12:32:15.329865",
+          "time": "12:32",
+          "text": "Sehr geehrte Damen und Herren, Wir möchten von Linz nach Wels Umziehen könnten Sie mich bitte anrufen es ist dringend. Mit freundlichen Grüßen Hannah Schneider"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3391476261",
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:338747815",
@@ -2253,7 +2887,19 @@
       "googleLeadId": "338747815",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338747815",
       "leadType": "MESSAGE",
-      "leadStatus": "DECLINED"
+      "leadStatus": "DECLINED",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3391792417",
+          "date": "2026-09-09 12:27:16.355106",
+          "time": "12:27",
+          "text": "Umzug Wels nach Linz"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3391792417",
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:338747674",
@@ -2267,7 +2913,12 @@
       "googleLeadId": "338747674",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338747674",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0670 3064562",
@@ -2311,7 +2962,12 @@
       "googleLeadId": "338434456",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338434456",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 9472220",
@@ -2335,7 +2991,12 @@
       "googleLeadId": "338428543",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338428543",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 5905733",
@@ -2359,7 +3020,12 @@
       "googleLeadId": "337894430",
       "googleLeadResource": "customers/3226096935/localServicesLeads/337894430",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:338207718",
@@ -2373,7 +3039,12 @@
       "googleLeadId": "338207718",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338207718",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 3179473",
@@ -2407,7 +3078,12 @@
       "googleLeadId": "338152347",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338152347",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:338279212",
@@ -2421,7 +3097,12 @@
       "googleLeadId": "338279212",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338279212",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 5220222",
@@ -2445,7 +3126,12 @@
       "googleLeadId": "337830557",
       "googleLeadResource": "customers/3226096935/localServicesLeads/337830557",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0677 61626365",
@@ -2479,7 +3165,12 @@
       "googleLeadId": "338265379",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338265379",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0650 6679402",
@@ -2493,7 +3184,7 @@
     },
     {
       "id": "lsa:3226096935:338047608",
-      "Musteri": "Müşteri",
+      "Musteri": "Kunde",
       "Telefon": null,
       "Hizmet": "moving_junk_removal",
       "Konum": "Kärnten",
@@ -2503,7 +3194,19 @@
       "googleLeadId": "338047608",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338047608",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3391188629",
+          "date": "2026-09-06 17:43:20.61151",
+          "time": "17:43",
+          "text": "Guten Tag, ich wollte anfragen wieviel das Entsorgen eines Sofas, der Abbau und das Entsorgen eines Kastens kosten würden? Eventuell kommen noch ein paar andere Möbelstücke dazu. Wohnung ist ebenerdig in Klagenfurt. Man kann direkt vorm Garten parken. Danke und Liebe Grüße, Lisa Svaldo"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3391188629",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "338047608",
@@ -2527,7 +3230,12 @@
       "googleLeadId": "337744679",
       "googleLeadResource": "customers/3226096935/localServicesLeads/337744679",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0681 10470531",
@@ -2551,7 +3259,12 @@
       "googleLeadId": "337613456",
       "googleLeadResource": "customers/3226096935/localServicesLeads/337613456",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 3044901",
@@ -2575,7 +3288,12 @@
       "googleLeadId": "338026534",
       "googleLeadResource": "customers/3226096935/localServicesLeads/338026534",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 4027443",
@@ -2599,7 +3317,19 @@
       "googleLeadId": "337808739",
       "googleLeadResource": "customers/3226096935/localServicesLeads/337808739",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3390344857",
+          "date": "2026-09-04 21:27:03.299258",
+          "time": "21:27",
+          "text": "Guten Abend! Ich bräuchte eine Fuhr von Wiesfleck (7425) bach Wien (1030). Es geht um einen Bauernkasten, 2 Stühle und mehrere Kisten. Wie viel würde das ungefähr kosten? Mit freundlichen Grüßen Hemma Dorner-Reitlinger"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3390344857",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0699 81905719",
@@ -2623,7 +3353,19 @@
       "googleLeadId": "337679929",
       "googleLeadResource": "customers/3226096935/localServicesLeads/337679929",
       "leadType": "MESSAGE",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3389574885",
+          "date": "2026-09-03 22:12:39.191346",
+          "time": "22:12",
+          "text": "Hallo, ich suche Hilfe beim Übersiedeln von 4724 Neukirchen nach 4722 Steegen. Übersiedelt und aufgebaut gehören 1 Boxspringbett 140 cm breit, 1 Kratzbaum ca. 70 kg schwer, 1 Regal bereits zerlegt und 1 Komode. Optimaler Termin wäre Aufbau in Steegen, 2. Stock, Lift vorhanden, am 23. September am späten Nachmittag, ab ca. 15.15 (Schlüsselübergabe habe ich um 15.00). Am 24. werden bereits neue Möbel angeliefert. Haben Sie freie Kaoazitäten? Dann freu ich mich auf einen unverbindlichen Kostenvoranschlag. Vielen Dank, FG Eva Entholzer"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3389574885",
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:337677535",
@@ -2637,7 +3379,19 @@
       "googleLeadId": "337677535",
       "googleLeadResource": "customers/3226096935/localServicesLeads/337677535",
       "leadType": "MESSAGE",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3390274940",
+          "date": "2026-09-03 22:05:30.236481",
+          "time": "22:05",
+          "text": "Hallo wir würden eine Firma suchen. Die preislich akzeptabel ist, da wir bis jz nur Wucherpreise gehört haben. Wir würden von leopoldsdorf im marchfeld nach Deutschland oberasbach ziehen wollen. Es wurde fast alles aus der Wohnung mitkommen. Mobelabbau und Aufbau und Kartons räumen wir ein und aus. Würden nur Transport benötigen.mfg brandl"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3390274940",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 2898929",
@@ -2671,7 +3425,12 @@
       "googleLeadId": "337499715",
       "googleLeadResource": "customers/3226096935/localServicesLeads/337499715",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 1240498",
@@ -2695,7 +3454,12 @@
       "googleLeadId": "337123811",
       "googleLeadResource": "customers/3226096935/localServicesLeads/337123811",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 1318890",
@@ -2719,7 +3483,12 @@
       "googleLeadId": "337384986",
       "googleLeadResource": "customers/3226096935/localServicesLeads/337384986",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 4401749",
@@ -2743,7 +3512,12 @@
       "googleLeadId": "337379802",
       "googleLeadResource": "customers/3226096935/localServicesLeads/337379802",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0681 81212858",
@@ -2767,7 +3541,12 @@
       "googleLeadId": "337300521",
       "googleLeadResource": "customers/3226096935/localServicesLeads/337300521",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:337121136",
@@ -2781,7 +3560,12 @@
       "googleLeadId": "337121136",
       "googleLeadResource": "customers/3226096935/localServicesLeads/337121136",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:336782099",
@@ -2795,7 +3579,12 @@
       "googleLeadId": "336782099",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336782099",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 8745447",
@@ -2829,7 +3618,12 @@
       "googleLeadId": "337204396",
       "googleLeadResource": "customers/3226096935/localServicesLeads/337204396",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 4395268",
@@ -2853,7 +3647,19 @@
       "googleLeadId": "337100185",
       "googleLeadResource": "customers/3226096935/localServicesLeads/337100185",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3388969975",
+          "date": "2026-09-01 21:58:17.890233",
+          "time": "21:58",
+          "text": "Hallo, ich möchte Ende September, voraussichtlich am 24. oder 25. September, eine kleine Wohnung übersiedeln lassen und würde gerne nachfragen, ob Sie an einem dieser Termine verfügbar wären und mit welchen Kosten ich ungefähr rechnen müsste. Es handelt sich um eine 33 m² große Wohnung von Wiener Neudorf nach Hirtenberg. Zu übersiedeln wären ungefähr: * 1 Bett * 1 kleine Couch * 2 Kästen, die ab- und am neuen Standort wieder aufgebaut werden müssten * 1 Waschmaschine * einige kleinere Gegenstände/Umzugskartons Könnten Sie mir bitte mitteilen, was die Übersiedlung ungefähr kosten würde."
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3388969975",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0677 63457831",
@@ -2877,7 +3683,12 @@
       "googleLeadId": "336531218",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336531218",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:336930631",
@@ -2891,7 +3702,12 @@
       "googleLeadId": "336930631",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336930631",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:336354482",
@@ -2905,7 +3721,12 @@
       "googleLeadId": "336354482",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336354482",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:336341606",
@@ -2919,7 +3740,12 @@
       "googleLeadId": "336341606",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336341606",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0660 1866664",
@@ -2943,7 +3769,12 @@
       "googleLeadId": "336687130",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336687130",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:336254309",
@@ -2957,7 +3788,12 @@
       "googleLeadId": "336254309",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336254309",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 9607575",
@@ -2981,7 +3817,12 @@
       "googleLeadId": "336239648",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336239648",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:336587730",
@@ -2995,7 +3836,12 @@
       "googleLeadId": "336587730",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336587730",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "085 107 2330",
@@ -3019,7 +3865,12 @@
       "googleLeadId": "336229649",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336229649",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:336650305",
@@ -3033,7 +3884,12 @@
       "googleLeadId": "336650305",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336650305",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0650 9932027",
@@ -3057,7 +3913,12 @@
       "googleLeadId": "336223115",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336223115",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:336216812",
@@ -3071,7 +3932,12 @@
       "googleLeadId": "336216812",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336216812",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:336639409",
@@ -3085,7 +3951,12 @@
       "googleLeadId": "336639409",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336639409",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:336579808",
@@ -3099,7 +3970,19 @@
       "googleLeadId": "336579808",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336579808",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3387742239",
+          "date": "2026-08-30 17:40:06.886785",
+          "time": "17:40",
+          "text": "Guten Tag Ich habe eine Frage Ich jätte einen Umzug zu machen habe eine Wohnung die 58 Quadratmeter groß ist . Ich habe Sachen zum mitnehmen und auch sehr viele Sachen die auf den Sperrmüll gehören. Wie sind da die Kosten da ich von 2620 Neunkirchen nach 4040 linz umziehe. Ich würde nur Mal vorab informieren sammeln. Mit freundlichen Grüßen"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3387742239",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 99698149",
@@ -3123,7 +4006,19 @@
       "googleLeadId": "336495039",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336495039",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3387725220",
+          "date": "2026-08-30 15:19:43.444114",
+          "time": "15:19",
+          "text": "Was kostet ein Umzug"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3387725220",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0650 5643799",
@@ -3147,7 +4042,12 @@
       "googleLeadId": "336564442",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336564442",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:336134816",
@@ -3161,7 +4061,12 @@
       "googleLeadId": "336134816",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336134816",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0699 18315053",
@@ -3185,7 +4090,12 @@
       "googleLeadId": "336561847",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336561847",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:336247380",
@@ -3199,7 +4109,19 @@
       "googleLeadId": "336247380",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336247380",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3387611566",
+          "date": "2026-08-28 20:12:47.159151",
+          "time": "20:12",
+          "text": "Umzug von Liezen nach Vöcklabruck was würde das kosten?"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3387611566",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 3087219",
@@ -3223,7 +4145,12 @@
       "googleLeadId": "336277057",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336277057",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:336266014",
@@ -3237,7 +4164,12 @@
       "googleLeadId": "336266014",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336266014",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:336147564",
@@ -3251,7 +4183,19 @@
       "googleLeadId": "336147564",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336147564",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3387787340",
+          "date": "2026-08-28 11:01:23.424732",
+          "time": "11:01",
+          "text": "Liebes Team, wieviel kostet ein Umzug von 6215 Achenkirch nach 8380 Jennersdorf? Wohnzimmerschränke zerlegt, Schlafzimmerkästen, 2 Glasvitrinen, großer Tisch, 6 Stühle, keine Küche, keine Couch, keine Betten. Liebe Grüße und Danke Renate Gruber"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3387787340",
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:336213136",
@@ -3265,7 +4209,12 @@
       "googleLeadId": "336213136",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336213136",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:336214195",
@@ -3279,7 +4228,19 @@
       "googleLeadId": "336214195",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336214195",
       "leadType": "MESSAGE",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": "0650 2282930",
+      "conversations": [
+        {
+          "id": "3387092985",
+          "date": "2026-08-28 10:48:07.587852",
+          "time": "10:48",
+          "text": "Es um den Tansport eines Flügels von Parterre in den ersten Stock. Die Adresse ist in Oberhofen im Inntal. Es ist eine offene Innen Treppe. Könntet ihr uns dabei helfen? LG Andreas 0650 2282930"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3387092985",
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335793263",
@@ -3293,7 +4254,12 @@
       "googleLeadId": "335793263",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335793263",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "Renate Gruber",
@@ -3317,7 +4283,12 @@
       "googleLeadId": "336024819",
       "googleLeadResource": "customers/3226096935/localServicesLeads/336024819",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335994832",
@@ -3331,7 +4302,12 @@
       "googleLeadId": "335994832",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335994832",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335919843",
@@ -3345,7 +4321,12 @@
       "googleLeadId": "335919843",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335919843",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335571632",
@@ -3359,7 +4340,12 @@
       "googleLeadId": "335571632",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335571632",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335571851",
@@ -3373,7 +4359,12 @@
       "googleLeadId": "335571851",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335571851",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335916165",
@@ -3387,7 +4378,12 @@
       "googleLeadId": "335916165",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335916165",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 9218226",
@@ -3411,7 +4407,12 @@
       "googleLeadId": "335789886",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335789886",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335812570",
@@ -3425,7 +4426,12 @@
       "googleLeadId": "335812570",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335812570",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335717229",
@@ -3439,7 +4445,12 @@
       "googleLeadId": "335717229",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335717229",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335332505",
@@ -3453,7 +4464,12 @@
       "googleLeadId": "335332505",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335332505",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335324399",
@@ -3467,7 +4483,12 @@
       "googleLeadId": "335324399",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335324399",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335743510",
@@ -3481,7 +4502,12 @@
       "googleLeadId": "335743510",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335743510",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335671791",
@@ -3490,12 +4516,36 @@
       "Hizmet": "moving_transportation",
       "Konum": "Wien",
       "Tarih": "26.08.2026 10:17",
-      "Mesaj": "Ich würde am 1.Oktber von Kapfenberg nach Wartberg Übersiedeln und ihre Dienstleistung benötigen!\n\nDanke für die rasche Rückmeldung und erwarte Ihr Angebot Lg Ernst Kucharz \n\nSicherteam Umzug & Räumung <job-1423605559@awexpress.google.com> schrieb am \nMi., 26. Aug. 2026, 09:18:\n\n> Local Services By Google Sicherteam Umzug & Räumung bearbeitet Ihre \n> Anfrage Vielen Dank, dass Sie \"Lokale Dienstleistungen\" nutzen. Zur \n> Erinnerung sind hier nochmals die Details Ihrer Dienstleistungsanfrage \n> aufgeführt.\n>  \n> <https://c.gle/ACT4xYz2D0Jn-QbZiWwk_6OUD5VDola1jHjB8gnU1xOcN70Lk406B0MTsJb_pjGE8frIZ_7r6YIFlmiRJ-namODPp4S6oi3TSOW38GcT0iz39wLLODf6ZFDzOQt_N_h32LIMXNvZDCvlX5l4izS2HPa1Wwioen1nJYEaOIE_SRyd46k> \n>  \n> <https://c.gle/ACT4xYz2D0Jn-QbZiWwk_6OUD5VDola1jHjB8gnU1xOcN70Lk406B0MTsJb_pjGE8frIZ_7r6YIFlmiRJ-namODPp4S6oi3TSOW38GcT0iz39wLLODf6ZFDzOQt_N_h32LIMXNvZDCvlX5l4izS2HPa1Wwioen1nJYEaOIE_SRyd46k>  \n> <https://c.gle/ACT4xYz2D0Jn-QbZiWwk_6OUD5VDola1jHjB8gnU1xOcN70Lk406B0MTsJb_pjGE8frIZ_7r6YIFlmiRJ-namODPp4S6oi3TSOW38GcT0iz39wLLODf6ZFDzOQt_N_h32LIMXNvZDCvlX5l4izS2HPa1Wwioen1nJYEaOIE_SRyd46k> \n> Sicherteam Umzug & Räumung bearbeitet Ihre Anfrage \n> Vielen Dank, dass Sie \"Lokale Dienstleistungen\" nutzen. Zur Erinnerung \n> sind hier nochmals die Details Ihrer Dienstleistungsanfrage aufgeführt.  \n> Informationen zum Unternehmen \n>  Sicherteam \n> Umz... \n>  \n> Kontakt \n> <https://c.gle/ACT4xYxy7nRPaqGMdGnuUBrtkUELlfsL_LjJEVHnHmgC0uj2rPA-nmaYXM5_z81_OW0PlRsNlNZ4CB4lZPDHk9CiC-cEKZf4ygAi6u-jkecIpMhMwpyKN29JXGkEQyJkHjr1caRvHha9QPfMNQdWKG_NIxROXVoadAyUuyTkH1TG5n1rh58c7tdLA59xBTMCvkgHRHPPUzrqA9fQ6_VQnQUiQg9t5WcwI2GeYiIz7ZuB3Ntzky4t4B7cJNmbdudgsrZeeBYlij2zFIw_6XN5jSeEEmSAvMgDzaQmIvSMgjENqHXLqe46TFESTfjVgG4GDp6Xxih41pWofi7b5ER3kRmV31ExpZXYWHTsQROFR-D4ctPqe7jF9A> \n>  \n> 5  \n> Sie hören bald von Sicherteam Umzug & Räumung. Zur weiteren Konversation \n> antworten Sie einfach auf diese E-Mail. \n> Details zu Ihrer Anfrage \n>  Ort: \n> Kapfenberg \n>  0676 \n> 4019695 \n>  Name: \n> Potenzieller Kunde \n>  Art \n> der Dienstleistung: Beförderung von Umzugsgut \n>  Beschreibung: \n> Ich würde am 1.Oktber von Kapfenberg nach Wartberg Übersiedeln und ihre \n> Dienstleistung benötigen! \n> Haben Sie Fragen? Wir unterstützen Sie gern. \n>  \n> <https://c.gle/ACT4xYzowEcZgSu0QHh4dytJellSxgJ97HxDyu3IffEHrHQ5A6NqFcAH8Qcd8Sp57Bn8B2EeuBDtAVN7ATy_LDkzOna10JWZ1-mj80HfYMJsjx53H8ZiTZ3EtJIWjCaHLmAizdRMPWcBLCc-i7GhaYZyDDTJrO3kD9ifHA-S5aB7> \n> Kontakt \n> <https://c.gle/ACT4xYzowEcZgSu0QHh4dytJellSxgJ97HxDyu3IffEHrHQ5A6NqFcAH8Qcd8Sp57Bn8B2EeuBDtAVN7ATy_LDkzOna10JWZ1-mj80HfYMJsjx53H8ZiTZ3EtJIWjCaHLmAizdRMPWcBLCc-i7GhaYZyDDTJrO3kD9ifHA-S5aB7>  \n> <https://c.gle/ACT4xYyd09bfDUUIk1Zc2-k0cd7o2Rmgeli-NsmgbPcqTLhmnPCInDVI9GTt6Jaukf9LSRLWVcCSq7I7mPIF1XFpt4epAHzbD_e9MB4Ftv-4l0C25zSkxXsZcotfvka8oU2I0U0Zr-_xHJBoanWbNFNnqLmg-lP8zeyh4S39LxUko5-oJQ> \n> Hilfe \n> <https://c.gle/ACT4xYyd09bfDUUIk1Zc2-k0cd7o2Rmgeli-NsmgbPcqTLhmnPCInDVI9GTt6Jaukf9LSRLWVcCSq7I7mPIF1XFpt4epAHzbD_e9MB4Ftv-4l0C25zSkxXsZcotfvka8oU2I0U0Zr-_xHJBoanWbNFNnqLmg-lP8zeyh4S39LxUko5-oJQ> \n> Sicherteam Umzug & Räumung bearbeitet Ihre Anfrage \n> Vielen Dank, dass Sie \"Lokale Dienstleistungen\" nutzen. Zur Erinnerung \n> sind hier nochmals die Details Ihrer Dienstleistungsanfrage aufgeführt. \n>  \n> Details zu Ihrer Anfrage \n>  Ort: \n> Kapfenberg \n>  0676 \n> 4019695 \n>  Name: \n> Potenzieller Kunde \n>  Art \n> der Dienstleistung: Beförderung von Umzugsgut \n>  Beschreibung: \n> Ich würde am 1.Oktber von Kapfenberg nach Wartberg Übersiedeln und ihre \n> Dienstleistung benötigen! \n> Informationen zum Unternehmen \n>  Sicherteam \n> Umzug & Räumung \n>  \n> Kontakt \n> <https://c.gle/ACT4xYxy7nRPaqGMdGnuUBrtkUELlfsL_LjJEVHnHmgC0uj2rPA-nmaYXM5_z81_OW0PlRsNlNZ4CB4lZPDHk9CiC-cEKZf4ygAi6u-jkecIpMhMwpyKN29JXGkEQyJkHjr1caRvHha9QPfMNQdWKG_NIxROXVoadAyUuyTkH1TG5n1rh58c7tdLA59xBTMCvkgHRHPPUzrqA9fQ6_VQnQUiQg9t5WcwI2GeYiIz7ZuB3Ntzky4t4B7cJNmbdudgsrZeeBYlij2zFIw_6XN5jSeEEmSAvMgDzaQmIvSMgjENqHXLqe46TFESTfjVgG4GDp6Xxih41pWofi7b5ER3kRmV31ExpZXYWHTsQROFR-D4ctPqe7jF9A> \n>  \n> 5  \n> Sie hören bald von Sicherteam Umzug & Räumung. Zur weiteren Konversation \n> antworten Sie einfach auf diese E-Mail. \n> Haben Sie Fragen? Wir unterstützen Sie gern. \n>  \n> <https://c.gle/ACT4xYzowEcZgSu0QHh4dytJellSxgJ97HxDyu3IffEHrHQ5A6NqFcAH8Qcd8Sp57Bn8B2EeuBDtAVN7ATy_LDkzOna10JWZ1-mj80HfYMJsjx53H8ZiTZ3EtJIWjCaHLmAizdRMPWcBLCc-i7GhaYZyDDTJrO3kD9ifHA-S5aB7> \n> Kontakt \n> <https://c.gle/ACT4xYzowEcZgSu0QHh4dytJellSxgJ97HxDyu3IffEHrHQ5A6NqFcAH8Qcd8Sp57Bn8B2EeuBDtAVN7ATy_LDkzOna10JWZ1-mj80HfYMJsjx53H8ZiTZ3EtJIWjCaHLmAizdRMPWcBLCc-i7GhaYZyDDTJrO3kD9ifHA-S5aB7> \n>    \n> <https://c.gle/ACT4xYyd09bfDUUIk1Zc2-k0cd7o2Rmgeli-NsmgbPcqTLhmnPCInDVI9GTt6Jaukf9LSRLWVcCSq7I7mPIF1XFpt4epAHzbD_e9MB4Ftv-4l0C25zSkxXsZcotfvka8oU2I0U0Zr-_xHJBoanWbNFNnqLmg-lP8zeyh4S39LxUko5-oJQ> \n> Hilfe \n> <https://c.gle/ACT4xYyd09bfDUUIk1Zc2-k0cd7o2Rmgeli-NsmgbPcqTLhmnPCInDVI9GTt6Jaukf9LSRLWVcCSq7I7mPIF1XFpt4epAHzbD_e9MB4Ftv-4l0C25zSkxXsZcotfvka8oU2I0U0Zr-_xHJBoanWbNFNnqLmg-lP8zeyh4S39LxUko5-oJQ> \n>  Google \n> LLC\n> 1600 Amphitheatre Parkway,\n> Mountain View, CA 94043 \n> www.google.com \n>\n> Mit dieser Servicemitteilung informieren wir Sie über wichtige Neuigkeiten \n> zu Ihrer Anfrage zu Google Lokale Dienstleistungen. \n>\n> Mit dieser Servicemitteilung informieren wir Sie über wichtige Neuigkeiten \n> zu Ihrer Anfrage zu Google Lokale Dienstleistungen. \n>\n\nHallo wollte kurz nachfragen ob der Umzug am 1.Oktber klappt und wann sie \nca kommen",
+      "Mesaj": "Ich würde am 1.Oktber von Kapfenberg nach Wartberg Übersiedeln und ihre Dienstleistung benötigen!\n\nDanke für die rasche Rückmeldung und erwarte Ihr Angebot Lg Ernst Kucharz\n\nSicherteam Umzug & Räumung\n\nHallo wollte kurz nachfragen ob der Umzug am 1.Oktber klappt und wann sie\nca kommen",
       "telegramSent": true,
       "googleLeadId": "335671791",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335671791",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3386951660",
+          "date": "2026-08-26 10:17:57.495548",
+          "time": "10:17",
+          "text": "Ich würde am 1.Oktber von Kapfenberg nach Wartberg Übersiedeln und ihre Dienstleistung benötigen!"
+        },
+        {
+          "id": "3386944067",
+          "date": "2026-08-26 10:34:51.711",
+          "time": "10:34",
+          "text": "Danke für die rasche Rückmeldung und erwarte Ihr Angebot Lg Ernst Kucharz\n\nSicherteam Umzug & Räumung"
+        },
+        {
+          "id": "3398966580",
+          "date": "2026-09-29 20:52:50.47",
+          "time": "20:52",
+          "text": "Hallo wollte kurz nachfragen ob der Umzug am 1.Oktber klappt und wann sie\nca kommen"
+        }
+      ],
+      "conversationCount": 3,
+      "lastConversationId": "3398966580",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0676 4019695",
@@ -3519,7 +4569,12 @@
       "googleLeadId": "335738785",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335738785",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335568405",
@@ -3533,7 +4588,12 @@
       "googleLeadId": "335568405",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335568405",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335123936",
@@ -3547,7 +4607,12 @@
       "googleLeadId": "335123936",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335123936",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335112455",
@@ -3561,7 +4626,12 @@
       "googleLeadId": "335112455",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335112455",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335521444",
@@ -3575,7 +4645,12 @@
       "googleLeadId": "335521444",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335521444",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335075162",
@@ -3589,7 +4664,12 @@
       "googleLeadId": "335075162",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335075162",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335496115",
@@ -3603,7 +4683,12 @@
       "googleLeadId": "335496115",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335496115",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335431899",
@@ -3617,7 +4702,12 @@
       "googleLeadId": "335431899",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335431899",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335495071",
@@ -3631,7 +4721,12 @@
       "googleLeadId": "335495071",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335495071",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335431671",
@@ -3645,7 +4740,12 @@
       "googleLeadId": "335431671",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335431671",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:334918769",
@@ -3659,11 +4759,23 @@
       "googleLeadId": "334918769",
       "googleLeadResource": "customers/3226096935/localServicesLeads/334918769",
       "leadType": "MESSAGE",
-      "leadStatus": "DECLINED"
+      "leadStatus": "DECLINED",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3385568091",
+          "date": "2026-08-24 20:09:35.114064",
+          "time": "20:09",
+          "text": "Umzug nach Linz"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3385568091",
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335311300",
-      "Musteri": "Müşteri",
+      "Musteri": "Kunde",
       "Telefon": null,
       "Hizmet": "xcat:service_area_business_mover",
       "Konum": "Wien",
@@ -3673,7 +4785,12 @@
       "googleLeadId": "335311300",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335311300",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "Musteri": "0664 4744229",
@@ -3697,7 +4814,12 @@
       "googleLeadId": "334873880",
       "googleLeadResource": "customers/3226096935/localServicesLeads/334873880",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335202189",
@@ -3711,7 +4833,12 @@
       "googleLeadId": "335202189",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335202189",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:334827578",
@@ -3725,7 +4852,12 @@
       "googleLeadId": "334827578",
       "googleLeadResource": "customers/3226096935/localServicesLeads/334827578",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335141601",
@@ -3739,7 +4871,12 @@
       "googleLeadId": "335141601",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335141601",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335207938",
@@ -3753,7 +4890,12 @@
       "googleLeadId": "335207938",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335207938",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335201365",
@@ -3767,7 +4909,12 @@
       "googleLeadId": "335201365",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335201365",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:334777565",
@@ -3781,7 +4928,19 @@
       "googleLeadId": "334777565",
       "googleLeadResource": "customers/3226096935/localServicesLeads/334777565",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3385332660",
+          "date": "2026-08-24 12:12:56.428649",
+          "time": "12:12",
+          "text": "Cisco Red 11:06 (vor 4 Minuten) an office Sehr geehrte Damen und Herren, Ich bräuchte bitte ein Angebot für einen kleinen Umzug von Salzburg nach Bad Reichenhall. Von einem Lager zu einer 1-Zimmer-Wohnung. die Lagerbox befindet sich an folgender Adresse: Gnigler Str. 51, 5020 Salzburg https://maps.app.goo.gl/DKJcutiNxorkpFxM9 Das Seniorenwohnheim in Bad Reichenhall an folgender: Wisbacherstraße 4, 83435 Bad Reichenhall https://maps.app.goo.gl/PqH7ZU8PNH6Ce9k67 Lagerbox 1. OG, Großraum-Lift vorhanden. Seniorenwohnheim 1. OG. ebenfalls Standardlift vorhanden. Die"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3385332660",
+      "isMessageUpdate": false
     },
     {
       "Musteri": "Sassan Tahmasebi",
@@ -3805,7 +4964,12 @@
       "googleLeadId": "334758647",
       "googleLeadResource": "customers/3226096935/localServicesLeads/334758647",
       "leadType": "PHONE_CALL",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335147455",
@@ -3819,7 +4983,12 @@
       "googleLeadId": "335147455",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335147455",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335116522",
@@ -3833,7 +5002,12 @@
       "googleLeadId": "335116522",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335116522",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:335090509",
@@ -3847,7 +5021,19 @@
       "googleLeadId": "335090509",
       "googleLeadResource": "customers/3226096935/localServicesLeads/335090509",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "Telefon2": null,
+      "conversations": [
+        {
+          "id": "3385475614",
+          "date": "2026-08-23 08:30:03.244635",
+          "time": "08:30",
+          "text": "Guten Morgen , wir benötigen eventuell ihre Dienstleistung. Von Nelkenweg 4 8410 Wildon Ca. 15 km nach Ragnitz 54 b 8413 Ragnitz ( Penthouse 2 Stock ) Couch , Doppelbett, einige kleinere Teile. Ich bitte um Rückmeldung ob oder wann sie Kapazitäten haben. Mit besten Dank Helmut Gratz"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3385475614",
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:334718268",
@@ -3861,7 +5047,12 @@
       "googleLeadId": "334718268",
       "googleLeadResource": "customers/3226096935/localServicesLeads/334718268",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:334314074",
@@ -3875,7 +5066,12 @@
       "googleLeadId": "334314074",
       "googleLeadResource": "customers/3226096935/localServicesLeads/334314074",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:334736443",
@@ -3889,7 +5085,12 @@
       "googleLeadId": "334736443",
       "googleLeadResource": "customers/3226096935/localServicesLeads/334736443",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:334517430",
@@ -3903,7 +5104,12 @@
       "googleLeadId": "334517430",
       "googleLeadResource": "customers/3226096935/localServicesLeads/334517430",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:334569997",
@@ -3917,7 +5123,12 @@
       "googleLeadId": "334569997",
       "googleLeadResource": "customers/3226096935/localServicesLeads/334569997",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:334436745",
@@ -3931,7 +5142,12 @@
       "googleLeadId": "334436745",
       "googleLeadResource": "customers/3226096935/localServicesLeads/334436745",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:334414845",
@@ -3945,7 +5161,12 @@
       "googleLeadId": "334414845",
       "googleLeadResource": "customers/3226096935/localServicesLeads/334414845",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:334416339",
@@ -3959,7 +5180,12 @@
       "googleLeadId": "334416339",
       "googleLeadResource": "customers/3226096935/localServicesLeads/334416339",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:334394925",
@@ -3973,7 +5199,12 @@
       "googleLeadId": "334394925",
       "googleLeadResource": "customers/3226096935/localServicesLeads/334394925",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "Telefon2": null,
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "isMessageUpdate": false
     }
   ]
 }
