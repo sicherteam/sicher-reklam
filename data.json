@@ -1,6 +1,20 @@
 {
-  "updatedAt": "30.10.2026, 09:42:33",
+  "updatedAt": "30.10.2026, 16:22:18",
   "leads": [
+    {
+      "id": "lsa:3226096935:348742913",
+      "Musteri": "+436602763633",
+      "Telefon": "+436602763633",
+      "Hizmet": "xcat:service_area_business_mover",
+      "Konum": "-",
+      "Tarih": "30.10.2026 13:30",
+      "Mesaj": "-",
+      "telegramSent": true,
+      "googleLeadId": "348742913",
+      "googleLeadResource": "customers/3226096935/localServicesLeads/348742913",
+      "leadType": "PHONE_CALL",
+      "leadStatus": "ACTIVE"
+    },
     {
       "id": "lsa:3226096935:348676401",
       "Musteri": "+4369917236613",
