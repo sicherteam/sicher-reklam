@@ -14,16 +14,107 @@ const CHECK = cli.has('--check');
 const BOOTSTRAP = cli.has('--bootstrap');
 const DRY_RUN = cli.has('--dry-run') || CHECK;
 const API_VERSION = process.env.GOOGLE_ADS_API_VERSION || 'v26';
-const CUSTOMER_ID = (process.env.GOOGLE_ADS_CUSTOMER_ID || '4889362380').replace(/-/g, '');
+const CUSTOMER_ID = (process.env.GOOGLE_ADS_CUSTOMER_ID || '3226096935').replace(/-/g, '');
 const LOGIN_ID = (process.env.GOOGLE_ADS_LOGIN_CUSTOMER_ID || '').replace(/-/g, '');
 const DATA_PATH = path.resolve(process.env.DATA_PATH || 'data.json');
 const LOOKBACK_DAYS = Number(process.env.LOOKBACK_DAYS || 120);
 const SKIP_TELEGRAM = process.env.SKIP_TELEGRAM === 'true' || BOOTSTRAP || DRY_RUN;
 const GIT_PUSH = process.env.GIT_PUSH === 'true' && !DRY_RUN;
-const PROJECT = process.env.PROJECT_NAME || 'Mustafa Reklam';
+const PROJECT = process.env.PROJECT_NAME || 'Sicher Reklam';
+const DEFAULT_LOCATION = process.env.DEFAULT_LOCATION || 'Wien';
 
 function required(key) { const val = process.env[key]; if (!val) throw new Error(`Missing ${key}`); return val; }
 function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+
+const AUSTRIAN_AREAS = [
+  // Major Cities / States
+  { name: 'Wien', regex: /\b(wien|vienna|1\d{3})\b/i },
+  { name: 'Niederösterreich', regex: /\b(niederösterreich|niederoesterreich|nö)\b/i },
+  { name: 'Burgenland', regex: /\b(burgenland)\b/i },
+  { name: 'Oberösterreich', regex: /\b(oberösterreich|oö|linz|wels|steyr)\b/i },
+  { name: 'Steiermark', regex: /\b(steiermark|graz|leoben)\b/i },
+  { name: 'Kärnten', regex: /\b(kärnten|kaernten|klagenfurt|villach)\b/i },
+  { name: 'Salzburg', regex: /\b(salzburg)\b/i },
+  { name: 'Tirol', regex: /\b(tirol|innsbruck)\b/i },
+  { name: 'Vorarlberg', regex: /\b(vorarlberg|bregenz|dornbirn|feldkirch)\b/i },
+
+  // Specific NÖ / Burgenland / Vienna regions
+  { name: 'Eisenstadt', regex: /\b(eisenstadt)\b/i },
+  { name: 'Wiener Neustadt', regex: /\b(wiener\s*neustadt|wr\.?\s*neustadt)\b/i },
+  { name: 'Sieghartskirchen', regex: /\b(sieghartskirchen)\b/i },
+  { name: 'Zwettl', regex: /\b(zwettl)\b/i },
+  { name: 'Weyer', regex: /\b(weyer)\b/i },
+  { name: 'St. Pölten', regex: /\b(st\.?\s*pölten|sankt\s*pölten)\b/i },
+  { name: 'Baden', regex: /\b(baden)\b/i },
+  { name: 'Mödling', regex: /\b(mödling)\b/i },
+  { name: 'Tulln', regex: /\b(tulln)\b/i },
+  { name: 'Korneuburg', regex: /\b(korneuburg)\b/i },
+  { name: 'Gänserndorf', regex: /\b(gänserndorf)\b/i },
+  { name: 'Bruck an der Leitha', regex: /\b(bruck\s*an\s*der\s*leitha)\b/i },
+  { name: 'Neusiedl am See', regex: /\b(neusiedl)\b/i },
+  { name: 'Mattersburg', regex: /\b(mattersburg)\b/i },
+  { name: 'Oberwart', regex: /\b(oberwart)\b/i },
+  { name: 'Großpetersdorf', regex: /\b(großpetersdorf)\b/i },
+  { name: 'Kohfidisch', regex: /\b(kohfidisch)\b/i },
+  { name: 'Krems', regex: /\b(krems)\b/i },
+  { name: 'Amstetten', regex: /\b(amstetten)\b/i },
+  { name: 'Mistelbach', regex: /\b(mistelbach)\b/i },
+  { name: 'Hollabrunn', regex: /\b(hollabrunn)\b/i },
+  { name: 'Schwechat', regex: /\b(schwechat)\b/i },
+  { name: 'Klosterneuburg', regex: /\b(klosterneuburg)\b/i },
+];
+
+const AUSTRIAN_PREFIXES = [
+  { prefix: /^(?:\+43|0043|0)?1\d{4,}$/, location: 'Wien' },
+  { prefix: /^(?:\+43|0043|0)?2682/, location: 'Eisenstadt' },
+  { prefix: /^(?:\+43|0043|0)?2622/, location: 'Wiener Neustadt' },
+  { prefix: /^(?:\+43|0043|0)?2274/, location: 'Sieghartskirchen' },
+  { prefix: /^(?:\+43|0043|0)?2742/, location: 'St. Pölten' },
+  { prefix: /^(?:\+43|0043|0)?2252/, location: 'Baden' },
+  { prefix: /^(?:\+43|0043|0)?2236/, location: 'Mödling' },
+  { prefix: /^(?:\+43|0043|0)?2272/, location: 'Tulln an der Donau' },
+  { prefix: /^(?:\+43|0043|0)?2262/, location: 'Korneuburg' },
+  { prefix: /^(?:\+43|0043|0)?2282/, location: 'Gänserndorf' },
+  { prefix: /^(?:\+43|0043|0)?2162/, location: 'Bruck an der Leitha' },
+  { prefix: /^(?:\+43|0043|0)?2167/, location: 'Neusiedl am See' },
+  { prefix: /^(?:\+43|0043|0)?2732/, location: 'Krems an der Donau' },
+  { prefix: /^(?:\+43|0043|0)?2822/, location: 'Zwettl' },
+  { prefix: /^(?:\+43|0043|0)?316/,  location: 'Graz' },
+  { prefix: /^(?:\+43|0043|0)?732/,  location: 'Linz' },
+  { prefix: /^(?:\+43|0043|0)?662/,  location: 'Salzburg' },
+  { prefix: /^(?:\+43|0043|0)?512/,  location: 'Innsbruck' },
+  { prefix: /^(?:\+43|0043|0)?463/,  location: 'Klagenfurt' },
+];
+
+function detectLocation(lead, fallbackLocation = DEFAULT_LOCATION) {
+  if (lead.Konum && lead.Konum !== '-' && lead.Konum.trim().length > 1) {
+    return lead.Konum.trim();
+  }
+
+  const msg = lead.Mesaj || '';
+  if (msg && msg !== '-') {
+    const found = [];
+    for (const item of AUSTRIAN_AREAS) {
+      if (item.regex.test(msg)) found.push(item.name);
+    }
+    if (found.length > 0) {
+      return [...new Set(found)].slice(0, 2).join(' / ');
+    }
+    const zipMatch = msg.match(/\b(1\d{3})\b/);
+    if (zipMatch) return `Wien (${zipMatch[1]})`;
+    const nöZipMatch = msg.match(/\b([23]\d{3})\b/);
+    if (nöZipMatch) return `Niederösterreich (${nöZipMatch[1]})`;
+  }
+
+  const rawPhone = (lead.Telefon || '').replace(/[\s\-\/\(\)]/g, '');
+  if (rawPhone) {
+    for (const item of AUSTRIAN_PREFIXES) {
+      if (item.prefix.test(rawPhone)) return item.location;
+    }
+  }
+
+  return fallbackLocation;
+}
 
 async function requestJson(url, opts = {}, retry = 0) {
   let response;
@@ -88,21 +179,22 @@ function lastDate() {
   if (!Number.isInteger(LOOKBACK_DAYS) || LOOKBACK_DAYS < 1 || LOOKBACK_DAYS > 3650) {
     throw new Error('LOOKBACK_DAYS must be between 1 and 3650');
   }
-  // One extra UTC day ensures no missing events due to advertiser timezone offset.
   const dt = new Date(Date.now() - (LOOKBACK_DAYS + 1) * 86400000);
   return dt.toISOString().slice(0, 10);
 }
 
 function toLegacyDate(accountLocalTime) {
-  // Google Ads returns creation_date_time in the advertiser account's local timezone.
-  // Never add a fixed UTC offset: Vienna alternates between CET and CEST.
   const match = String(accountLocalTime || '').match(/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})/);
   return match ? `${match[3]}.${match[2]}.${match[1]} ${match[4]}:${match[5]}` : '-';
 }
+
 function dateSortKey(value) {
-  const m = String(value).match(/^(\d{2})\.(\d{2})\.(\d{4}) (\d{2}):(\d{2})$/);
-  return m ? `${m[3]}${m[2]}${m[1]}${m[4]}${m[5]}` : '';
+  const m = String(value).match(/^(\d{2})\.(\d{2})\.(\d{2,4}) (\d{2}):(\d{2})$/);
+  if (!m) return '';
+  const y = m[3].length === 2 ? `20${m[3]}` : m[3];
+  return `${y}${m[2]}${m[1]}${m[4]}${m[5]}`;
 }
+
 function htmlEscape(value) {
   return String(value ?? '-').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
@@ -113,6 +205,7 @@ function loadData() {
   if (!Array.isArray(content.leads)) throw new Error(`Invalid ${DATA_PATH}: leads[] missing`);
   return content;
 }
+
 function atomicWrite(value) {
   const tmp = `${DATA_PATH}.tmp-${process.pid}`;
   fs.writeFileSync(tmp, JSON.stringify(value, null, 2) + '\n', { mode: 0o600 });
@@ -140,16 +233,30 @@ async function sendTelegram(lead) {
 
   if (targets.length === 0) throw new Error('Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID');
 
-  const format = (key, label) => `<b>${label}:</b> ${htmlEscape(lead[key])}`;
-  const message = [
+  let customerText = '';
+  if (lead.Telefon) {
+    if (lead.Musteri && lead.Musteri !== lead.Telefon && lead.Musteri !== 'Müşteri' && lead.Musteri !== '-') {
+      customerText = `${htmlEscape(lead.Musteri)} (${htmlEscape(lead.Telefon)})`;
+    } else {
+      customerText = htmlEscape(lead.Telefon);
+    }
+  } else {
+    customerText = htmlEscape(lead.Musteri || '-');
+  }
+
+  const lines = [
     `🔔 <b>YENİ Müşteri!</b> (${htmlEscape(PROJECT)})`,
-    format('Musteri', 'Müşteri'),
-    ...(lead.Telefon ? [format('Telefon', 'Telefon')] : []),
-    format('Konum', 'Konum'),
-    format('Hizmet', 'Hizmet'),
-    format('Tarih', 'Tarih'),
-    format('Mesaj', 'Mesaj'),
-  ].join('\n');
+    `<b>Müşteri:</b> ${customerText}`,
+    `<b>Konum:</b> ${htmlEscape(lead.Konum || DEFAULT_LOCATION)}`,
+    `<b>Tarih:</b> ${htmlEscape(lead.Tarih || '-')}`,
+    `<b>Anfrage-ID:</b> <code>${htmlEscape(lead.googleLeadId || lead.id)}</code>`,
+  ];
+
+  if (lead.Mesaj && lead.Mesaj !== '-') {
+    lines.push(`<b>Mesaj:</b> ${htmlEscape(lead.Mesaj)}`);
+  }
+
+  const message = lines.join('\n');
 
   let anySuccess = false;
   for (const target of targets) {
@@ -188,8 +295,7 @@ async function fetchLeads(token) {
     FROM local_services_lead
     WHERE local_services_lead.creation_date_time >= '${since}'
     ORDER BY local_services_lead.creation_date_time DESC`);
-  // Conversations can be many per lead. Restrict by event timestamp, but include
-  // conversations slightly older than lead-query window to avoid boundary mismatch.
+
   const conversationRows = await gaql(token, `
     SELECT local_services_lead_conversation.lead,
            local_services_lead_conversation.id,
@@ -215,18 +321,18 @@ async function fetchLeads(token) {
     const extension = contact.phoneNumberExtension;
     const phone = contact.phoneNumber ? `${contact.phoneNumber}${extension ? ` ext. ${extension}` : ''}` : null;
     const conversations = (messages.get(lead.resourceName) || []).sort((a, b) => a.date.localeCompare(b.date));
+    const messageText = conversations.length ? conversations.map(x => x.text).join('\n\n') : '-';
+    const detectedLoc = detectLocation({ Mesaj: messageText, Telefon: phone, Konum: '-' }, DEFAULT_LOCATION);
+
     return {
-      // Do not modify legacy MD5 identifiers: API leads have a stable prefixed ID.
       id: `lsa:${CUSTOMER_ID}:${lead.id}`,
       Musteri: contact.consumerName || phone || 'Müşteri',
       Telefon: phone,
       Hizmet: lead.serviceId || lead.categoryId || lead.leadType || '-',
-      // The API does not guarantee the inbox's location column. Do not invent it.
-      Konum: '-',
+      Konum: detectedLoc,
       Tarih: toLegacyDate(lead.creationDateTime),
-      Mesaj: conversations.length ? conversations.map(x => x.text).join('\n\n') : '-',
+      Mesaj: messageText,
       telegramSent: false,
-      // Additional audit fields, safe for existing consumers to ignore.
       googleLeadId: String(lead.id),
       googleLeadResource: lead.resourceName,
       leadType: lead.leadType || null,
@@ -241,7 +347,6 @@ function gitPush() {
   execFileSync('git', ['add', '--', file], { cwd, stdio: 'inherit', timeout: 15000 });
   const staged = execFileSync('git', ['diff', '--cached', '--name-only'], { cwd, encoding: 'utf8' }).trim();
   if (!staged) return;
-  // Do not pull/rebase automatically while handling customer data.
   execFileSync('git', ['commit', '-m', 'Update LSA lead data [skip ci]'], { cwd, stdio: 'inherit', timeout: 15000 });
   execFileSync('git', ['push', 'origin', 'HEAD:main'], { cwd, stdio: 'inherit', timeout: 30000 });
 }
@@ -250,44 +355,89 @@ async function main() {
   if (!/^\d{10}$/.test(CUSTOMER_ID)) throw new Error('GOOGLE_ADS_CUSTOMER_ID must be 10 digits');
   const token = await accessToken();
   if (CHECK) return check(token);
-  const imported = await fetchLeads(token); // On API error, existing data remains untouched.
+  const imported = await fetchLeads(token);
   const current = loadData();
   const byId = new Map(current.leads.map(l => [l.id, l]));
+
+  // Build a set of ALL IDs that have ever been sent to Telegram
+  const sentIds = new Set();
+  for (const l of current.leads) {
+    if (l.telegramSent) {
+      if (l.id) sentIds.add(String(l.id));
+      if (l.googleLeadId) sentIds.add(String(l.googleLeadId));
+      if (l.id && l.id.startsWith('lsa:')) {
+        const parts = l.id.split(':');
+        if (parts[2]) sentIds.add(String(parts[2]));
+      }
+    }
+  }
+
   let added = 0, changed = 0;
   for (const lead of imported) {
     const old = byId.get(lead.id);
+    const wasSent = (old && old.telegramSent) || 
+                    sentIds.has(String(lead.googleLeadId)) || 
+                    sentIds.has(String(lead.id));
+
     if (!old) {
       added++;
-      byId.set(lead.id, { ...lead, telegramSent: BOOTSTRAP ? true : false });
+      byId.set(lead.id, { ...lead, telegramSent: BOOTSTRAP ? true : wasSent });
     } else {
-      const merged = { ...old, ...lead, telegramSent: Boolean(old.telegramSent) };
-      // Retain historically scraped location / human-friendly service if API does not have it.
-      if (lead.Konum === '-' && old.Konum && old.Konum !== '-') merged.Konum = old.Konum;
+      const merged = { ...old, ...lead, telegramSent: wasSent };
+      // Retain historically scraped location if available and valid
+      if (old.Konum && old.Konum !== '-' && old.Konum !== DEFAULT_LOCATION) {
+        merged.Konum = old.Konum;
+      }
       if (lead.Mesaj === '-' && old.Mesaj && old.Mesaj !== '-') merged.Mesaj = old.Mesaj;
       if (JSON.stringify(old) !== JSON.stringify(merged)) changed++;
       byId.set(lead.id, merged);
     }
   }
-  const all = [...byId.values()].sort((a, b) => dateSortKey(b.Tarih).localeCompare(dateSortKey(a.Tarih)));
+
+  // Sort descending for data.json display (newest first on top of data.json)
+  const all = [...byId.values()].sort((a, b) => 
+    dateSortKey(b.Tarih).localeCompare(dateSortKey(a.Tarih)) || 
+    String(b.googleLeadId || '').localeCompare(String(a.googleLeadId || ''))
+  );
+
   console.log(`${imported.length} API leads; ${added} new; ${changed} updated; ${all.length} total including legacy records.`);
   if (DRY_RUN) return console.log('Dry run: no file writes, Telegram notifications or Git changes.');
-  // Persist first, including new records marked telegramSent=false, so crashes are retried.
+
   const output = { ...current, updatedAt: new Date().toLocaleString('de-AT', { timeZone: 'Europe/Vienna' }), leads: all };
   atomicWrite(output);
+
   if (!SKIP_TELEGRAM) {
-    // Only API leads are candidates. Legacy entries must not be unexpectedly re-sent.
-    for (const lead of all.filter(l => l.googleLeadId && !l.telegramSent)) {
+    // CHRONOLOGICAL ORDER: Oldest first -> Newest last, so in Telegram the newest message sits at the bottom!
+    const unsentLeads = all
+      .filter(l => l.googleLeadId && !l.telegramSent)
+      .sort((a, b) => 
+        dateSortKey(a.Tarih).localeCompare(dateSortKey(b.Tarih)) || 
+        String(a.googleLeadId).localeCompare(String(b.googleLeadId))
+      );
+
+    console.log(`Unsent leads to dispatch: ${unsentLeads.length}`);
+
+    for (const lead of unsentLeads) {
       try {
         if (await sendTelegram(lead)) {
           lead.telegramSent = true;
+          sentIds.add(String(lead.googleLeadId));
+          sentIds.add(String(lead.id));
           atomicWrite(output);
-          console.log(`Telegram sent for ${lead.id}`);
+          console.log(`Telegram sent for ${lead.id} (${lead.googleLeadId} - ${lead.Tarih})`);
         }
-      } catch (e) { console.error(`Telegram failed for ${lead.id}: ${e.message}`); process.exitCode = 1; }
-      await sleep(250);
+      } catch (e) {
+        console.error(`Telegram failed for ${lead.id}: ${e.message}`);
+        process.exitCode = 1;
+      }
+      await sleep(350);
     }
-  } else { console.log('Telegram disabled (SKIP_TELEGRAM, --bootstrap or --dry-run).'); }
+  } else {
+    console.log('Telegram disabled (SKIP_TELEGRAM, --bootstrap or --dry-run).');
+  }
+
   if (GIT_PUSH) gitPush();
   console.log(`Saved ${DATA_PATH}`);
 }
+
 main().catch(err => { console.error(`ERROR: ${err.message}`); process.exitCode = 1; });
