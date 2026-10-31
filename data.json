@@ -1,5 +1,5 @@
 {
-  "updatedAt": "31.10.2026, 09:37:42",
+  "updatedAt": "31.10.2026, 10:04:30",
   "leads": [
     {
       "id": "lsa:3226096935:348911540",
@@ -20,11 +20,12 @@
       ],
       "conversationCount": 1,
       "lastConversationId": "3410316422",
-      "telegramSent": false,
+      "telegramSent": true,
       "googleLeadId": "348911540",
       "googleLeadResource": "customers/3226096935/localServicesLeads/348911540",
       "leadType": "MESSAGE",
-      "leadStatus": "NEW"
+      "leadStatus": "NEW",
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:348742913",
