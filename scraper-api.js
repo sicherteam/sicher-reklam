@@ -157,6 +157,11 @@ function detectLocation(lead, fallbackLocation = DEFAULT_LOCATION) {
 
   const msg = lead.Mesaj || '';
   if (msg && msg !== '-') {
+    const zipMatch = msg.match(/\b(1\d{3})\b/);
+    if (zipMatch) return `Wien (${zipMatch[1]})`;
+    const nöZipMatch = msg.match(/\b([23]\d{3})\b/);
+    if (nöZipMatch) return `Niederösterreich (${nöZipMatch[1]})`;
+
     const found = [];
     for (const item of AUSTRIAN_AREAS) {
       if (item.regex.test(msg)) found.push(item.name);
@@ -164,10 +169,6 @@ function detectLocation(lead, fallbackLocation = DEFAULT_LOCATION) {
     if (found.length > 0) {
       return [...new Set(found)].slice(0, 2).join(' / ');
     }
-    const zipMatch = msg.match(/\b(1\d{3})\b/);
-    if (zipMatch) return `Wien (${zipMatch[1]})`;
-    const nöZipMatch = msg.match(/\b([23]\d{3})\b/);
-    if (nöZipMatch) return `Niederösterreich (${nöZipMatch[1]})`;
   }
 
   const rawPhone = (lead.Telefon || '').replace(/[\s\-\/\(\)]/g, '');
