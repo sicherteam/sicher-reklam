@@ -299,9 +299,16 @@ async function sendTelegram(lead) {
   if (targets.length === 0) throw new Error('Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID');
 
   const isUpdate = Boolean(lead.isMessageUpdate);
-  const header = isUpdate 
-    ? `🔔 <b>NEUE Nachricht!</b> (${htmlEscape(PROJECT)})` 
-    : `🔔 <b>NEUER Kunde!</b> (${htmlEscape(PROJECT)})`;
+  const isMsg = isUpdate || (lead.leadType === 'MESSAGE') || Boolean(lead.Mesaj && lead.Mesaj !== '-');
+
+  let header;
+  if (isUpdate) {
+    header = `💬 <b>NEUE Nachricht!</b> (${htmlEscape(PROJECT)})`;
+  } else if (isMsg) {
+    header = `💬 <b>NEUER Kunde (Nachricht)!</b> (${htmlEscape(PROJECT)})`;
+  } else {
+    header = `📞 <b>NEUER Kunde (Tel)!</b> (${htmlEscape(PROJECT)})`;
+  }
 
   let customerText = '';
   if (lead.Telefon) {
@@ -341,7 +348,7 @@ async function sendTelegram(lead) {
     lines.push(`\n<b>Nachricht:</b>\n${htmlEscape(lead.Mesaj)}`);
   }
 
-  if (lead.googleLeadId) {
+  if (isMsg && lead.googleLeadId) {
     lines.push(`\n💬 <i>Antworten = Nachricht an Kunden</i> · <code>#LSA-${CUSTOMER_ID}-${lead.googleLeadId}</code>`);
   }
 
