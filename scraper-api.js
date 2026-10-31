@@ -341,6 +341,10 @@ async function sendTelegram(lead) {
     lines.push(`\n<b>Nachricht:</b>\n${htmlEscape(lead.Mesaj)}`);
   }
 
+  if (lead.googleLeadId) {
+    lines.push(`\n💬 <i>Antworten = Direkt an Kunden senden</i>\n<code>#LSA-${CUSTOMER_ID}-${lead.googleLeadId}</code>`);
+  }
+
   const message = lines.join('\n');
 
   let anySuccess = false;
