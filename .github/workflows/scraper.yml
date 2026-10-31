@@ -2,8 +2,8 @@ name: LSA Lead API Sync Automation
 
 on:
   schedule:
-    # Her 5 dakikada bir otomatik senkronizasyon (yedek emniyet kemeri)
-    - cron: '*/5 * * * *'
+    # Her 15 dakikada bir otomatik senkronizasyon (yedek emniyet kemeri)
+    - cron: '*/15 * * * *'
   workflow_dispatch: # Anlık tetikleme (Gmail Apps Script veya manuel)
 
 permissions:
