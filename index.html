@@ -11,7 +11,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="SicherReklam">
-<link rel="apple-touch-icon" href="./icon-512.png">
+  <link rel="apple-touch-icon" href="./icon-512.png">
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
@@ -74,13 +74,40 @@
     }
 
     .message-box {
-      background-color: #f1f5f9;
+      background-color: #f8fafc;
       border-left: 4px solid var(--primary-color);
       border-radius: 8px;
       padding: 12px 16px;
       font-size: 0.9rem;
       white-space: pre-line;
       word-break: break-word;
+    }
+
+    .message-box-multi {
+      background-color: #f1f5f9;
+      border-left: 4px solid #64748b;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      white-space: pre-line;
+      word-break: break-word;
+    }
+
+    .message-box-multi.latest {
+      background-color: #eff6ff;
+      border-left-color: #2563eb;
+    }
+
+    .tel2-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.8rem;
+      padding: 2px 8px;
+      background-color: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
+      border-radius: 6px;
     }
 
     @media (max-width: 767.98px) {
@@ -100,7 +127,7 @@
       .lead-card-header {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
         border-bottom: 1px solid #f1f5f9;
         padding-bottom: 8px;
         margin-bottom: 10px;
@@ -109,6 +136,7 @@
       .lead-card-row {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         margin-bottom: 6px;
         font-size: 0.875rem;
       }
@@ -129,14 +157,14 @@
     <div class="row g-3 align-items-center mb-4">
       <div class="col-12 col-md-6">
         <h2 class="header-title mb-1 fs-3">SICHER REKLAMLAR</h2>
-        <div class="text-muted small">
-          <i class="bi bi-clock-history me-1"></i><strong>Son Güncelleme:</strong> 
-          <span id="last-update" class="text-primary fw-bold ms-1">Yükleniyor...</span>
+        <div class="text-muted small d-flex flex-wrap align-items-center gap-2">
+          <span><i class="bi bi-clock-history me-1"></i><strong>Son Güncelleme:</strong> <span id="last-update" class="text-primary fw-bold">Yükleniyor...</span></span>
+          <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle" id="lead-count">-</span>
         </div>
       </div>
       <div class="col-12 col-md-6">
         <div class="position-relative">
-          <input type="text" id="searchInput" onkeyup="filterTable()" class="form-control form-control-lg fs-6 ps-5" placeholder="Ara (Müşteri, Konum, Hizmet, Mesaj...)...">
+          <input type="text" id="searchInput" onkeyup="filterTable()" class="form-control form-control-lg fs-6 ps-5" placeholder="Ara (Müşteri, Telefon, Konum, Hizmet, Mesaj...)...">
           <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
         </div>
       </div>
@@ -162,7 +190,7 @@
         <thead>
           <tr>
             <th>Müşteri / Telefon</th>
-            <th>Hizmet</th>
+            <th>Tür / Hizmet</th>
             <th>Konum</th>
             <th>Tarih</th>
             <th class="text-end">Aksiyon</th>
@@ -185,14 +213,36 @@
     function cleanMessageText(text) {
       if (!text || text === '-' || text.trim() === '') return null;
       
-      let cleaned = text
-        .split('Wird geladen')[0]
-        .split('Audioinhalte')[0]
-        .split('Hier dem Kunden')[0]
-        .replace(/^P\n+/g, '')
-        .trim();
+      const cutPatterns = [
+        /\n\s*Schnellpack\b/i,
+        /\bSchnellpack\s*<[^>]+>/i,
+        /<[^>]*@awexpress\.google\.com>/i,
+        /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,}\s+schrieb am\b/i,
+        /schrieb am\s+(?:Mo|Di|Mi|Do|Fr|Sa|So)\.?,?\s+\d+/i,
+        /\n\s*>\s*Local Services By Google/i,
+        /\bLocal Services By Google\b/i,
+        /\n\s*>\s*Vielen Dank/i,
+        /\bbearbeitet Ihre Anfrage\b/i,
+        /\bSicherteam\s*<[^>]+>/i,
+        /\bWiener-R[aä]umungsprofi\s*<[^>]+>/i,
+        /\bDetails zu Ihrer Anfrage\b/i,
+        /\bIhre Kundennummer:\b/i,
+        /https?:\/\/c\.gle\/[^\s]+/i,
+        /\bWird geladen\b/i,
+        /\bAudioinhalte\b/i,
+        /\bHier dem Kunden\b/i
+      ];
 
-      return cleaned.length > 0 ? cleaned : null;
+      let cleaned = text;
+      for (const pat of cutPatterns) {
+        const idx = cleaned.search(pat);
+        if (idx !== -1) {
+          cleaned = cleaned.slice(0, idx);
+        }
+      }
+
+      cleaned = cleaned.replace(/^P\n+/g, '').replace(/\r\n/g, '\n').replace(/[ \t]+$/gm, '').replace(/\n{3,}/g, '\n\n').trim();
+      return cleaned.length > 0 && cleaned !== '-' ? cleaned : null;
     }
 
     function escapeHTML(str) {
@@ -202,10 +252,86 @@
       );
     }
 
+    function formatServiceBadge(service, leadType) {
+      const isCall = leadType === 'PHONE_CALL';
+      const typeBadge = isCall
+        ? '<span class="badge bg-success-subtle text-success border border-success-subtle me-1"><i class="bi bi-telephone-fill me-1"></i>Telefon</span>'
+        : '<span class="badge bg-primary-subtle text-primary border border-primary-subtle me-1"><i class="bi bi-chat-dots-fill me-1"></i>Mesaj</span>';
+
+      if (!service || service === '-' || service === 'moving_transportation' || service === 'xcat:service_area_business_mover') {
+        return typeBadge;
+      }
+
+      const map = {
+        'national_move': 'Umzug im Inland',
+        'furniture_assembly': 'Möbelmontage',
+        'packing_services': 'Einpackservice',
+        'garbage_removal': 'Entrümpelung',
+        'clearance': 'Räumung'
+      };
+      const label = map[service] || service.replace(/^xcat:/, '').replace(/_/g, ' ');
+      return `${typeBadge} <span class="badge bg-light text-secondary border">${escapeHTML(label)}</span>`;
+    }
+
+    function renderMessageBlock(lead) {
+      const convs = Array.isArray(lead.conversations) ? lead.conversations : [];
+      
+      if (convs.length === 1) {
+        const c = convs[0];
+        const text = cleanMessageText(c.text);
+        if (!text) return null;
+        return `
+          <div class="message-box">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <strong class="text-primary small"><i class="bi bi-chat-left-text me-1"></i>Nachricht</strong>
+              ${c.time ? `<span class="badge bg-primary-subtle text-primary border border-primary-subtle small">${escapeHTML(c.time)}</span>` : ''}
+            </div>
+            <div class="small text-dark msg-content">${escapeHTML(text)}</div>
+          </div>
+        `;
+      }
+
+      if (convs.length > 1) {
+        return `
+          <div class="d-flex flex-column gap-2">
+            ${convs.map((c, i) => {
+              const text = cleanMessageText(c.text);
+              if (!text) return '';
+              const isLatest = i === convs.length - 1;
+              return `
+                <div class="message-box-multi ${isLatest ? 'latest' : ''}">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <strong class="${isLatest ? 'text-primary' : 'text-secondary'} small">
+                      <i class="bi bi-chat-left-quote me-1"></i>Nachricht ${i + 1}
+                    </strong>
+                    ${c.time ? `<span class="badge ${isLatest ? 'bg-primary-subtle text-primary border border-primary-subtle' : 'bg-light text-secondary border'} small">${escapeHTML(c.time)}</span>` : ''}
+                  </div>
+                  <div class="small text-dark msg-content">${escapeHTML(text)}</div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }
+
+      const rawCleaned = cleanMessageText(lead.Mesaj);
+      if (rawCleaned) {
+        return `
+          <div class="message-box">
+            <strong class="text-primary small d-block mb-1"><i class="bi bi-chat-quote me-1"></i>Nachricht:</strong>
+            <div class="small text-dark msg-content">${escapeHTML(rawCleaned)}</div>
+          </div>
+        `;
+      }
+
+      return null;
+    }
+
     async function loadData() {
       const tbody = document.getElementById('lead-table-body');
       const cardsBody = document.getElementById('lead-cards-body');
       const updateSpan = document.getElementById('last-update');
+      const countBadge = document.getElementById('lead-count');
 
       try {
         const response = await fetch('./data.json?t=' + Date.now(), { cache: 'no-cache' });
@@ -218,62 +344,71 @@
           const emptyHTML = '<div class="text-center py-4 text-muted">Veri bulunamadı.</div>';
           tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-muted">Veri bulunamadı.</td></tr>`;
           cardsBody.innerHTML = emptyHTML;
+          countBadge.innerText = '0 Kayıt';
           return;
         }
+
+        countBadge.innerText = `${data.leads.length} Kayıt`;
 
         let desktopRows = '';
         let mobileCards = '';
 
         data.leads.forEach((lead, index) => {
-          const customer = escapeHTML(lead["Musteri"] || 'Müşteri');
+          const customer = escapeHTML(lead["Musteri"] || 'Kunde');
           const phone = escapeHTML(lead["Telefon"] || '');
-          const jobType = escapeHTML(lead["Hizmet"] || '-');
-          const location = escapeHTML(lead["Konum"] || '-');
+          const phone2 = escapeHTML(lead["Telefon2"] || '');
+          const service = escapeHTML(lead["Hizmet"] || '-');
+          const rawLocation = lead["Konum"];
+          const location = escapeHTML((rawLocation && rawLocation !== '-') ? rawLocation : 'Wien');
           const dateStr = escapeHTML(lead["Tarih"] || lead["Ilk gorusme"] || '-');
-          const rawMessage = lead["Mesaj"] || '-';
+          const leadType = lead["leadType"] || (lead["Mesaj"] && lead["Mesaj"] !== '-' ? 'MESSAGE' : 'PHONE_CALL');
 
-          const cleanedMsg = cleanMessageText(rawMessage);
-          const escapedCleanedMsg = cleanedMsg ? escapeHTML(cleanedMsg) : null;
+          const messageHTML = renderMessageBlock(lead);
+          const hasMessages = Boolean(messageHTML);
+          const convCount = Array.isArray(lead.conversations) ? lead.conversations.length : (hasMessages ? 1 : 0);
 
-          let phoneDisplay = `<span class="fw-bold text-dark">${customer}</span>`;
-          let targetPhone = phone && phone !== '-' ? phone : (customer.match(/\+?\d[\d\s-]{5,}/) ? customer : null);
-          
-          if (targetPhone) {
-            phoneDisplay = `<a href="tel:${targetPhone.replace(/\s+/g, '')}" class="fw-bold text-decoration-none text-primary"><i class="bi bi-telephone me-1"></i>${customer}</a>`;
+          let primaryPhone = phone && phone !== '-' ? phone : (customer.match(/\+?\d[\d\s-]{5,}/) ? customer : null);
+          let phoneDisplay = '';
+
+          if (primaryPhone) {
+            phoneDisplay = `<a href="tel:${primaryPhone.replace(/\s+/g, '')}" class="fw-bold text-decoration-none text-primary"><i class="bi bi-telephone-fill me-1"></i>${customer}</a>`;
+          } else {
+            phoneDisplay = `<span class="fw-bold text-dark">${customer}</span>`;
           }
 
-          const msgButton = escapedCleanedMsg ? `
-            <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#msg-desktop-${index}">
-              <i class="bi bi-chat-text me-1"></i>Mesaj
+          if (phone2) {
+            phoneDisplay += `
+              <div class="mt-1">
+                <a href="tel:${phone2.replace(/\s+/g, '')}" class="tel2-badge text-decoration-none">
+                  <i class="bi bi-telephone-plus text-success"></i>
+                  <strong>Tel 2:</strong> ${phone2}
+                </a>
+              </div>
+            `;
+          }
+
+          const actionBtn = hasMessages ? `
+            <button class="btn btn-sm ${convCount > 1 ? 'btn-primary' : 'btn-outline-primary'}" type="button" data-bs-toggle="collapse" data-bs-target="#msg-desktop-${index}">
+              <i class="bi bi-chat-text me-1"></i>Mesaj ${convCount > 1 ? `<span class="badge bg-light text-primary ms-1">${convCount}</span>` : ''}
             </button>
           ` : '<span class="text-muted small">-</span>';
 
           desktopRows += `
             <tr class="searchable-row">
               <td>${phoneDisplay}</td>
-              <td>${jobType}</td>
-              <td><span class="badge bg-light text-dark border">${location}</span></td>
+              <td>${formatServiceBadge(service, leadType)}</td>
+              <td><span class="badge bg-light text-dark border"><i class="bi bi-geo-alt me-1 text-danger"></i>${location}</span></td>
               <td class="text-muted small"><i class="bi bi-calendar-event me-1"></i>${dateStr}</td>
-              <td class="text-end">${msgButton}</td>
+              <td class="text-end">${actionBtn}</td>
             </tr>
-            ${escapedCleanedMsg ? `
+            ${hasMessages ? `
               <tr class="collapse msg-row" id="msg-desktop-${index}">
                 <td colspan="5" class="p-3 bg-light">
-                  <div class="message-box">
-                    <strong class="text-primary small d-block mb-1"><i class="bi bi-chat-quote me-1"></i>Müşteri Mesajı:</strong>
-                    <div class="small text-dark msg-content">${escapedCleanedMsg}</div>
-                  </div>
+                  ${messageHTML}
                 </td>
               </tr>
             ` : ''}
           `;
-
-          const mobileMsgHTML = escapedCleanedMsg ? `
-            <div class="message-box mt-2">
-              <strong class="text-primary small d-block mb-1"><i class="bi bi-chat-quote me-1"></i>Mesaj:</strong>
-              <div class="small text-dark">${escapedCleanedMsg}</div>
-            </div>
-          ` : '';
 
           mobileCards += `
             <div class="lead-card searchable-card">
@@ -282,14 +417,14 @@
                 <span class="badge bg-light text-secondary border small">${dateStr}</span>
               </div>
               <div class="lead-card-row">
-                <span class="lead-card-label">Hizmet:</span>
-                <span class="lead-card-value">${jobType}</span>
+                <span class="lead-card-label">Tür / Hizmet:</span>
+                <span class="lead-card-value">${formatServiceBadge(service, leadType)}</span>
               </div>
               <div class="lead-card-row">
                 <span class="lead-card-label">Konum:</span>
-                <span class="lead-card-value">${location}</span>
+                <span class="lead-card-value"><span class="badge bg-light text-dark border"><i class="bi bi-geo-alt me-1 text-danger"></i>${location}</span></span>
               </div>
-              ${mobileMsgHTML}
+              ${hasMessages ? `<div class="mt-3">${messageHTML}</div>` : ''}
             </div>
           `;
         });
@@ -366,7 +501,7 @@
       deferredPrompt = null;
     });
 
-    // 🚀 SERVICE WORKER KAYDI (3 satırlık sw.js gerektirir)
+    // 🚀 SERVICE WORKER KAYDI
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW Hata:', err));
