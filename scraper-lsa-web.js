@@ -177,6 +177,7 @@ async function run() {
   console.log(`=== Starting 24/7 LSA Web Scraper for ${PROJECT} ===`);
   const browser = await chromium.launch({
     headless: true,
+    ignoreDefaultArgs: ['--enable-automation'],
     args: [
       '--disable-blink-features=AutomationControlled',
       '--no-sandbox',
