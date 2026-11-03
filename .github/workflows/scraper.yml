@@ -2,8 +2,8 @@ name: LSA Lead API Sync Automation
 
 on:
   schedule:
-    # Her 15 dakikada bir otomatik senkronizasyon (yedek emniyet kemeri)
-    - cron: '*/15 * * * *'
+    # Her 10 dakikada bir 7/24 otomatik senkronizasyon
+    - cron: '*/10 * * * *'
   workflow_dispatch: # Anlık tetikleme (Gmail Apps Script veya manuel)
 
 permissions:
@@ -28,6 +28,34 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Restore Playwright Session Cache
+        uses: actions/cache@v4
+        with:
+          path: session-state.json
+          key: playwright-session-${{ runner.os }}-${{ hashFiles('session-state.json') }}
+          restore-keys: |
+            playwright-session-${{ runner.os }}-
+
+      - name: Install Playwright & Browsers
+        run: |
+          npm install playwright
+          npx playwright install --with-deps chromium
+
+      - name: Run LSA Web Scraper (Standort & 2FA Login)
+        continue-on-error: true
+        env:
+          GOOGLE_EMAIL: ${{ secrets.GOOGLE_EMAIL || 'atsicherteam@gmail.com' }}
+          GOOGLE_PASSWORD: ${{ secrets.GOOGLE_PASSWORD }}
+          GOOGLE_2FA_SECRET: ${{ secrets.GOOGLE_2FA_SECRET || '5gzwaIwsz2ehseiz2hjbdokz23rwmsan' }}
+          LSA_INBOX_URL: ${{ secrets.LSA_INBOX_URL || 'https://ads.google.com/localservices/inbox?cid=9203255169&bid=11049534709&pid=9999999999&euid=8501543550&hl=de&gl=AT' }}
+          GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID || '3226096935' }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_CHAT_ID_2: ${{ secrets.TELEGRAM_CHAT_ID_2 }}
+          PROJECT_NAME: ${{ secrets.PROJECT_NAME || 'Sicher Reklam' }}
+          DATA_PATH: 'data.json'
+        run: node scraper-lsa-web.js
+
       - name: Google Ads API Senkronizasyonunu Çalıştır
         env:
           GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID || '3226096935' }}
@@ -37,7 +65,6 @@ jobs:
           GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          TELEGRAM_BOT_TOKEN_2: ${{ secrets.TELEGRAM_BOT_TOKEN_2 }}
           TELEGRAM_CHAT_ID_2: ${{ secrets.TELEGRAM_CHAT_ID_2 }}
           PROJECT_NAME: 'Sicher Reklam'
           SKIP_TELEGRAM: ${{ secrets.SKIP_TELEGRAM || 'false' }}
@@ -57,6 +84,6 @@ jobs:
             exit 0
           fi
           
-          git commit -m "Automated LSA lead sync [skip ci]"
+          git commit -m "Automated LSA lead sync with location [skip ci]"
           git pull --rebase --autostash -X theirs origin main
           git push origin main

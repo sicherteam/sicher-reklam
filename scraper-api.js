@@ -21,7 +21,7 @@ const LOOKBACK_DAYS = Number(process.env.LOOKBACK_DAYS || 120);
 const SKIP_TELEGRAM = process.env.SKIP_TELEGRAM === 'true' || BOOTSTRAP || DRY_RUN;
 const GIT_PUSH = process.env.GIT_PUSH === 'true' && !DRY_RUN;
 const PROJECT = process.env.PROJECT_NAME || 'Sicher Reklam';
-const DEFAULT_LOCATION = process.env.DEFAULT_LOCATION || 'Wien';
+const DEFAULT_LOCATION = process.env.DEFAULT_LOCATION || '-';
 
 function required(key) { const val = process.env[key]; if (!val) throw new Error(`Missing ${key}`); return val; }
 function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
@@ -330,7 +330,7 @@ async function sendTelegram(lead) {
     lines.push(`<b>Telefon 2:</b> ${htmlEscape(lead.Telefon2)}`);
   }
 
-  lines.push(`<b>Ort:</b> ${htmlEscape(lead.Konum || DEFAULT_LOCATION)}`);
+  lines.push(`<b>Ort:</b> ${htmlEscape(lead.Konum && lead.Konum !== '-' ? lead.Konum : '-')}`);
   lines.push(`<b>Datum:</b> ${htmlEscape(lead.Tarih || '-')}`);
 
   const convs = lead.conversations || [];
