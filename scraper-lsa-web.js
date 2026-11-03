@@ -234,8 +234,9 @@ async function run() {
       const emailInput = page.locator('#identifierId, input[name="identifier"], input[type="email"], input[type="text"]').first();
       await emailInput.waitFor({ state: 'visible', timeout: 30000 });
       await emailInput.click();
-      await emailInput.pressSequentially(EMAIL, { delay: 80 });
-      await page.waitForTimeout(1000);
+      await emailInput.pressSequentially(EMAIL, { delay: 60 });
+      await page.waitForTimeout(800);
+      await page.screenshot({ path: 'step1_email.png' }).catch(() => {});
       await emailInput.press('Enter');
 
       const nextBtn = page.locator('#identifierNext button, #identifierNext, button:has-text("Weiter"), button:has-text("Next")').first();
@@ -249,8 +250,9 @@ async function run() {
       const passInput = page.locator('input[type="password"], input[name="Passwd"], input[name="password"]').first();
       await passInput.waitFor({ state: 'visible', timeout: 30000 });
       await passInput.click();
-      await passInput.pressSequentially(PASSWORD, { delay: 80 });
-      await page.waitForTimeout(1000);
+      await passInput.pressSequentially(PASSWORD, { delay: 60 });
+      await page.waitForTimeout(800);
+      await page.screenshot({ path: 'step2_password.png' }).catch(() => {});
       await passInput.press('Enter');
 
       const passNext = page.locator('#passwordNext button, #passwordNext, button:has-text("Weiter"), button:has-text("Next")').first();
@@ -262,19 +264,20 @@ async function run() {
       // Step 3: 2FA TOTP
       console.log('Checking for 2FA challenge...');
       await page.waitForTimeout(3000);
+      await page.screenshot({ path: 'step3_2fa_prompt.png' }).catch(() => {});
 
       const totpSelector = 'input#totpPin, input[name="totpPin"], input[type="tel"], input[type="number"], input[autocomplete="one-time-code"]';
       let totpInput = page.locator(totpSelector).first();
 
       if (!await totpInput.isVisible().catch(() => false)) {
         console.log('TOTP input not directly visible, checking for "Andere Option"...');
-        const tryAnother = page.locator('button:has-text("Andere"), div[role="button"]:has-text("Andere"), a:has-text("Andere"), button:has-text("Try another"), div[role="button"]:has-text("Try another"), a:has-text("Try another")').first();
+        const tryAnother = page.locator('button:has-text("Andere"), div[role="button"]:has-text("Andere"), a:has-text("Andere"), button:has-text("Try another"), div[role="button"]:has-text("Try another")').first();
         if (await tryAnother.isVisible({ timeout: 4000 }).catch(() => false)) {
           console.log('Clicking "Andere Option"...');
           await tryAnother.click();
           await page.waitForTimeout(2500);
 
-          const authOption = page.locator('li:has-text("Authenticator"), div:has-text("Authenticator"), span:has-text("Authenticator"), li:has-text("Authentifikator"), div:has-text("Authentifikator"), span:has-text("Authentifikator"), li:has-text("Bestätigungscode"), div:has-text("Bestätigungscode"), span:has-text("Bestätigungscode")').first();
+          const authOption = page.locator('li:has-text("Authenticator"), div:has-text("Authenticator"), span:has-text("Authenticator"), li:has-text("Authentifikator"), div:has-text("Authentifikator"), span:has-text("Authentifikator"), li:has-text("Bestätigungscode"), div:has-text("Bestätigungscode")').first();
           if (await authOption.isVisible({ timeout: 4000 }).catch(() => false)) {
             console.log('Selecting Authenticator option from list...');
             await authOption.click();
@@ -286,35 +289,39 @@ async function run() {
       totpInput = page.locator(totpSelector).first();
       if (await totpInput.isVisible({ timeout: 15000 }).catch(() => false)) {
         const code = generateTOTP(TOTP_SECRET);
-        console.log('Generated fresh 6-digit TOTP code, entering...');
+        console.log(`Generated fresh 6-digit TOTP code (${code}), entering...`);
         await totpInput.click();
-        await totpInput.pressSequentially(code, { delay: 100 });
+        await totpInput.pressSequentially(code, { delay: 80 });
         await page.waitForTimeout(1000);
-        await totpInput.press('Enter');
+        await page.screenshot({ path: 'step4_totp_filled.png' }).catch(() => {});
 
+        // Submit TOTP
+        await totpInput.press('Enter');
         const totpNext = page.locator('#totpNext button, #totpNext, button:has-text("Weiter"), button:has-text("Next")').first();
-        if (await totpNext.isVisible({ timeout: 2000 }).catch(() => false)) {
+        if (await totpNext.isVisible({ timeout: 3000 }).catch(() => false)) {
           await totpNext.click().catch(() => {});
         }
-        await page.waitForTimeout(5000);
+        await page.waitForTimeout(6000);
+        await page.screenshot({ path: 'step5_after_totp.png' }).catch(() => {});
       }
 
       // Check for interstitial prompts like "Nicht jetzt" / "Not now" / "Passkey"
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 5; i++) {
         const skipBtn = page.locator('button:has-text("Nicht jetzt"), button:has-text("Überspringen"), button:has-text("Später"), button:has-text("Not now"), button:has-text("Skip")').first();
         if (await skipBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
           console.log('Dismissing interstitial prompt...');
           await skipBtn.click().catch(() => {});
-          await page.waitForTimeout(2000);
+          await page.waitForTimeout(3000);
         }
       }
 
       // Wait for navigation back to LSA
-      console.log('Waiting for LSA Inbox page after login...');
+      console.log('Waiting for ads.google.com navigation...');
       try {
         await page.waitForURL(url => url.hostname.includes('ads.google.com'), { timeout: 45000 });
       } catch {
-        console.log('Re-navigating directly to INBOX_URL...');
+        console.log('Not yet on ads.google.com, current URL:', page.url());
+        console.log('Navigating directly to INBOX_URL...');
         await page.goto(INBOX_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
       }
       console.log('Current URL after login:', page.url());

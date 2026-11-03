@@ -73,7 +73,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: scraper-debug
-          path: error_screenshot.png
+          path: "*.png"
           if-no-files-found: ignore
 
       - name: Google Ads API Senkronizasyonunu Çalıştır
