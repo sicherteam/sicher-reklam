@@ -36,6 +36,17 @@ jobs:
           restore-keys: |
             playwright-session-${{ runner.os }}-
 
+      - name: Initialize Session from Secret if Missing
+        env:
+          GOOGLE_SESSION_STATE: ${{ secrets.GOOGLE_SESSION_STATE }}
+        run: |
+          if [ ! -f session-state.json ] || [ ! -s session-state.json ]; then
+            if [ -n "$GOOGLE_SESSION_STATE" ]; then
+              echo "Restoring session-state.json from GOOGLE_SESSION_STATE secret..."
+              echo "$GOOGLE_SESSION_STATE" > session-state.json
+            fi
+          fi
+
       - name: Install Playwright & Browsers
         run: |
           npm install playwright
