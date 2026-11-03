@@ -403,6 +403,34 @@ async function run() {
       await dialogCloseBtn.click().catch(() => {});
     }
 
+    // Check if on /verification screen (e.g. Sicher account) and navigate to "Anfragen" (inbox)
+    if (page.url().includes('/verification') || await page.locator('*:has-text("Unternehmensüberprüfung")').first().isVisible({ timeout: 2000 }).catch(() => false)) {
+      console.log('Detected verification screen! Transitioning to "Anfragen" (inbox)...');
+      await page.screenshot({ path: 'step_verification_screen.png' }).catch(() => {});
+
+      // 1. Try clicking hamburger menu in top-left
+      const menuBtn = page.locator('button[aria-label*="menü" i], button[aria-label*="menu" i], button:has(mat-icon), button:has(svg), header button, .mat-icon-button').first();
+      if (await menuBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
+        console.log('Clicking hamburger menu...');
+        await menuBtn.click();
+        await page.waitForTimeout(2000);
+        await page.screenshot({ path: 'step_menu_opened.png' }).catch(() => {});
+      }
+
+      // 2. Click "Anfragen"
+      const anfragenItem = page.locator('a:has-text("Anfragen"), [role="menuitem"]:has-text("Anfragen"), div[role="link"]:has-text("Anfragen"), button:has-text("Anfragen"), span:has-text("Anfragen")').first();
+      if (await anfragenItem.isVisible({ timeout: 4000 }).catch(() => false)) {
+        console.log('Clicking "Anfragen" item from side menu...');
+        await anfragenItem.click();
+        await page.waitForTimeout(4000);
+      } else {
+        console.log('Menu item not visible directly, navigating to INBOX_URL...');
+        await page.goto(INBOX_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
+      }
+      console.log('Current URL after navigating from verification:', page.url());
+      await page.screenshot({ path: 'step_after_anfragen.png' }).catch(() => {});
+    }
+
     // Wait for the table to render
     console.log('Waiting for inbox table or download button...');
     await page.waitForSelector('button:has-text("HERUNTERLADEN"), [role="table"], table, tr', { timeout: 45000 });
