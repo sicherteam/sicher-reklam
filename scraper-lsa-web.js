@@ -408,27 +408,82 @@ async function run() {
       console.log('Detected verification screen! Transitioning to "Anfragen" (inbox)...');
       await page.screenshot({ path: 'step_verification_screen.png' }).catch(() => {});
 
-      // 1. Try clicking hamburger menu in top-left
-      const menuBtn = page.locator('button[aria-label*="menü" i], button[aria-label*="menu" i], button:has(mat-icon), button:has(svg), header button, .mat-icon-button').first();
-      if (await menuBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
-        console.log('Clicking hamburger menu...');
-        await menuBtn.click();
-        await page.waitForTimeout(2000);
-        await page.screenshot({ path: 'step_menu_opened.png' }).catch(() => {});
+      // 1. Click hamburger menu in top-left (☰)
+      console.log('Clicking hamburger menu (☰)...');
+      const menuSelectors = [
+        'button[aria-label*="menü" i]',
+        'button[aria-label*="menu" i]',
+        '[role="button"][aria-label*="menü" i]',
+        '[role="button"][aria-label*="menu" i]',
+        'material-button.menu-button',
+        'material-button:has(material-icon[icon="menu"])',
+        'material-button:has-text("menu")',
+        'button:has-text("menu")',
+        '[icon="menu"]',
+        'material-icon:has-text("menu")',
+        'i:has-text("menu")',
+        '.material-icons:has-text("menu")'
+      ];
+
+      let menuClicked = false;
+      for (const sel of menuSelectors) {
+        const el = page.locator(sel).first();
+        if (await el.isVisible({ timeout: 1000 }).catch(() => false)) {
+          console.log(`Clicking menu button with selector: ${sel}`);
+          await el.click().catch(() => {});
+          menuClicked = true;
+          break;
+        }
       }
 
-      // 2. Click "Anfragen"
-      const anfragenItem = page.locator('a:has-text("Anfragen"), [role="menuitem"]:has-text("Anfragen"), div[role="link"]:has-text("Anfragen"), button:has-text("Anfragen"), span:has-text("Anfragen")').first();
-      if (await anfragenItem.isVisible({ timeout: 4000 }).catch(() => false)) {
-        console.log('Clicking "Anfragen" item from side menu...');
-        await anfragenItem.click();
-        await page.waitForTimeout(4000);
-      } else {
-        console.log('Menu item not visible directly, navigating to INBOX_URL...');
-        await page.goto(INBOX_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
+      if (!menuClicked) {
+        console.log('Clicking hamburger icon by coordinate (32, 32)...');
+        await page.mouse.click(32, 32);
       }
-      console.log('Current URL after navigating from verification:', page.url());
-      await page.screenshot({ path: 'step_after_anfragen.png' }).catch(() => {});
+
+      await page.waitForTimeout(2000);
+      await page.screenshot({ path: 'step_menu_opened.png' }).catch(() => {});
+
+      // 2. Click "Anfragen" in sidebar menu
+      console.log('Looking for "Anfragen" in sidebar menu...');
+      const anfragenSelectors = [
+        'a:has-text("Anfragen")',
+        'button:has-text("Anfragen")',
+        '[role="menuitem"]:has-text("Anfragen")',
+        '[role="link"]:has-text("Anfragen")',
+        'material-select-item:has-text("Anfragen")',
+        'material-list-item:has-text("Anfragen")',
+        'div:has-text("Anfragen")'
+      ];
+
+      let anfragenClicked = false;
+      for (const sel of anfragenSelectors) {
+        const item = page.locator(sel).last();
+        if (await item.isVisible({ timeout: 1500 }).catch(() => false)) {
+          console.log(`Clicking Anfragen with selector: ${sel}`);
+          await item.click().catch(() => {});
+          anfragenClicked = true;
+          break;
+        }
+      }
+
+      if (!anfragenClicked) {
+        console.log('Trying getByText for Anfragen...');
+        const textItem = page.getByText('Anfragen', { exact: true }).first();
+        if (await textItem.isVisible({ timeout: 2000 }).catch(() => false)) {
+          await textItem.click().catch(() => {});
+          anfragenClicked = true;
+        }
+      }
+
+      if (!anfragenClicked) {
+        console.log('Clicking Anfragen by coordinate (80, 80)...');
+        await page.mouse.click(80, 80);
+      }
+
+      await page.waitForTimeout(5000);
+      await page.screenshot({ path: 'step_inbox_loaded.png' }).catch(() => {});
+      console.log('Current URL after Anfragen click:', page.url());
     }
 
     // Wait for the table to render
