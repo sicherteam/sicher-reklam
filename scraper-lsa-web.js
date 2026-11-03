@@ -199,10 +199,22 @@ async function run() {
   const context = await browser.newContext(contextOptions);
   const page = await context.newPage();
 
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+  });
+
   try {
     console.log('Navigating to LSA Inbox URL:', INBOX_URL);
     await page.goto(INBOX_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
     await page.waitForTimeout(3000);
+
+    // Dismiss GDPR consent if present
+    const consentBtn = page.locator('button:has-text("Alle akzeptieren"), button:has-text("Ich stimme zu"), button:has-text("Accept all")').first();
+    if (await consentBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
+      console.log('Accepting cookies...');
+      await consentBtn.click();
+      await page.waitForTimeout(2000);
+    }
 
     let currentUrl = page.url();
     console.log('Landing URL:', currentUrl);
@@ -216,56 +228,95 @@ async function run() {
 
       // Step 1: Email
       console.log('Typing email:', EMAIL);
-      const emailInput = page.locator('input[type="email"]');
-      await emailInput.waitFor({ state: 'visible', timeout: 15000 });
+      const emailInput = page.locator('#identifierId, input[name="identifier"], input[type="email"], input[type="text"]').first();
+      await emailInput.waitFor({ state: 'visible', timeout: 30000 });
+      await emailInput.click();
       await emailInput.fill(EMAIL);
       await page.waitForTimeout(500);
-      await page.locator('#identifierNext, button:has-text("Weiter"), button:has-text("Next")').first().click();
-      await page.waitForTimeout(3000);
+      await emailInput.press('Enter');
+
+      const nextBtn = page.locator('#identifierNext button, #identifierNext, button:has-text("Weiter"), button:has-text("Next")').first();
+      if (await nextBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+        await nextBtn.click().catch(() => {});
+      }
+      await page.waitForTimeout(4000);
 
       // Step 2: Password
       console.log('Waiting for password input...');
-      const passInput = page.locator('input[type="password"]');
-      await passInput.waitFor({ state: 'visible', timeout: 15000 });
+      const passInput = page.locator('input[type="password"], input[name="Passwd"], input[name="password"]').first();
+      await passInput.waitFor({ state: 'visible', timeout: 30000 });
+      await passInput.click();
       await passInput.fill(PASSWORD);
       await page.waitForTimeout(500);
-      await page.locator('#passwordNext, button:has-text("Weiter"), button:has-text("Next")').first().click();
+      await passInput.press('Enter');
+
+      const passNext = page.locator('#passwordNext button, #passwordNext, button:has-text("Weiter"), button:has-text("Next")').first();
+      if (await passNext.isVisible({ timeout: 2000 }).catch(() => false)) {
+        await passNext.click().catch(() => {});
+      }
       await page.waitForTimeout(4000);
 
       // Step 3: 2FA TOTP
       console.log('Checking for 2FA challenge...');
-      const totpSelector = 'input[type="tel"], input#totpPin, input[name="totpPin"], input[id*="totp"]';
+      await page.waitForTimeout(3000);
 
-      // Check if "Try another way" option is visible (to select Authenticator)
-      const anotherWayBtn = page.locator('button:has-text("Andere Option"), button:has-text("Try another way")').first();
-      if (await anotherWayBtn.isVisible().catch(() => false)) {
-        const totpVisible = await page.locator(totpSelector).first().isVisible().catch(() => false);
-        if (!totpVisible) {
-          console.log('Selecting Authenticator option...');
-          await anotherWayBtn.click();
-          await page.waitForTimeout(2000);
-          const authApp = page.locator('div:has-text("Authenticator"), div:has-text("Bestätigungscode")').first();
-          if (await authApp.isVisible().catch(() => false)) {
-            await authApp.click();
-            await page.waitForTimeout(2000);
+      const totpSelector = 'input#totpPin, input[name="totpPin"], input[type="tel"], input[type="number"], input[autocomplete="one-time-code"]';
+      let totpInput = page.locator(totpSelector).first();
+
+      if (!await totpInput.isVisible().catch(() => false)) {
+        console.log('TOTP input not directly visible, checking for "Andere Option"...');
+        const tryAnother = page.locator('button:has-text("Andere"), div[role="button"]:has-text("Andere"), a:has-text("Andere"), button:has-text("Try another"), div[role="button"]:has-text("Try another"), a:has-text("Try another")').first();
+        if (await tryAnother.isVisible({ timeout: 4000 }).catch(() => false)) {
+          console.log('Clicking "Andere Option"...');
+          await tryAnother.click();
+          await page.waitForTimeout(2500);
+
+          const authOption = page.locator('li:has-text("Authenticator"), div:has-text("Authenticator"), span:has-text("Authenticator"), li:has-text("Authentifikator"), div:has-text("Authentifikator"), span:has-text("Authentifikator"), li:has-text("Bestätigungscode"), div:has-text("Bestätigungscode"), span:has-text("Bestätigungscode")').first();
+          if (await authOption.isVisible({ timeout: 4000 }).catch(() => false)) {
+            console.log('Selecting Authenticator option from list...');
+            await authOption.click();
+            await page.waitForTimeout(2500);
           }
         }
       }
 
-      const totpInput = page.locator(totpSelector).first();
-      if (await totpInput.isVisible({ timeout: 10000 }).catch(() => false)) {
+      totpInput = page.locator(totpSelector).first();
+      if (await totpInput.isVisible({ timeout: 15000 }).catch(() => false)) {
         const code = generateTOTP(TOTP_SECRET);
         console.log('Generated fresh 6-digit TOTP code, entering...');
+        await totpInput.click();
         await totpInput.fill(code);
         await page.waitForTimeout(500);
-        await page.locator('#totpNext, button:has-text("Weiter"), button:has-text("Next")').first().click();
+        await totpInput.press('Enter');
+
+        const totpNext = page.locator('#totpNext button, #totpNext, button:has-text("Weiter"), button:has-text("Next")').first();
+        if (await totpNext.isVisible({ timeout: 2000 }).catch(() => false)) {
+          await totpNext.click().catch(() => {});
+        }
+        await page.waitForTimeout(5000);
+      }
+
+      // Check for interstitial prompts like "Nicht jetzt" / "Not now" / "Passkey"
+      for (let i = 0; i < 4; i++) {
+        const skipBtn = page.locator('button:has-text("Nicht jetzt"), button:has-text("Überspringen"), button:has-text("Später"), button:has-text("Not now"), button:has-text("Skip")').first();
+        if (await skipBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+          console.log('Dismissing interstitial prompt...');
+          await skipBtn.click().catch(() => {});
+          await page.waitForTimeout(2000);
+        }
       }
 
       // Wait for navigation back to LSA
       console.log('Waiting for LSA Inbox page after login...');
-      await page.waitForURL(url => url.hostname.includes('ads.google.com'), { timeout: 60000 });
-      console.log('Login successful! Saving session state...');
+      try {
+        await page.waitForURL(url => url.hostname.includes('ads.google.com'), { timeout: 45000 });
+      } catch {
+        console.log('Re-navigating directly to INBOX_URL...');
+        await page.goto(INBOX_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
+      }
+      console.log('Current URL after login:', page.url());
       await context.storageState({ path: SESSION_PATH });
+      console.log('Saved session state to', SESSION_PATH);
     }
 
     // Wait for the table to render
