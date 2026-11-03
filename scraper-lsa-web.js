@@ -176,14 +176,16 @@ function saveData(data) {
 async function run() {
   console.log(`=== Starting 24/7 LSA Web Scraper for ${PROJECT} ===`);
   const browser = await chromium.launch({
-    headless: true,
+    channel: 'chrome',
+    headless: false,
     ignoreDefaultArgs: ['--enable-automation'],
     args: [
       '--disable-blink-features=AutomationControlled',
       '--no-sandbox',
       '--disable-setuid-sandbox',
       '--disable-infobars',
-      '--window-size=1920,1080'
+      '--window-size=1920,1080',
+      '--start-maximized'
     ]
   });
 
@@ -232,8 +234,8 @@ async function run() {
       const emailInput = page.locator('#identifierId, input[name="identifier"], input[type="email"], input[type="text"]').first();
       await emailInput.waitFor({ state: 'visible', timeout: 30000 });
       await emailInput.click();
-      await emailInput.fill(EMAIL);
-      await page.waitForTimeout(500);
+      await emailInput.pressSequentially(EMAIL, { delay: 80 });
+      await page.waitForTimeout(1000);
       await emailInput.press('Enter');
 
       const nextBtn = page.locator('#identifierNext button, #identifierNext, button:has-text("Weiter"), button:has-text("Next")').first();
@@ -247,8 +249,8 @@ async function run() {
       const passInput = page.locator('input[type="password"], input[name="Passwd"], input[name="password"]').first();
       await passInput.waitFor({ state: 'visible', timeout: 30000 });
       await passInput.click();
-      await passInput.fill(PASSWORD);
-      await page.waitForTimeout(500);
+      await passInput.pressSequentially(PASSWORD, { delay: 80 });
+      await page.waitForTimeout(1000);
       await passInput.press('Enter');
 
       const passNext = page.locator('#passwordNext button, #passwordNext, button:has-text("Weiter"), button:has-text("Next")').first();
@@ -286,8 +288,8 @@ async function run() {
         const code = generateTOTP(TOTP_SECRET);
         console.log('Generated fresh 6-digit TOTP code, entering...');
         await totpInput.click();
-        await totpInput.fill(code);
-        await page.waitForTimeout(500);
+        await totpInput.pressSequentially(code, { delay: 100 });
+        await page.waitForTimeout(1000);
         await totpInput.press('Enter');
 
         const totpNext = page.locator('#totpNext button, #totpNext, button:has-text("Weiter"), button:has-text("Next")').first();

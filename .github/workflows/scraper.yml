@@ -47,10 +47,11 @@ jobs:
             fi
           fi
 
-      - name: Install Playwright & Browsers
+      - name: Install Google Chrome, Xvfb & Playwright
         run: |
+          sudo apt-get update && sudo apt-get install -y xvfb
           npm install playwright
-          npx playwright install --with-deps chromium
+          npx playwright install --with-deps chrome
 
       - name: Run LSA Web Scraper (Standort & 2FA Login)
         continue-on-error: true
@@ -65,7 +66,7 @@ jobs:
           TELEGRAM_CHAT_ID_2: ${{ secrets.TELEGRAM_CHAT_ID_2 }}
           PROJECT_NAME: ${{ secrets.PROJECT_NAME || 'Sicher Reklam' }}
           DATA_PATH: 'data.json'
-        run: node scraper-lsa-web.js
+        run: xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" node scraper-lsa-web.js
 
       - name: Upload Screenshot on Error
         if: always()
