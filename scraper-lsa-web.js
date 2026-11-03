@@ -313,46 +313,54 @@ async function run() {
       const totpInput = page.locator(totpSelector).first();
       await totpInput.waitFor({ state: 'visible', timeout: 20000 });
 
-      // Ensure at least 6 seconds remaining in current TOTP window to prevent expiration during submit
-      const epoch = Math.floor(Date.now() / 1000);
-      const remainingSecs = 30 - (epoch % 30);
-      if (remainingSecs < 6) {
-        console.log(`Only ${remainingSecs}s left in TOTP window, waiting ${remainingSecs + 1}s for fresh window...`);
-        await page.waitForTimeout((remainingSecs + 1) * 1000);
-      }
-
-      const code = generateTOTP(TOTP_SECRET);
-      console.log(`Generated fresh 6-digit TOTP code (${code}), entering...`);
-      await totpInput.click();
-      await totpInput.fill('');
-      await totpInput.pressSequentially(code, { delay: 80 });
-      await page.waitForTimeout(1000);
-      await page.screenshot({ path: 'step4_totp_filled.png' }).catch(() => {});
-
-      // Check "Auf diesem Gerät nicht mehr nachfragen" if present
-      const trustDevice = page.locator('input[type="checkbox"], [role="checkbox"]').first();
-      if (await trustDevice.isVisible({ timeout: 2000 }).catch(() => false)) {
-        const isChecked = await trustDevice.isChecked().catch(() => false);
-        if (!isChecked) {
-          console.log('Checking "Auf diesem Gerät nicht mehr nachfragen"...');
-          await trustDevice.check().catch(() => {});
+      // Enter TOTP code with retry loop in case code is consumed or invalid
+      for (let attempt = 1; attempt <= 2; attempt++) {
+        const epoch = Math.floor(Date.now() / 1000);
+        const remainingSecs = 30 - (epoch % 30);
+        if (remainingSecs < 6) {
+          console.log(`Only ${remainingSecs}s left in TOTP window, waiting ${remainingSecs + 1}s for fresh window...`);
+          await page.waitForTimeout((remainingSecs + 1) * 1000);
         }
-      }
 
-      // Submit TOTP
-      console.log('Submitting TOTP code...');
-      await totpInput.press('Enter');
-      await page.waitForTimeout(1000);
-      const totpNext = page.locator('#totpNext button, #totpNext, button:has-text("Weiter"), button:has-text("Next")').first();
-      if (await totpNext.isVisible({ timeout: 3000 }).catch(() => false)) {
-        await totpNext.click().catch(() => {});
-      }
-      await page.waitForTimeout(6000);
-      await page.screenshot({ path: 'step5_after_totp.png' }).catch(() => {});
+        const code = generateTOTP(TOTP_SECRET);
+        console.log(`[Attempt ${attempt}/2] Generated fresh 6-digit TOTP code (${code}), entering...`);
+        await totpInput.click();
+        await totpInput.fill('');
+        await totpInput.pressSequentially(code, { delay: 80 });
+        await page.waitForTimeout(1000);
+        await page.screenshot({ path: `step4_totp_filled_att${attempt}.png` }).catch(() => {});
 
-      const errorTexts = await page.locator('[aria-live="assertive"], .o6cuMc, .jssub').allInnerTexts().catch(() => []);
-      if (errorTexts.length) {
-        console.log('Google Auth status/error message visible on page:', errorTexts.join(' | '));
+        // Check "Auf diesem Gerät nicht mehr nachfragen" if present
+        const trustDevice = page.locator('input[type="checkbox"], [role="checkbox"]').first();
+        if (await trustDevice.isVisible({ timeout: 2000 }).catch(() => false)) {
+          const isChecked = await trustDevice.isChecked().catch(() => false);
+          if (!isChecked) {
+            console.log('Checking "Auf diesem Gerät nicht mehr nachfragen"...');
+            await trustDevice.check().catch(() => {});
+          }
+        }
+
+        // Submit TOTP
+        console.log('Submitting TOTP code...');
+        await totpInput.press('Enter');
+        await page.waitForTimeout(1000);
+        const totpNext = page.locator('#totpNext button, #totpNext, button:has-text("Weiter"), button:has-text("Next")').first();
+        if (await totpNext.isVisible({ timeout: 3000 }).catch(() => false)) {
+          await totpNext.click().catch(() => {});
+        }
+        await page.waitForTimeout(6000);
+        await page.screenshot({ path: `step5_after_totp_att${attempt}.png` }).catch(() => {});
+
+        const hasErrorCode = await page.locator('*:has-text("Falscher Code"), *:has-text("Wrong code"), *:has-text("ungültig")').first().isVisible({ timeout: 1500 }).catch(() => false);
+        if (!hasErrorCode) {
+          console.log('TOTP code accepted!');
+          break;
+        }
+
+        if (attempt < 2) {
+          console.log('Google reported code invalid/consumed. Waiting 30s for next clean TOTP window before retry...');
+          await page.waitForTimeout(30000);
+        }
       }
 
       // Check for interstitial prompts like "Nicht jetzt" / "Not now" / "Passkey"
@@ -375,6 +383,13 @@ async function run() {
         console.log('Navigating directly to INBOX_URL...');
         await page.goto(INBOX_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
       }
+
+      // Ensure we are on INBOX_URL
+      if (!page.url().includes('/inbox')) {
+        console.log('Navigating to INBOX_URL:', INBOX_URL);
+        await page.goto(INBOX_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
+      }
+
       console.log('Current URL after login:', page.url());
       await page.waitForTimeout(3000);
       await page.screenshot({ path: 'step6_lsa_landing.png' }).catch(() => {});
