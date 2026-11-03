@@ -279,17 +279,33 @@ async function run() {
           await page.screenshot({ path: 'step3b_other_options.png' }).catch(() => {});
 
           console.log('Searching for Authenticator option in list...');
-          const authOption = page.locator('[role="link"], [role="button"], li, div[data-challengetype], div').filter({ hasText: /authenticator|authentifikator/i }).first();
-          if (await authOption.isVisible({ timeout: 6000 }).catch(() => false)) {
-            console.log('Clicking Authenticator option container...');
-            await authOption.click();
-          } else {
-            console.log('Attempting text search for Authenticator...');
-            const authText = page.getByText(/authenticator|authentifikator/i).first();
-            await authText.click().catch(e => console.log('Auth click error:', e.message));
+          const authClicked = await page.evaluate(() => {
+            const all = Array.from(document.querySelectorAll('*'));
+            const target = all.find(el => el.textContent && el.textContent.includes('Google Authenticator') && el.children.length === 0);
+            if (target) {
+              const clickable = target.closest('li, [role="link"], [role="button"]') || target;
+              clickable.click();
+              return true;
+            }
+            return false;
+          });
+
+          if (!authClicked) {
+            console.log('Fallback: clicking getByText Google Authenticator...');
+            const authText = page.getByText(/Google Authenticator/i).first();
+            await authText.click({ force: true }).catch(e => console.log('Auth click error:', e.message));
           }
+
           await page.waitForTimeout(3000);
           await page.screenshot({ path: 'step3c_authenticator_prompt.png' }).catch(() => {});
+
+          // In case page is still on selection list, retry clicking li container
+          const stillOnSelection = await page.locator('*:has-text("Wählen Sie aus, wie Sie sich anmelden möchten")').first().isVisible({ timeout: 2000 }).catch(() => false);
+          if (stillOnSelection) {
+            console.log('Still on selection list! Retrying click on li container...');
+            await page.locator('li:has-text("Google Authenticator"), [role="link"]:has-text("Google Authenticator")').first().click({ force: true }).catch(() => {});
+            await page.waitForTimeout(3000);
+          }
         }
       }
 
