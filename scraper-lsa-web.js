@@ -263,46 +263,80 @@ async function run() {
 
       // Step 3: 2FA TOTP
       console.log('Checking for 2FA challenge...');
-      await page.waitForTimeout(3000);
+      await page.waitForTimeout(4000);
       await page.screenshot({ path: 'step3_2fa_prompt.png' }).catch(() => {});
 
-      const totpSelector = 'input#totpPin, input[name="totpPin"], input[type="tel"], input[type="number"], input[autocomplete="one-time-code"]';
-      let totpInput = page.locator(totpSelector).first();
+      let bodyText = await page.evaluate(() => document.body ? document.body.innerText : '');
+      let isAuthenticatorScreen = /authenticator|authentifikator/i.test(bodyText) && !bodyText.includes('g.co/sc');
 
-      if (!await totpInput.isVisible().catch(() => false)) {
-        console.log('TOTP input not directly visible, checking for "Andere Option"...');
-        const tryAnother = page.locator('button:has-text("Andere"), div[role="button"]:has-text("Andere"), a:has-text("Andere"), button:has-text("Try another"), div[role="button"]:has-text("Try another")').first();
-        if (await tryAnother.isVisible({ timeout: 4000 }).catch(() => false)) {
-          console.log('Clicking "Andere Option"...');
+      if (!isAuthenticatorScreen) {
+        console.log('Current screen is not Authenticator (found Sicherheitscode g.co/sc or prompt). Looking for "Andere Option wählen"...');
+        const tryAnother = page.locator('button:has-text("Andere Option"), [role="button"]:has-text("Andere Option"), button:has-text("Try another"), [role="button"]:has-text("Try another"), button:has-text("Andere"), [role="button"]:has-text("Andere"), a:has-text("Andere")').first();
+        if (await tryAnother.isVisible({ timeout: 5000 }).catch(() => false)) {
+          console.log('Clicking "Andere Option wählen"...');
           await tryAnother.click();
-          await page.waitForTimeout(2500);
+          await page.waitForTimeout(3000);
+          await page.screenshot({ path: 'step3b_other_options.png' }).catch(() => {});
 
-          const authOption = page.locator('li:has-text("Authenticator"), div:has-text("Authenticator"), span:has-text("Authenticator"), li:has-text("Authentifikator"), div:has-text("Authentifikator"), span:has-text("Authentifikator"), li:has-text("Bestätigungscode"), div:has-text("Bestätigungscode")').first();
-          if (await authOption.isVisible({ timeout: 4000 }).catch(() => false)) {
-            console.log('Selecting Authenticator option from list...');
+          console.log('Searching for Authenticator option in list...');
+          const authOption = page.locator('[role="link"], [role="button"], li, div[data-challengetype], div').filter({ hasText: /authenticator|authentifikator/i }).first();
+          if (await authOption.isVisible({ timeout: 6000 }).catch(() => false)) {
+            console.log('Clicking Authenticator option container...');
             await authOption.click();
-            await page.waitForTimeout(2500);
+          } else {
+            console.log('Attempting text search for Authenticator...');
+            const authText = page.getByText(/authenticator|authentifikator/i).first();
+            await authText.click().catch(e => console.log('Auth click error:', e.message));
           }
+          await page.waitForTimeout(3000);
+          await page.screenshot({ path: 'step3c_authenticator_prompt.png' }).catch(() => {});
         }
       }
 
-      totpInput = page.locator(totpSelector).first();
-      if (await totpInput.isVisible({ timeout: 15000 }).catch(() => false)) {
-        const code = generateTOTP(TOTP_SECRET);
-        console.log(`Generated fresh 6-digit TOTP code (${code}), entering...`);
-        await totpInput.click();
-        await totpInput.pressSequentially(code, { delay: 80 });
-        await page.waitForTimeout(1000);
-        await page.screenshot({ path: 'step4_totp_filled.png' }).catch(() => {});
+      const totpSelector = 'input#totpPin, input[name="totpPin"], input[type="tel"], input[type="number"], input[type="text"]';
+      const totpInput = page.locator(totpSelector).first();
+      await totpInput.waitFor({ state: 'visible', timeout: 20000 });
 
-        // Submit TOTP
-        await totpInput.press('Enter');
-        const totpNext = page.locator('#totpNext button, #totpNext, button:has-text("Weiter"), button:has-text("Next")').first();
-        if (await totpNext.isVisible({ timeout: 3000 }).catch(() => false)) {
-          await totpNext.click().catch(() => {});
+      // Ensure at least 6 seconds remaining in current TOTP window to prevent expiration during submit
+      const epoch = Math.floor(Date.now() / 1000);
+      const remainingSecs = 30 - (epoch % 30);
+      if (remainingSecs < 6) {
+        console.log(`Only ${remainingSecs}s left in TOTP window, waiting ${remainingSecs + 1}s for fresh window...`);
+        await page.waitForTimeout((remainingSecs + 1) * 1000);
+      }
+
+      const code = generateTOTP(TOTP_SECRET);
+      console.log(`Generated fresh 6-digit TOTP code (${code}), entering...`);
+      await totpInput.click();
+      await totpInput.fill('');
+      await totpInput.pressSequentially(code, { delay: 80 });
+      await page.waitForTimeout(1000);
+      await page.screenshot({ path: 'step4_totp_filled.png' }).catch(() => {});
+
+      // Check "Auf diesem Gerät nicht mehr nachfragen" if present
+      const trustDevice = page.locator('input[type="checkbox"], [role="checkbox"]').first();
+      if (await trustDevice.isVisible({ timeout: 2000 }).catch(() => false)) {
+        const isChecked = await trustDevice.isChecked().catch(() => false);
+        if (!isChecked) {
+          console.log('Checking "Auf diesem Gerät nicht mehr nachfragen"...');
+          await trustDevice.check().catch(() => {});
         }
-        await page.waitForTimeout(6000);
-        await page.screenshot({ path: 'step5_after_totp.png' }).catch(() => {});
+      }
+
+      // Submit TOTP
+      console.log('Submitting TOTP code...');
+      await totpInput.press('Enter');
+      await page.waitForTimeout(1000);
+      const totpNext = page.locator('#totpNext button, #totpNext, button:has-text("Weiter"), button:has-text("Next")').first();
+      if (await totpNext.isVisible({ timeout: 3000 }).catch(() => false)) {
+        await totpNext.click().catch(() => {});
+      }
+      await page.waitForTimeout(6000);
+      await page.screenshot({ path: 'step5_after_totp.png' }).catch(() => {});
+
+      const errorTexts = await page.locator('[aria-live="assertive"], .o6cuMc, .jssub').allInnerTexts().catch(() => []);
+      if (errorTexts.length) {
+        console.log('Google Auth status/error message visible on page:', errorTexts.join(' | '));
       }
 
       // Check for interstitial prompts like "Nicht jetzt" / "Not now" / "Passkey"
@@ -318,15 +352,24 @@ async function run() {
       // Wait for navigation back to LSA
       console.log('Waiting for ads.google.com navigation...');
       try {
-        await page.waitForURL(url => url.hostname.includes('ads.google.com'), { timeout: 45000 });
+        await page.waitForURL(url => url.hostname.includes('ads.google.com'), { timeout: 60000 });
+        console.log('Successfully navigated to ads.google.com! URL:', page.url());
       } catch {
         console.log('Not yet on ads.google.com, current URL:', page.url());
         console.log('Navigating directly to INBOX_URL...');
         await page.goto(INBOX_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
       }
       console.log('Current URL after login:', page.url());
+      await page.waitForTimeout(3000);
+      await page.screenshot({ path: 'step6_lsa_landing.png' }).catch(() => {});
       await context.storageState({ path: SESSION_PATH });
       console.log('Saved session state to', SESSION_PATH);
+    }
+
+    // Dismiss any Ads modals or dialogs if present
+    const dialogCloseBtn = page.locator('[aria-label="Schließen"], [aria-label="Close"], button:has-text("Verstanden"), button:has-text("Got it")').first();
+    if (await dialogCloseBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+      await dialogCloseBtn.click().catch(() => {});
     }
 
     // Wait for the table to render
