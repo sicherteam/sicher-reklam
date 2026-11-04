@@ -1,6 +1,24 @@
 {
-  "updatedAt": "4.11.2026, 15:55:13",
+  "updatedAt": "4.11.2026, 17:43:56",
   "leads": [
+    {
+      "id": "lsa:3226096935:350028828",
+      "Musteri": "+436764276386",
+      "Telefon": "+436764276386",
+      "Telefon2": null,
+      "Hizmet": "xcat:service_area_business_mover",
+      "Konum": "-",
+      "Tarih": "04.11.2026 19:41",
+      "Mesaj": "-",
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "telegramSent": true,
+      "googleLeadId": "350028828",
+      "googleLeadResource": "customers/3226096935/localServicesLeads/350028828",
+      "leadType": "PHONE_CALL",
+      "leadStatus": "ACTIVE"
+    },
     {
       "id": "lsa:3226096935:349669129",
       "Musteri": "Kunde",
@@ -5276,6 +5294,23 @@
       "conversationCount": 0,
       "lastConversationId": null,
       "isMessageUpdate": false
+    },
+    {
+      "id": "lsa:web:3226096935:350028828",
+      "Musteri": "0676 4276386",
+      "Telefon": "0676 4276386",
+      "Telefon2": null,
+      "Hizmet": "-",
+      "Konum": "Amstetten",
+      "Tarih": "04.11.26 4:41 PM",
+      "Mesaj": "-",
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "telegramSent": true,
+      "googleLeadId": "350028828",
+      "leadType": "PHONE_CALL",
+      "leadStatus": "Nicht belastet"
     }
   ]
 }
