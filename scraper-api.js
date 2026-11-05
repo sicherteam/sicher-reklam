@@ -494,7 +494,15 @@ function gitPush() {
 
 async function main() {
   if (!/^\d{10}$/.test(CUSTOMER_ID)) throw new Error('GOOGLE_ADS_CUSTOMER_ID must be 10 digits');
-  const token = await accessToken();
+  let token;
+  try {
+    token = await accessToken();
+  } catch (err) {
+    console.warn(`\n⚠️ GOOGLE_REFRESH_TOKEN süresi dolmuş veya geçersiz: ${err.message}`);
+    console.warn('Google Cloud "Testing" modundaki OAuth tokenları 7 gün sonra sona erer.');
+    console.warn('Web Scraper (2FA) arka planda müşteri ve konum bilgilerini çekmeye devam ediyor.');
+    return;
+  }
   if (CHECK) return check(token);
   const imported = await fetchLeads(token);
   const current = loadData();

@@ -77,6 +77,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: Google Ads API Senkronizasyonunu Çalıştır
+        continue-on-error: true
         env:
           GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID || '3226096935' }}
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}

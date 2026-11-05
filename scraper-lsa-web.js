@@ -430,7 +430,7 @@ async function run() {
     }
 
     // Check if on /verification screen (e.g. Sicher account) and navigate to "Anfragen" (inbox)
-    if (page.url().includes('/verification') || await page.locator('*:has-text("Unternehmensüberprüfung")').first().isVisible({ timeout: 2000 }).catch(() => false)) {
+    if (page.url().includes('/verification')) {
       console.log('Detected verification screen! Transitioning to "Anfragen" (inbox)...');
       await page.screenshot({ path: 'step_verification_screen.png' }).catch(() => {});
 
@@ -514,8 +514,15 @@ async function run() {
 
     // Wait for the table to render
     console.log('Waiting for inbox table or download button...');
-    await page.waitForSelector('button:has-text("HERUNTERLADEN"), [role="table"], table, tr', { timeout: 45000 });
-    await page.waitForTimeout(4000);
+    const downloadBtnLocator = page.locator('button:has-text("HERUNTERLADEN"), [aria-label*="Herunterladen" i], [aria-label*="Download" i]').first();
+    const tableRowLocator = page.locator('[role="row"]').nth(1);
+
+    await Promise.any([
+      downloadBtnLocator.waitFor({ state: 'visible', timeout: 30000 }),
+      tableRowLocator.waitFor({ state: 'visible', timeout: 30000 }),
+      page.waitForTimeout(10000)
+    ]).catch(() => {});
+    await page.waitForTimeout(2000);
 
     // Method A: Click HERUNTERLADEN to get official CSV
     let leads = [];
