@@ -333,6 +333,32 @@ async function sendTelegram(lead) {
   lines.push(`<b>Ort:</b> ${htmlEscape(lead.Konum && lead.Konum !== '-' ? lead.Konum : '-')}`);
   lines.push(`<b>Datum:</b> ${htmlEscape(lead.Tarih || '-')}`);
 
+  const serviceMap = {
+    'local_move': 'Innerörtlicher Umzug',
+    'long_distance_move': 'Fernumzug',
+    'packing_service': 'Packservice',
+    'furniture_assembly': 'Möbelmontage',
+    'commercial_move': 'Gewerblicher Umzug',
+    'junk_removal': 'Entrümpelung',
+    'storage': 'Lagerung',
+  };
+  const jobTitle = serviceMap[lead.Hizmet] || lead.Hizmet;
+  if (jobTitle && jobTitle !== '-' && !jobTitle.startsWith('xcat:')) {
+    lines.push(`<b>Dienstleistung:</b> ${htmlEscape(jobTitle)}`);
+  }
+  const statusMap = {
+    'NEW': 'Wird überprüft',
+    'ACTIVE': 'Wird überprüft',
+    'BOOKED': 'Gebucht',
+    'DECLINED': 'Abgelehnt',
+    'EXPIRED': 'Abgelaufen'
+  };
+  const cleanLeadStatus = (lead.leadStatus || '').replace(/help_outline/gi, '').trim();
+  const displayStatus = statusMap[cleanLeadStatus] || cleanLeadStatus;
+  if (displayStatus && displayStatus !== '-') {
+    lines.push(`<b>Status:</b> ${htmlEscape(displayStatus)}`);
+  }
+
   const convs = lead.conversations || [];
   if (convs.length === 1) {
     const c = convs[0];

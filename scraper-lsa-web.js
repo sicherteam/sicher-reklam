@@ -59,6 +59,13 @@ function generateTOTP(secret, timeStep = 30) {
   return code.toString().padStart(6, '0');
 }
 
+function cleanStatus(str) {
+  return String(str || '')
+    .replace(/help_outline/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function htmlEscape(value) {
   return String(value ?? '-').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
@@ -80,7 +87,7 @@ async function sendTelegram(lead) {
     return;
   }
 
-  const isMsg = lead.art?.toLowerCase().includes('nachricht') || lead.art?.toLowerCase().includes('sms');
+  const isMsg = lead.art?.toLowerCase().includes('nachricht') || lead.art?.toLowerCase().includes('sms') || lead.leadType === 'MESSAGE';
   const header = isMsg
     ? `💬 <b>NEUER Kunde (Nachricht)!</b> (${htmlEscape(PROJECT)})`
     : `📞 <b>NEUER Kunde (Tel)!</b> (${htmlEscape(PROJECT)})`;
@@ -94,11 +101,30 @@ async function sendTelegram(lead) {
   if (lead.jobtyp && lead.jobtyp !== '-') {
     lines.push(`<b>Dienstleistung:</b> ${htmlEscape(lead.jobtyp)}`);
   }
-  if (lead.status && lead.status !== '-') {
-    lines.push(`<b>Status:</b> ${htmlEscape(lead.status)}`);
+  const statusClean = cleanStatus(lead.status);
+  if (statusClean && statusClean !== '-') {
+    lines.push(`<b>Status:</b> ${htmlEscape(statusClean)}`);
   }
-  if (lead.leadId) {
-    lines.push(`\n<code>#LSA-${CUSTOMER_ID}-${lead.leadId}</code>`);
+
+  // Include message content if present
+  const convs = lead.conversations || [];
+  if (convs.length === 1) {
+    const c = convs[0];
+    const timeStr = c.time ? ` ${c.time}` : '';
+    lines.push(`\n<b>Nachricht:${timeStr}</b>\n${htmlEscape(c.text)}`);
+  } else if (convs.length > 1) {
+    for (let i = 0; i < convs.length; i++) {
+      const c = convs[i];
+      const timeStr = c.time ? ` ${c.time}` : '';
+      lines.push(`\n<b>Nachricht ${i + 1}:${timeStr}</b>\n${htmlEscape(c.text)}`);
+    }
+  } else if (lead.mesaj && lead.mesaj !== '-') {
+    lines.push(`\n<b>Nachricht:</b>\n${htmlEscape(lead.mesaj)}`);
+  }
+
+  // ONLY output #LSA tag for Nachricht (messages), NEVER for Tel (calls)!
+  if (isMsg && lead.leadId) {
+    lines.push(`\n💬 <i>Antworten = Nachricht an Kunden</i> · <code>#LSA-${CUSTOMER_ID}-${lead.leadId}</code>`);
   }
 
   const text = lines.join('\n');
