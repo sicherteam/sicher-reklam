@@ -1,5 +1,5 @@
 {
-  "updatedAt": "5.11.2026, 09:31:13",
+  "updatedAt": "5.11.2026, 10:20:15",
   "leads": [
     {
       "id": "lsa:3226096935:350028828",
@@ -28,23 +28,29 @@
       "Hizmet": "local_move",
       "Konum": "Wien",
       "Tarih": "03.11.2026 15:28",
-      "Mesaj": "Hallo, Ich bräuchte bitte ein Angebot für einen Umzug von Riedlingsdorf nach Pinkafeld. Ende November Anfang Dezember. Von den Regalen sind es 7 , 2 andere etwas größere Regale 1 Schreibtisch ca 1.80 lang 1 eckschreibtisch, 1 Waschmaschine welche in den 2ten Stock gehört. 1 Wz- Tisch. Umzugskarton ca 30-40 Im Kellerabteil der alten Wohnung ca 5 kisten und einige Bretter  Mfg Susanne Wais",
+      "Mesaj": "Hallo, Ich bräuchte bitte ein Angebot für einen Umzug von Riedlingsdorf nach Pinkafeld. Ende November Anfang Dezember. Von den Regalen sind es 7 , 2 andere etwas größere Regale 1 Schreibtisch ca 1.80 lang 1 eckschreibtisch, 1 Waschmaschine welche in den 2ten Stock gehört. 1 Wz- Tisch. Umzugskarton ca 30-40 Im Kellerabteil der alten Wohnung ca 5 kisten und einige Bretter  Mfg Susanne Wais\n\nWäre für Sie der Termin 03.12 2026 möglich ?\n\nMit freundlichen Grüßen Susanne Wais\n\nVon meinem/meiner Galaxy gesendet\n\n-------- Ursprüngliche Nachricht --------\nVon: Sicherteam Umzug & Räumung",
       "conversations": [
         {
           "id": "3411142790",
           "date": "2026-11-03 15:28:42.97343",
           "time": "15:28",
           "text": "Hallo, Ich bräuchte bitte ein Angebot für einen Umzug von Riedlingsdorf nach Pinkafeld. Ende November Anfang Dezember. Von den Regalen sind es 7 , 2 andere etwas größere Regale 1 Schreibtisch ca 1.80 lang 1 eckschreibtisch, 1 Waschmaschine welche in den 2ten Stock gehört. 1 Wz- Tisch. Umzugskarton ca 30-40 Im Kellerabteil der alten Wohnung ca 5 kisten und einige Bretter  Mfg Susanne Wais"
+        },
+        {
+          "id": "3411904493",
+          "date": "2026-11-05 12:18:12.419",
+          "time": "12:18",
+          "text": "Wäre für Sie der Termin 03.12 2026 möglich ?\n\nMit freundlichen Grüßen Susanne Wais\n\nVon meinem/meiner Galaxy gesendet\n\n-------- Ursprüngliche Nachricht --------\nVon: Sicherteam Umzug & Räumung"
         }
       ],
-      "conversationCount": 1,
-      "lastConversationId": "3411142790",
+      "conversationCount": 2,
+      "lastConversationId": "3411904493",
       "telegramSent": true,
       "googleLeadId": "349669129",
       "googleLeadResource": "customers/3226096935/localServicesLeads/349669129",
       "leadType": "MESSAGE",
       "leadStatus": "ACTIVE",
-      "isMessageUpdate": false
+      "isMessageUpdate": true
     },
     {
       "id": "lsa:3226096935:349664662",
