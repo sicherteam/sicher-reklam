@@ -260,6 +260,23 @@ function dateSortKey(value) {
   return `${y}${m[2]}${m[1]}${m[4]}${m[5]}`;
 }
 
+function encodeZeroWidthTag(cid, lid) {
+  try {
+    const payload = `${cid}:${lid}`;
+    let bin = '';
+    for (let i = 0; i < payload.length; i++) {
+      bin += payload.charCodeAt(i).toString(2).padStart(8, '0');
+    }
+    let zw = '\u200D';
+    for (const b of bin) {
+      zw += (b === '1' ? '\u200C' : '\u200B');
+    }
+    return zw + '\u200D';
+  } catch {
+    return '';
+  }
+}
+
 function normalizePhone(p) {
   if (!p) return '';
   let s = String(p).replace(/\D/g, '');
@@ -369,7 +386,7 @@ async function sendTelegram(lead) {
   }
 
   if (isMsg && lead.googleLeadId) {
-    lines.push(`\n💬 <i>Nachricht an Kunden möglich</i> · <code>#Antwort-${CUSTOMER_ID}-${lead.googleLeadId}</code>`);
+    lines.push(`\n💬 <i>Nachricht an Kunden möglich</i>${encodeZeroWidthTag(CUSTOMER_ID, lead.googleLeadId)}`);
   }
 
   const message = lines.join('\n');

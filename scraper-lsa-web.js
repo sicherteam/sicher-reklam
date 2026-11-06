@@ -554,7 +554,14 @@ async function run() {
     const domRows = await page.evaluate(() => {
       const rows = Array.from(document.querySelectorAll('tr, [role="row"]'));
       return rows.map(r => {
-        const cells = Array.from(r.querySelectorAll('td, [role="cell"]')).map(c => c.innerText.trim());
+        const cells = Array.from(r.querySelectorAll('td, [role="cell"]')).map(c => {
+          const title = c.getAttribute('title') || c.querySelector('[title]')?.getAttribute('title');
+          const aria = c.getAttribute('aria-label') || c.querySelector('[aria-label]')?.getAttribute('aria-label');
+          const text = c.innerText.trim();
+          if (title && (text.endsWith('...') || text.endsWith('…') || title.length > text.length)) return title.trim();
+          if (aria && (text.endsWith('...') || text.endsWith('…') || aria.length > text.length)) return aria.trim();
+          return text;
+        });
         return cells;
       }).filter(cells => cells.length >= 5);
     });
