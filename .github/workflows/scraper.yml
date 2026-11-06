@@ -98,7 +98,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          git add data.json
+          git add data.json standort-cache.json
           
           if git diff --staged --quiet; then
             echo "✅ Veriler güncel, commit atlanıyor."

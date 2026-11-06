@@ -260,6 +260,14 @@ function dateSortKey(value) {
   return `${y}${m[2]}${m[1]}${m[4]}${m[5]}`;
 }
 
+function normalizePhone(p) {
+  if (!p) return '';
+  let s = String(p).replace(/\D/g, '');
+  if (s.startsWith('43')) s = '0' + s.slice(2);
+  if (s.startsWith('0043')) s = '0' + s.slice(4);
+  return s;
+}
+
 function htmlEscape(value) {
   return String(value ?? '-').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
@@ -332,20 +340,6 @@ async function sendTelegram(lead) {
 
   lines.push(`<b>Ort:</b> ${htmlEscape(lead.Konum && lead.Konum !== '-' ? lead.Konum : '-')}`);
   lines.push(`<b>Datum:</b> ${htmlEscape(lead.Tarih || '-')}`);
-
-  const serviceMap = {
-    'local_move': 'Innerörtlicher Umzug',
-    'long_distance_move': 'Fernumzug',
-    'packing_service': 'Packservice',
-    'furniture_assembly': 'Möbelmontage',
-    'commercial_move': 'Gewerblicher Umzug',
-    'junk_removal': 'Entrümpelung',
-    'storage': 'Lagerung',
-  };
-  const jobTitle = serviceMap[lead.Hizmet] || lead.Hizmet;
-  if (jobTitle && jobTitle !== '-' && !jobTitle.startsWith('xcat:')) {
-    lines.push(`<b>Dienstleistung:</b> ${htmlEscape(jobTitle)}`);
-  }
   const statusMap = {
     'NEW': 'Wird überprüft',
     'ACTIVE': 'Wird überprüft',
@@ -375,7 +369,7 @@ async function sendTelegram(lead) {
   }
 
   if (isMsg && lead.googleLeadId) {
-    lines.push(`\n💬 <i>Antworten = Nachricht an Kunden</i> · <code>#LSA-${CUSTOMER_ID}-${lead.googleLeadId}</code>`);
+    lines.push(`\n💬 <i>Nachricht an Kunden möglich</i> · <code>#Antwort-${CUSTOMER_ID}-${lead.googleLeadId}</code>`);
   }
 
   const message = lines.join('\n');
@@ -506,6 +500,28 @@ async function main() {
   if (CHECK) return check(token);
   const imported = await fetchLeads(token);
   const current = loadData();
+
+  // Load location map from standort-cache.json & existing leads
+  const standortCachePath = path.resolve('standort-cache.json');
+  const locationMap = new Map();
+  if (fs.existsSync(standortCachePath)) {
+    try {
+      const cache = JSON.parse(fs.readFileSync(standortCachePath, 'utf8'));
+      for (const [k, v] of Object.entries(cache)) {
+        if (v && v !== '-') locationMap.set(String(k), v);
+      }
+    } catch {}
+  }
+  for (const l of current.leads) {
+    if (l.Konum && l.Konum !== '-' && l.Konum !== DEFAULT_LOCATION) {
+      if (l.googleLeadId) locationMap.set(String(l.googleLeadId), l.Konum);
+      const np = normalizePhone(l.Telefon || l.Musteri);
+      if (np) locationMap.set(np, l.Konum);
+    }
+  }
+
+  // Remove any legacy duplicate lsa:web: records from current.leads
+  current.leads = current.leads.filter(l => !String(l.id).startsWith(`lsa:web:`));
   const byId = new Map(current.leads.map(l => [l.id, l]));
 
   // Build a set of ALL IDs that have ever been sent to Telegram
@@ -523,7 +539,25 @@ async function main() {
 
   let added = 0, changed = 0;
   for (const lead of imported) {
-    const old = byId.get(lead.id);
+    const np = normalizePhone(lead.Telefon);
+
+    // Match old record by ID, googleLeadId or phone
+    let old = byId.get(lead.id);
+    if (!old && lead.googleLeadId) {
+      old = current.leads.find(l => l.googleLeadId && String(l.googleLeadId) === String(lead.googleLeadId));
+    }
+    if (!old && np) {
+      old = current.leads.find(l => normalizePhone(l.Telefon || l.Musteri) === np);
+    }
+
+    // Resolve location from browser scraper cache or existing records
+    const resolvedLoc = (lead.googleLeadId && locationMap.get(String(lead.googleLeadId))) ||
+                        (np && locationMap.get(np)) ||
+                        (old && old.Konum && old.Konum !== '-' && old.Konum !== DEFAULT_LOCATION ? old.Konum : null);
+    if (resolvedLoc && resolvedLoc !== '-') {
+      lead.Konum = resolvedLoc;
+    }
+
     const wasSent = (old && old.telegramSent) || 
                     sentIds.has(String(lead.googleLeadId)) || 
                     sentIds.has(String(lead.id));
@@ -542,19 +576,16 @@ async function main() {
       added++;
       byId.set(lead.id, { ...lead, telegramSent: BOOTSTRAP ? true : wasSent });
     } else {
-      // Re-trigger notification ONLY if a customer sent a brand-new follow-up message
       const shouldNotify = hasNewMessage && !BOOTSTRAP;
       const merged = { 
         ...old, 
         ...lead, 
+        Konum: (resolvedLoc && resolvedLoc !== '-') ? resolvedLoc : (old.Konum && old.Konum !== '-' ? old.Konum : lead.Konum),
         telegramSent: shouldNotify ? false : wasSent,
         isMessageUpdate: shouldNotify
       };
 
       if (lead.Telefon2) merged.Telefon2 = lead.Telefon2;
-      if (old.Konum && old.Konum !== '-' && old.Konum !== DEFAULT_LOCATION) {
-        merged.Konum = old.Konum;
-      }
       if (JSON.stringify(old) !== JSON.stringify(merged)) changed++;
       byId.set(lead.id, merged);
     }

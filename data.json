@@ -5301,23 +5301,6 @@
       "conversationCount": 0,
       "lastConversationId": null,
       "isMessageUpdate": false
-    },
-    {
-      "id": "lsa:web:3226096935:350028828",
-      "Musteri": "0676 4276386",
-      "Telefon": "0676 4276386",
-      "Telefon2": null,
-      "Hizmet": "-",
-      "Konum": "Amstetten",
-      "Tarih": "04.11.26 4:41 PM",
-      "Mesaj": "-",
-      "conversations": [],
-      "conversationCount": 0,
-      "lastConversationId": null,
-      "telegramSent": true,
-      "googleLeadId": "350028828",
-      "leadType": "PHONE_CALL",
-      "leadStatus": "Nicht belastet"
     }
   ]
 }

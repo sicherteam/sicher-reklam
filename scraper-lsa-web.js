@@ -20,7 +20,7 @@ if (typeof process.loadEnvFile === 'function' && fs.existsSync('.env')) {
 const EMAIL = process.env.GOOGLE_EMAIL || 'atsicherteam@gmail.com';
 const PASSWORD = process.env.GOOGLE_PASSWORD;
 const TOTP_SECRET = (process.env.GOOGLE_2FA_SECRET || '5gzwaIwsz2ehseiz2hjbdokz23rwmsan').replace(/\s+/g, '');
-const INBOX_URL = process.env.LSA_INBOX_URL || 'https://ads.google.com/localservices/inbox?cid=9203255169&bid=11049534709&pid=9999999999&euid=8501543550&hl=de&gl=AT';
+const INBOX_URL = process.env.LSA_INBOX_URL || 'https://ads.google.com/localservices/inbox?cid=5731737435&bid=10985584555&pid=9999999999&euid=3547106212&hl=de-AT&gl=AT';
 const PROJECT = process.env.PROJECT_NAME || 'Sicher Reklam';
 const CUSTOMER_ID = (process.env.GOOGLE_ADS_CUSTOMER_ID || '3226096935').replace(/-/g, '');
 const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -185,7 +185,11 @@ function parseCsv(csvText) {
 }
 
 function normalizePhone(p) {
-  return String(p || '').replace(/\D/g, '').replace(/^43/, '0');
+  if (!p) return '';
+  let s = String(p).replace(/\D/g, '');
+  if (s.startsWith('43')) s = '0' + s.slice(2);
+  if (s.startsWith('0043')) s = '0' + s.slice(4);
+  return s;
 }
 
 function loadData() {
@@ -588,79 +592,59 @@ async function run() {
 
     console.log(`Final processed leads count: ${leads.length}`);
 
-    // Sync with data.json
+    // 1. Save extracted standorte to standort-cache.json
+    const standortCachePath = path.resolve('standort-cache.json');
+    let standortCache = {};
+    if (fs.existsSync(standortCachePath)) {
+      try { standortCache = JSON.parse(fs.readFileSync(standortCachePath, 'utf8')); } catch {}
+    }
+    for (const lead of leads) {
+      if (lead.kunde === 'Kunde' || lead.kunde === 'Customer') continue;
+      if (lead.standort && lead.standort !== '-' && lead.standort !== 'Standort') {
+        if (lead.leadId && /^\d+$/.test(lead.leadId)) standortCache[String(lead.leadId)] = lead.standort;
+        const norm = normalizePhone(lead.kunde);
+        if (norm) standortCache[norm] = lead.standort;
+      }
+    }
+    if (Array.isArray(domRows)) {
+      for (const dRow of domRows) {
+        if (!dRow || dRow[0] === 'Kunde' || dRow[0] === 'Customer') continue;
+        const dLoc = dRow[3];
+        const dId = dRow[dRow.length - 1];
+        const norm = normalizePhone(dRow[0]);
+        if (dLoc && dLoc !== '-' && dLoc !== 'Standort') {
+          if (dId && /^\d+$/.test(dId)) standortCache[String(dId)] = dLoc;
+          if (norm) standortCache[norm] = dLoc;
+        }
+      }
+    }
+    fs.writeFileSync(standortCachePath, JSON.stringify(standortCache, null, 2), 'utf8');
+    console.log(`Saved ${Object.keys(standortCache).length} location mappings to standort-cache.json`);
+
+    // 2. Sync location updates directly into existing data.json leads (NO DUPLICATE ENTRIES, NO TELEGRAM HERE)
     const data = loadData();
     const existingLeads = data.leads || [];
     let updatedCount = 0;
-    let newCount = 0;
 
-    for (const lead of leads) {
-      const normPhone = normalizePhone(lead.kunde);
-      
-      // Match by leadId or phone
-      let matched = existingLeads.find(l => {
-        if (lead.leadId && l.googleLeadId && String(l.googleLeadId) === String(lead.leadId)) return true;
-        if (normPhone && l.Telefon && normalizePhone(l.Telefon) === normPhone) return true;
-        return false;
-      });
-
-      if (matched) {
-        // Update location if it was missing or default
-        if (lead.standort && lead.standort !== '-' && matched.Konum !== lead.standort) {
-          console.log(`Updating location for ${matched.Musteri || matched.Telefon}: ${matched.Konum} -> ${lead.standort}`);
-          matched.Konum = lead.standort;
+    for (const l of existingLeads) {
+      if (!l.Konum || l.Konum === '-') {
+        const loc = (l.googleLeadId && standortCache[String(l.googleLeadId)]) ||
+                    (l.Telefon && standortCache[normalizePhone(l.Telefon)]) ||
+                    (l.Musteri && standortCache[normalizePhone(l.Musteri)]);
+        if (loc && loc !== '-') {
+          console.log(`Updated location for ${l.Musteri || l.Telefon}: ${l.Konum} -> ${loc}`);
+          l.Konum = loc;
           updatedCount++;
         }
-        // If telegram wasn't sent yet, send it with the real location!
-        if (!matched.telegramSent) {
-          console.log(`Sending pending Telegram alert for ${matched.Musteri || matched.Telefon} with Ort: ${matched.Konum}`);
-          await sendTelegram({
-            kunde: matched.Musteri || matched.Telefon,
-            standort: matched.Konum,
-            datum: matched.Tarih,
-            jobtyp: matched.Hizmet,
-            status: matched.leadStatus,
-            art: matched.leadType === 'MESSAGE' ? 'Nachricht' : 'Telefon',
-            leadId: matched.googleLeadId
-          });
-          matched.telegramSent = true;
-          updatedCount++;
-        }
-      } else {
-        // Brand new lead found from web inbox
-        console.log(`New lead from web inbox: ${lead.kunde} (${lead.standort}) - ${lead.art}`);
-        const newLeadObj = {
-          id: `lsa:web:${CUSTOMER_ID}:${lead.leadId || Date.now()}`,
-          Musteri: lead.kunde || 'Kunde',
-          Telefon: lead.kunde?.match(/\d{4,}/) ? lead.kunde : null,
-          Telefon2: null,
-          Hizmet: lead.jobtyp || '-',
-          Konum: lead.standort && lead.standort !== '-' ? lead.standort : '-',
-          Tarih: lead.datum || '-',
-          Mesaj: '-',
-          conversations: [],
-          conversationCount: 0,
-          lastConversationId: null,
-          telegramSent: false,
-          googleLeadId: lead.leadId || null,
-          leadType: lead.art?.toLowerCase().includes('telefon') ? 'PHONE_CALL' : 'MESSAGE',
-          leadStatus: lead.status || 'ACTIVE'
-        };
-
-        // Send Telegram immediately
-        await sendTelegram(lead);
-        newLeadObj.telegramSent = true;
-        existingLeads.unshift(newLeadObj);
-        newCount++;
       }
     }
 
-    if (updatedCount > 0 || newCount > 0) {
-      console.log(`Saving data.json: ${newCount} new leads, ${updatedCount} updated.`);
+    if (updatedCount > 0) {
+      console.log(`Saving data.json: ${updatedCount} locations updated.`);
       data.updatedAt = new Date().toLocaleString('de-AT', { timeZone: 'Europe/Vienna' });
       saveData(data);
     } else {
-      console.log('No new leads or location changes.');
+      console.log('Location sync complete. All existing leads in data.json have locations.');
     }
 
   } catch (err) {
