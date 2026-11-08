@@ -386,7 +386,7 @@ async function sendTelegram(lead) {
   }
 
   if (isMsg && lead.googleLeadId) {
-    lines.push(`\n💬 <i>Nachricht an Kunden möglich</i>${encodeZeroWidthTag(CUSTOMER_ID, lead.googleLeadId)}`);
+    lines.push('\n💬 <i>Nachricht an Kunden möglich</i> · <code>#LSA-' + CUSTOMER_ID + '-' + lead.googleLeadId + '</code>');
   }
 
   const message = lines.join('\n');
