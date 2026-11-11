@@ -1,6 +1,31 @@
 {
-  "updatedAt": "11.11.2026, 09:24:54",
+  "updatedAt": "12.11.2026, 00:04:40",
   "leads": [
+    {
+      "id": "lsa:3226096935:350949899",
+      "Musteri": "Hedi Weindl",
+      "Telefon": "+4369910581256",
+      "Telefon2": null,
+      "Hizmet": "moving_transportation",
+      "Konum": "Wien",
+      "Tarih": "11.11.2026 16:49",
+      "Mesaj": "Ich möchte ein Piano von einer Wohnung in 1050, (erster Stock) nach 1210 (Erdgeschoss) transportieren lassen. was würde das bitte kosten? Mit freundlichen Grüßen H.Weindl",
+      "conversations": [
+        {
+          "id": "3413032518",
+          "date": "2026-11-11 16:49:32.323923",
+          "time": "16:49",
+          "text": "Ich möchte ein Piano von einer Wohnung in 1050, (erster Stock) nach 1210 (Erdgeschoss) transportieren lassen. was würde das bitte kosten? Mit freundlichen Grüßen H.Weindl"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3413032518",
+      "telegramSent": true,
+      "googleLeadId": "350949899",
+      "googleLeadResource": "customers/3226096935/localServicesLeads/350949899",
+      "leadType": "MESSAGE",
+      "leadStatus": "NEW"
+    },
     {
       "id": "lsa:3226096935:350697902",
       "Musteri": "+4369981809195",
