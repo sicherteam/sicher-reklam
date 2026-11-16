@@ -1,6 +1,31 @@
 {
-  "updatedAt": "16.11.2026, 12:31:45",
+  "updatedAt": "16.11.2026, 22:15:58",
   "leads": [
+    {
+      "id": "lsa:3226096935:352385820",
+      "Musteri": "Kunde",
+      "Telefon": null,
+      "Telefon2": null,
+      "Hizmet": "moving_transportation",
+      "Konum": "Wien",
+      "Tarih": "16.11.2026 18:16",
+      "Mesaj": "Sehr geehrte Damen und Herren, ich möchte mich über ihr Umzugsunternehmen informieren. Ich hab derzeit ein Lager bei My Place Siemensstraße in Wien. Wo ein Bett, ein Sofa, Schminktisch und Kartons mit Kleidung drinnen ist. Wie viel kostet ein Umzug von Lager bis zur Augasse 11,20B. Werden die Möbel direkt in die Wohnung gestellt und wann wäre es Möglich mit Ihrem Umzugsunternehmen um zu ziehen? Mit freundlichen Grüßen, Magdalena Arthofer",
+      "conversations": [
+        {
+          "id": "3414562059",
+          "date": "2026-11-16 18:16:25.191429",
+          "time": "18:16",
+          "text": "Sehr geehrte Damen und Herren, ich möchte mich über ihr Umzugsunternehmen informieren. Ich hab derzeit ein Lager bei My Place Siemensstraße in Wien. Wo ein Bett, ein Sofa, Schminktisch und Kartons mit Kleidung drinnen ist. Wie viel kostet ein Umzug von Lager bis zur Augasse 11,20B. Werden die Möbel direkt in die Wohnung gestellt und wann wäre es Möglich mit Ihrem Umzugsunternehmen um zu ziehen? Mit freundlichen Grüßen, Magdalena Arthofer"
+        }
+      ],
+      "conversationCount": 1,
+      "lastConversationId": "3414562059",
+      "telegramSent": true,
+      "googleLeadId": "352385820",
+      "googleLeadResource": "customers/3226096935/localServicesLeads/352385820",
+      "leadType": "MESSAGE",
+      "leadStatus": "NEW"
+    },
     {
       "id": "lsa:3226096935:351673836",
       "Musteri": "+436644620347",
