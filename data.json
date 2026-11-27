@@ -1,6 +1,24 @@
 {
-  "updatedAt": "27.11.2026, 04:14:35",
+  "updatedAt": "27.11.2026, 08:41:09",
   "leads": [
+    {
+      "id": "lsa:3226096935:354070229",
+      "Musteri": "+4367682537115",
+      "Telefon": "+4367682537115",
+      "Telefon2": null,
+      "Hizmet": "xcat:service_area_business_mover",
+      "Konum": "Melk",
+      "Tarih": "27.11.2026 10:34",
+      "Mesaj": "-",
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "telegramSent": true,
+      "googleLeadId": "354070229",
+      "googleLeadResource": "customers/3226096935/localServicesLeads/354070229",
+      "leadType": "PHONE_CALL",
+      "leadStatus": "ACTIVE"
+    },
     {
       "id": "lsa:3226096935:353128161",
       "Musteri": "+4369917102371",
