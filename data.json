@@ -1,6 +1,24 @@
 {
-  "updatedAt": "28.11.2026, 07:16:35",
+  "updatedAt": "28.11.2026, 11:46:15",
   "leads": [
+    {
+      "id": "lsa:3226096935:354240140",
+      "Musteri": "+436766936333",
+      "Telefon": "+436766936333",
+      "Telefon2": null,
+      "Hizmet": "xcat:service_area_business_mover",
+      "Konum": "Baden",
+      "Tarih": "28.11.2026 13:39",
+      "Mesaj": "-",
+      "conversations": [],
+      "conversationCount": 0,
+      "lastConversationId": null,
+      "telegramSent": true,
+      "googleLeadId": "354240140",
+      "googleLeadResource": "customers/3226096935/localServicesLeads/354240140",
+      "leadType": "PHONE_CALL",
+      "leadStatus": "ACTIVE"
+    },
     {
       "id": "lsa:3226096935:354554029",
       "Musteri": "+4366475140003",
@@ -17,7 +35,8 @@
       "googleLeadId": "354554029",
       "googleLeadResource": "customers/3226096935/localServicesLeads/354554029",
       "leadType": "PHONE_CALL",
-      "leadStatus": "ACTIVE"
+      "leadStatus": "ACTIVE",
+      "isMessageUpdate": false
     },
     {
       "id": "lsa:3226096935:354070229",
